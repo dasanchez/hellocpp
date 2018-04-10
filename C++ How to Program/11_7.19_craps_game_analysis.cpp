@@ -9,14 +9,10 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <cstdlib> // contains prototypes for functions srand and rand
 #include <ctime>
-#include <vector>
 
 using namespace std;
-
-#include "GradeBook.h"
 
 enum Status { CONTINUE, WON, LOST }; 
 Status oneGame( int winArray[], int loseArray[] );
