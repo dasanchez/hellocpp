@@ -1,6 +1,6 @@
 # hellocpp
 
-A repo for tracking C++ exercises.
+A repo for tracking exercises in C++.
 
 ## C++ How to Program, by Deitel and Deitel.
 
