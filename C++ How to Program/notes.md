@@ -22,3 +22,8 @@
   the function call `modifyArray(hourlyTemperatures, 24)`  
 passes the array and its size to function `modifyArray`.
 - C++ passes arrays to functions by reference. The value of the name of the array is the address in the computer's memory of the first element of the array.
+- Passing arrys  by value would require copying each element (impacting performance).
+- It's possible to pass an array by value by simply embedding it as a data member of a class and passing an object of the class, which defaults to pass-by-value.
+- The function's parameter list must specify that the function expects to receive an array:  
+`void modifyArray(int b[], int arraySize)`
+- When a function specifies an array parameter that's preceded by the `const` qualifier, the elements of the array become constant in the function body and any attempt to modify an element of the array in the function body results in a compilation error.

@@ -1,58 +1,54 @@
-// Fig 7.12
-// Static arrays are initialized to zero. 
+// Fig 7.13
+// Passing arrays and individual array elements to functions. 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-void staticArrayInit(void);
-void automaticArrayInit(void);
-const int arraySize = 3;
+void modifyArray(int [], int); // appears strange; array and size
+void modifyElement(int); // receive array element value
 
 int main()
 {
-    cout << "First call to each function:\n";
-    staticArrayInit();
-    automaticArrayInit();
+    const int arraySize = 5;
+    int a[arraySize] = {0, 1, 2, 3, 4};\
 
-    cout << "\n\nSecond call to each function:\n";
-    staticArrayInit();
-    automaticArrayInit();
+    cout << "Effects of passing entire array by reference:"
+        << "\nThe values of the original array are:\n";
 
+    // output original array elements
+    for (int i= 0; i < arraySize; ++i)
+        cout << setw(3) << a[i];
+    
     cout << endl;
+
+    // pass array a to modifyArray by reference
+    modifyArray(a, arraySize);
+    cout << "The vallues of the modified array are:\n";
+
+    // output modified original array elements
+    for (int j = 0; j < arraySize; ++j)
+        cout << setw(3) << a[j];
+
+    cout << "\n\nEffects of passing array element by value:"
+        << "\na[3] before modifyElement: " << a[3] << endl;
+
+    modifyElement(a[3]); // pass array element a[3] by value
+    cout << "a[3] after modifyElement:" << a[3] << endl;
 } // end main
 
-// function to demonstrate a static local array
-void staticArrayInit()
+// in function modifyArray, "b" points to the original array "a" in memory
+void modifyArray(int b[], int sizeOfArray)
 {
-    // initializes the elements to 0 the first time the function is called
-    static int array1[arraySize]; // static local array
+    // multiply each array element by 2
+    for (int k = 0; k < sizeOfArray; ++k)
+        b[k] *= 2;
+} // end function modifyArray
 
-    cout << "\nValues on entering staticArrayInit:\n";
-
-    // output contents of array 1
-    for (int i = 0; i < arraySize; ++i)
-        cout << "array1[" << i << "] = " << array1[i] << " ";
-
-    cout << "\nValues on exiting staticArrayInit:\n";
-
-    // modify and output contents of array1
-    for (int j = 0; j < arraySize; ++j)
-        cout << "array1[" << j << "] = " << (array1[j] += 5 ) << " ";
-} // end function staticArrayInit
-
-void automaticArrayInit()
+// in function modifyElement, "e" is a local copy of
+// array element a[3] passed from main
+void modifyElement(int e)
 {
-    // initializes  elements each time the function is called
-    int array2[arraySize] = {1, 2, 3}; // automatic local array
-
-    cout << "\nValues on entering automaticArrayInit:\n";
-
-    // output contents of array 2
-    for (int i = 0; i < arraySize; ++i)
-        cout << "array2[" << i << "] = " << array2[i] << " ";
-
-    cout << "\nValues on exiting automaticArrayInit:\n";
-
-    // modify and output contents of array2
-    for (int j = 0; j < arraySize; ++j)
-        cout << "array2[" << j << "] = " << (array2[j] += 5 ) << " ";
-} // end function automaticArrayInit
+    // multiply parameter by 2
+    cout << "Value of element in modifyElement: " << (e *= 2 ) << endl;
+  } // end function modifyElement
+  
