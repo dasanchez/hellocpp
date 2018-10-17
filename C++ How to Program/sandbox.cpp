@@ -1,40 +1,44 @@
-// Fig 7.18: GradeBook Case Study
-// Linear search of an array.
+// Fig 7.19: Insertion sort
+// This program sorts an array's values into ascending order.
 #include <iostream>
+#include <iomanip>
 using namespace std;
-
-int linearSearch(const int [], int, int); // prototype
 
 int main()
 {
-    const int arraySize = 100; // size of array a
-    int a[arraySize]; // create array a
-    int searchKey; // value to locate in array a
+    const int arraySize = 10; // size of array a
+    int data[arraySize] = {34, 56, 4, 10, 77, 51, 93, 30, 5, 52};
+    int insert; // temporary variable to hold element to insert
 
-    for (int i=0; i < arraySize; ++i)
-        a[i] = 2 * i; // create some data
-    
-    cout << "Enter integer search key:";
-    cin >> searchKey;
+    cout << "Unsorted array:\n";
 
-    // attempt to locate searchKey in array a
-    int element = linearSearch(a, searchKey, arraySize);
+    // output original array
+    for (int i =0; i< arraySize; ++i)
+        cout << setw(4) << data[i];
 
-    // display results
-    if (element != -1)
-        cout << "Found value in element " << element << endl;
-    else
-        cout << "Value not found" << endl;
+    // insertion sort
+    // loop over the elements of the array
+    for (int next = 1; next < arraySize; ++next)
+    {
+        insert = data[next]; // store the value in the current element
+        int moveItem = next; // initialize location to place element
+        
+        // search for the location in which to put the current element
+        while ( (moveItem > 0) && (data[moveItem-1] > insert))
+        {
+            // shift element one  slot to the right
+            data[moveItem] = data[moveItem - 1];
+            moveItem--;
+        } // end while
+
+        data[moveItem] = insert; // place inserted element into the array
+    } // end for
+
+    cout << "\nSorted array:\n";
+
+    // output sorted array
+    for (int i =0; i< arraySize; ++i)
+        cout << setw(4) << data[i];
+
+    cout << endl;
 } // end main
-
-// compare key to every element of array until location is
-// found or until end of array is reached; return subscript of
-// element if key is found or -1 if key not found
-int linearSearch(const int  array[], int key, int sizeOfArray)
-{
-    for ( int j=0; j < sizeOfArray; ++j)
-        if (array[j] == key) // if found,
-            return j; // return location of key
-    
-    return -1; // key not found
-} // end function linearSearch

@@ -35,3 +35,7 @@ passes the array and its size to function `modifyArray`.
 - On average, the program must compare the search key with half the  elements of the array.
 - To determine that a value is not in the array, the program must compare the search key to every element of the array.
 - Linear search works well for small arrays or for unsorted arrays.
+
+### Insertion Sort
+- Sorting data is one of the most important computing applications.
+- Insertion sort is a simple but inefficient sorting algorithm (easy to program, but runs slowly).
