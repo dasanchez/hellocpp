@@ -27,3 +27,5 @@ passes the array and its size to function `modifyArray`.
 - The function's parameter list must specify that the function expects to receive an array:  
 `void modifyArray(int b[], int arraySize)`
 - When a function specifies an array parameter that's preceded by the `const` qualifier, the elements of the array become constant in the function body and any attempt to modify an element of the array in the function body results in a compilation error.
+- Data members in a class: each object of a class maintains its own copy of an attribute.
+- _Static_ data members (class variables): all objects of a class share one copy of the data member.
