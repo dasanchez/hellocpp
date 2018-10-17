@@ -29,3 +29,9 @@ passes the array and its size to function `modifyArray`.
 - When a function specifies an array parameter that's preceded by the `const` qualifier, the elements of the array become constant in the function body and any attempt to modify an element of the array in the function body results in a compilation error.
 - Data members in a class: each object of a class maintains its own copy of an attribute.
 - _Static_ data members (class variables): all objects of a class share one copy of the data member.
+
+### Linear Search
+- The linear search compares each element of an array with a search key.
+- On average, the program must compare the search key with half the  elements of the array.
+- To determine that a value is not in the array, the program must compare the search key to every element of the array.
+- Linear search works well for small arrays or for unsorted arrays.
