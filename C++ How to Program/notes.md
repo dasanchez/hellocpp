@@ -3,7 +3,7 @@
 - An array is a consecutive group of memory locations that all have the same _type_.
 - A subscripted array name is an _lvalue_.
 
-### Initializing
+### Initializing Arrays
 - Automatic arrays are not implicitly initialized to zero, but static arrays are.
 - Elements of an array can be initialized in the array declaration by following the array name with an equals sign and a brace-delimited comma-separated list of _initializers_.
 - If there are fewer initializers than array elements, the remaining elements are initialized to 0.
@@ -39,3 +39,11 @@ passes the array and its size to function `modifyArray`.
 ### Insertion Sort
 - Sorting data is one of the most important computing applications.
 - Insertion sort is a simple but inefficient sorting algorithm (easy to program, but runs slowly).
+
+### Multidimensional Arrays
+- Arrays with two dimensions (subscripts) often represent tables of calues consisting of information arranged in rows and columns.
+- To idetify a particular table element, we must specify two subscripts.
+- An array with m rows and n columns is called an _m-by-n array_.
+- Any elements that do not have an explicit initializer are initialized to zero.
+- The size of a two-dimensional array's is not required as an argument, but all subsequent dimension sizes are required.
+
