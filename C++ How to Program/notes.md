@@ -42,8 +42,23 @@ passes the array and its size to function `modifyArray`.
 
 ### Multidimensional Arrays
 - Arrays with two dimensions (subscripts) often represent tables of calues consisting of information arranged in rows and columns.
-- To idetify a particular table element, we must specify two subscripts.
+- To identify a particular table element, we must specify two subscripts.
 - An array with m rows and n columns is called an _m-by-n array_.
 - Any elements that do not have an explicit initializer are initialized to zero.
 - The size of a two-dimensional array's is not required as an argument, but all subsequent dimension sizes are required.
 
+### Intro to C++ Standard Library Class Template `vector`
+- The `vector` template is a more robust type of array featuring many additional capabilities.
+- By default, all the elements of each vector object are set to 0.
+- Vectors can be defined to store any data type.
+- Member function `size` of class template `vector` returns the number of elements in a vector as a value of type `size_t` (which represents the type `unsigned int` on any systems).
+- The assignemnt (=) operator can be use with vector objects.
+- The equality (=) and inequality (!=) operators can also be used with vector objects.
+- Square brackets ([]) can be used to access and modify vector elements.
+
+### Exception handling
+- Exception handling enabes you to create fault-tolerant programs that can resolve (or handle) exceptions.
+- When a function detects a problem, such as an invalid array subscript or an invalid argument, it throws an exception.
+- To handle an exception, place any code that might throw an exception in a `try` statement. The `try` block contains the code that might _throw_ an exception, and the `catch` block contains the code that _handles_ the exception if one occurs.
+- The `vector` member function `at` provides bounds checking and throws an exception if its argument is an invalid subscript.
+- An unmodifiable _lvalue_ is an expression that identifies an object in memory (such as an element in a vector), but cannot be used to modify that object.
