@@ -1,103 +1,53 @@
-// Fig 7.25:
-// Demonstrating C++ Standard Library class template vector.
-#include <iostream>
-#include <iomanip>
-#include <vector>
-using namespace std;
+// 7.29: The Sieve of Erastothenes
+// The Sieve of Erastothenes is a method of finding prime numbers.
+// 1. Create an array with all alements initialized to 1 (true).
+//    Array elements with prime subscripts will remain 1, and all other
+//    elements will eventually be set to 0.
+// 2. Starting with array subscript 2, every time an array element
+//    is found whose value is 1, loop through the remainder of the array
+//    and set to zero every element whose subscript is a multiple of the
+//    subscript for the element with value 1.
+// 3. When this process is complete, the array elements that are still
+//    set to 1 indicate that the subscript is a prime number.
+//    These subscripts can then be printed.
 
-void outputVector(const vector<int> &); // display the vector
-void inputVector(vector<int> &);        // input values into the vector
+// Write a program that uses an array of 1000 elements to determine and
+// print the prime numbers between 2 and 999.
+#include <iostream>
+using namespace std;
 
 int main()
 {
-    vector<int> integers1(7);  // 7-element vector<int>
-    vector<int> integers2(10); // 10-element vector<int>
+    const int arraySize = 1000;
 
-    // print integers1 size and contents
-    cout << "Size of vector integers1 is " << integers1.size()
-         << "\nvector after initialization:" << endl;
-    outputVector(integers1);
+    bool primeArray[arraySize] = {1};
 
-    // print integers2 size and contents
-    cout << "Size of vector integers2 is " << integers2.size()
-         << "\nvector after initialization:" << endl;
-    outputVector(integers2);
-
-    // input and print integers1 and integers2
-    cout << "\nEnter 17 integers:" << endl;
-    inputVector(integers1);
-    inputVector(integers2);
-
-    // use inequality (!=) operator with vector objects
-    cout << "\nEvaluating: integers1 != integers2" << endl;
-
-    if (integers1 != integers2)
-        cout << "integers1 and integers2 are not equal" << endl;
-
-    // create vector integers3 using integers1 as an
-    // initializer; print size and contents
-    vector<int> integers3(integers1); // copy constructor
-
-    cout << "\nSize of vector integers3 is " << integers3.size()
-         << "\nvector after initialization:" << endl;
-    outputVector(integers3);
-
-    // use overloaded assignment (=) operator
-    cout << "\nAssigning integers2 to integers1:" << endl;
-    integers1 = integers2; // assign integers2 to integers1
-
-    cout << "integers1:" << endl;
-    outputVector(integers1);
-    cout << "integers2:" << endl;
-    outputVector(integers2);
-
-    // use equality (==) operator with vector objects
-    cout << "\nEvaluating: integers1 == integers2" << endl;
-
-    if (integers1 == integers2)
-        cout << "integers1 and integers2 are equal" << endl;
-
-    // use square brackets to create rvalue
-    cout << "\nintegers1[5] is " << integers1[5];
-
-    // use square brackets to create lvalue
-    cout << "\n\nAssigning 1000 to integers1[5]" << endl;
-    integers1[5] = 1000;
-    cout << "integers1:" << endl;
-    outputVector(integers1);
-
-    // attempt to use out-of-range subscript
-    try
+    // initialize array to all ones
+    for (int i = 0; i < arraySize; ++i)
+        primeArray[i] = true;
+    
+    // loop through all elements starting with 2:
+    for (int i = 2; i < arraySize; ++ i)
     {
-        cout << "\nAttempt to display integers1.at(15)" << endl;
-        cout << integers1.at(15) << endl; // ERROR: out of range
-    }                                     // end try
-    catch (out_of_range &ex)
+        if (primeArray[i] == 1)
+        {
+            // check for multiples:
+            for (int j = i+1; j < arraySize; ++j)
+            {
+                if (j%i == 0)
+                {
+                    // found a multiple
+                    primeArray[j] = false;
+                    // cout << "Removing " << j << ", multiple of " << i << endl;
+                }
+            }
+        }
+    }
+
+    // print all prime numbers left:
+    for (int i = 2; i < arraySize; ++i)
     {
-        cout << "An exception occurred: " << ex.what() << endl;
-    } // end catch
-} // end main
-
-// output vector contents
-void outputVector(const vector<int> &array)
-{
-    size_t i; // declare control variable
-
-    for (i = 0; i < array.size(); ++i)
-    {
-        cout << setw(12) << array[i];
-
-        if ((i + 1) % 4 == 0) // 4 numbers per row of output
-            cout << endl;
-    } // end for
-
-    if (i % 4 != 0)
-        cout << endl;
-} // end function outputVector
-
-// input vector contents
-void inputVector(vector <int> &array)
-{
-    for (size_t i = 0; i < array.size(); ++i)
-        cin >> array[i];
-} // end function inputVector
+        if (primeArray[i])
+            cout << i << endl;
+    }
+}
