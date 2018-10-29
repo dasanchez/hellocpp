@@ -16,14 +16,19 @@
 using namespace std;
 
 const int digits = 10;
-const int entries = 6;
+const int entries = 5;
 void bucketSort(int array[]);
 void printArray(int array[]);
 void printBucket(int array[digits][entries]);
 
 int main()
 {
-    int sortArray[entries] = {512, 3, 100, 7800, 51, 439};
+    int sortArray[entries];
+    
+    cout << "Enter " << entries << " integers:" << endl;
+    for (int i=0; i<entries; ++i)
+        cin >> sortArray[i]; 
+
     cout << "Array before sorting:" << endl;
     printArray(sortArray);
 

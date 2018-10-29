@@ -65,3 +65,8 @@ passes the array and its size to function `modifyArray`.
 
 ### Bucket Sort
 - The bucket sort provides better performance than an insertion sort, but requires much more memory. The insertion sort requires space for only one additional element of data, but the  bucket sort requires 10 times the size of the array being sorted. 
+- The bucket sort algorithm works as follows:
+1. Set up an array of empty buckets (or arrays)
+2. Distribution (or scatter) pass: Go over the original array, putting each object in its bucket.
+3. Sort each non-empty bucket.
+4. Gather pass: Visit the buckets in order and put all elements back into the original array.
