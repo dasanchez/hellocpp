@@ -62,3 +62,6 @@ passes the array and its size to function `modifyArray`.
 - To handle an exception, place any code that might throw an exception in a `try` statement. The `try` block contains the code that might _throw_ an exception, and the `catch` block contains the code that _handles_ the exception if one occurs.
 - The `vector` member function `at` provides bounds checking and throws an exception if its argument is an invalid subscript.
 - An unmodifiable _lvalue_ is an expression that identifies an object in memory (such as an element in a vector), but cannot be used to modify that object.
+
+### Bucket Sort
+- The bucket sort provides better performance than an insertion sort, but requires much more memory. The insertion sort requires space for only one additional element of data, but the  bucket sort requires 10 times the size of the array being sorted. 
