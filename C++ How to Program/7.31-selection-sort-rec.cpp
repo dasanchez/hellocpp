@@ -1,7 +1,7 @@
 // 7.31: Selection Sort by Recursion
 // A selection sort searches an array looking for the smallest element.
 // Then, the smallest element is swapped with the first element
-// of the array. 
+// of the array.
 // The process is repeated for the subarray beginning with the second
 // element of the array.
 // Each pass of the array results in one element being placed in
@@ -17,10 +17,10 @@ void printArray(int array[]);
 int main()
 {
     int sortArray[entries];
-    
+
     cout << "Enter " << entries << " integers:" << endl;
 
-    for (int i = 0; i<entries; ++i)
+    for (int i = 0; i < entries; ++i)
         cin >> sortArray[i];
     cout << "Array before sorting:" << endl;
     printArray(sortArray);
