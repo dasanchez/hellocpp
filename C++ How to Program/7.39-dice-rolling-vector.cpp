@@ -1,6 +1,6 @@
 /*
- * Exercise 7.38
- * Two-Dice Rolling ith vector
+ * Exercise 7.39
+ * Two-Dice Rolling with vector
  * Write a program that simulates the rolling of two dice.
  * Use rand twice with each "throw".
  * Roll the dice 36,000 times.
