@@ -1,22 +1,25 @@
 /*
- * Fig 8.4
- * Pointer operators & and *.
+ * Fig 8.7
+ * Pass-by-reference with a pointer argument used to cube a
+ * variable's value.
 */
 #include <iostream>
 using namespace std;
 
+void cubeByReference(int *); // prototype
+
 int main()
 {
-    int a; // a is an integer
-    int *aPtr; // aPtr is an int * which is a pointer to an integer
+    int number = 5;
+    cout << "The original value of number  is " << number;
 
-    a = 7; // assigned 7 to a
-    aPtr = &a; // assigned the address of a to aPtr
+    cubeByReference(&number); // pass number address to cubeByReference
 
-    cout << "The address of a is " << &a << endl;
-    cout << "The value of aPtr is " << aPtr << endl;
-    cout << "\nThe value of a is " << a << endl;
-    cout << "The value of *aPtr is " << *aPtr << endl;
-    cout << "\nShowing that * and & are inverses of each other:" << endl;
-    cout << "&*aPtr = " << &*aPtr << "\n*&aPtr = " << *&aPtr << endl;
-}
+    cout << "\nThe new value of number is " << number << endl;
+} // end main
+
+// calculate cube of *nPtr; modifies variable number in main
+void cubeByReference(int *nPtr)
+{
+    *nPtr = *nPtr * *nPtr * *nPtr; // cube *nPtr
+} // end function cubeByReference

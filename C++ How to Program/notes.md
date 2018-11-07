@@ -88,3 +88,12 @@ passes the array and its size to function `modifyArray`.
 - The **address operator (&)** is a unary operator that _obtains the memory address of its operand_.
 - This operator is not the same as the use of & in a reference variable declaration, which is always preceded by a data-type name. When declaring a reference, the & is part of the type.
 - The **\* operator**, commonly referred to as the **indirection operator** or **dereferencing operator**, _returns a synonym for the object to which its pointer operand points_.
+
+### Pass-by-Reference with Pointers
+
+- There are three ways in C++ to pass arguments to a function--pass-by-value, **pass-by-reference with reference arguments**, and **pass-by-reference with pointer arguments**.
+- You can use  pointers and the indirection operator (*) to accomplish pass-by-reference.
+- A function receiving an address as an argument must define a pointer parameter to receive the address.
+- Use pass-by-value to pass arguments to a function unless the caller _explicitly_ requires that the called function directly modify the value of the argument variable in the caller. This is an example of the principle of least privilege.
+- The compiler does not differentiate between a function that receives a pointer and a function that receives a one-dimensional array.
+
