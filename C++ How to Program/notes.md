@@ -70,3 +70,21 @@ passes the array and its size to function `modifyArray`.
 2. Distribution (or scatter) pass: Go over the original array, putting each object in its bucket.
 3. Sort each non-empty bucket.
 4. Gather pass: Visit the buckets in order and put all elements back into the original array.
+
+## Chapter 8
+
+### Pointer Variable Declarations and Initialization
+
+- Pointer variables contain _memory addresses as their values. Normally, a variable directly contains a specific value. A pointer contains the memory address of a variable that, in turn, contains a specific value. 
+- A variable name **directly references a value**, and a pointer **indirectly references a value**.
+- Referencing a value through a pointer is called **indirection**.
+- Pointers _must_ be declared before they can be used.
+- Pointers  should be initialized to 0, `NULL`, or an address of the corresponding type either when they're declared or in an assignment.
+- A pointer with the value 0 or `NULL` "points to nothing" and is known as a **null pointer**.
+- You should use the constant `nullptr` to initialize a pointer  instead of 0 or `NULL` in the new standard.
+
+### Pointer Operators
+
+- The **address operator (&)** is a unary operator that _obtains the memory address of its operand_.
+- This operator is not the same as the use of & in a reference variable declaration, which is always preceded by a data-type name. When declaring a reference, the & is part of the type.
+- The **\* operator**, commonly referred to as the **indirection operator** or **dereferencing operator**, _returns a synonym for the object to which its pointer operand points_.

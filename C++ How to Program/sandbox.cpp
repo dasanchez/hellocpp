@@ -1,46 +1,22 @@
 /*
- * Exercise 7.40
- * Find the  Minimum Value in a vector
- * Write a recursive function recursiveMinimum that takes an
- * integer vector and a starting subscript as arguments,
- * and returns the smallest element of the array.
- * The function should stop processing and return when the starting
- * subscript equals the size of the vector.
+ * Fig 8.4
+ * Pointer operators & and *.
 */
-
 #include <iostream>
-#include <vector>
-
 using namespace std;
-
-int recursiveMinimum(const vector<int> &, int);
 
 int main()
 {
-    const int arraySize = 5;
-    vector<int> myArray(arraySize);
-    cout << "Enter " << arraySize << " integers: ";
-    for (size_t i = 0; i < arraySize; ++i)
-        cin >> myArray[i];
-    cout << "Minimum value: " << recursiveMinimum(myArray, 0) << endl;
-}
+    int a; // a is an integer
+    int *aPtr; // aPtr is an int * which is a pointer to an integer
 
-int recursiveMinimum(const vector<int> &vec, int start)
-{
-    // here's the trick: use a static variable
-    static int min = vec[start]; 
-    
-    if (vec.at(start) < min)
-    {
-        min = vec.at(start);
-    }
+    a = 7; // assigned 7 to a
+    aPtr = &a; // assigned the address of a to aPtr
 
-    if (start == static_cast<int>(vec.size())-1)
-    {
-        return min;
-    }
-    else
-    {
-        return recursiveMinimum(vec, start + 1);
-    }
+    cout << "The address of a is " << &a << endl;
+    cout << "The value of aPtr is " << aPtr << endl;
+    cout << "\nThe value of a is " << a << endl;
+    cout << "The value of *aPtr is " << *aPtr << endl;
+    cout << "\nShowing that * and & are inverses of each other:" << endl;
+    cout << "&*aPtr = " << &*aPtr << "\n*&aPtr = " << *&aPtr << endl;
 }
