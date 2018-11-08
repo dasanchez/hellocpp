@@ -97,3 +97,41 @@ passes the array and its size to function `modifyArray`.
 - Use pass-by-value to pass arguments to a function unless the caller _explicitly_ requires that the called function directly modify the value of the argument variable in the caller. This is an example of the principle of least privilege.
 - The compiler does not differentiate between a function that receives a pointer and a function that receives a one-dimensional array.
 
+### Using `const` with Pointers
+
+- Let the  principle of least privilege be your guide: Always give a function enough access to the data in its parameters to accomplish its specified task, _but no more_.
+- If a value does not (or should not) change in the body of a function to which it's passed, the parameter should be declared `const`.
+- Before using a function, check its prototype to determine the parameters that it can and cannot modify.
+
+- There are four ways to pass a pointer to a function:
+
+**1. Nonconstant Pointer to Nonconstant Data**
+
+- Highest access is granted. The data can be modified through the dereferenced pointer, and the pointer can be modified to point to other data.
+
+**2. Nonconstant Pointer to Constant Data**
+
+- A pointer that can be modified to point to any data item of the appropriate type, but the data to which it points cannot be modified through that pointer.
+
+- ``` const int *countPtr;```
+
+- Pass large objects using pointers to constant daata, or references to constant data, to obtain the security of pass-by-value.
+
+**3. Constant Pointer to Nonconstant Data**
+
+- A pointer that always points to the same memory location; the data at that location _can_ be modified through the pointer.
+
+- ``` int *  const ptr = &x; // const pointer  must be initialized```
+
+- An example of such a pointer is an array name, which is a constant pointer to the beginning of the array.
+
+**4. Constant Pointer to Constant Data**
+
+- Minimum access privilege is granted. Such a pointer _always_ pointer so the _same_ memory location, and the data at that location cannot be modified via the pointer.
+- This is how an array should be passed to a function that _only reads_ the array, using array subscipt notation, and _does not modify_ the array.
+
+- ```const int *const ptr = &x;```
+
+### Selection Sort Using Pass-by-Reference
+
+- When passing an array to a function, also pass the size of the array (rather than building into th efunction knowledge of the array size) - this makes the function more usable.

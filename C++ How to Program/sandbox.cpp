@@ -1,25 +1,58 @@
 /*
- * Fig 8.7
- * Pass-by-reference with a pointer argument used to cube a
- * variable's value.
+ * Fig 8.13: Selection sort with pass-by-reference.
+ * This program puts values into an array, sorts them 
+ * into ascending order and prints the resulting array.
 */
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-void cubeByReference(int *); // prototype
+void selectionSort(int * const, const int ); // prototype
+void swap(int * const, int * const); // prototype
 
 int main()
 {
-    int number = 5;
-    cout << "The original value of number  is " << number;
+    const int arraySize = 10;
+    int a[arraySize] = { 2, 6, 4, 8, 10, 12, 89, 68, 45, 37};
 
-    cubeByReference(&number); // pass number address to cubeByReference
+    cout << "Data items in original order" << endl;
 
-    cout << "\nThe new value of number is " << number << endl;
+    for (int i = 0; i < arraySize; ++i)
+        cout << setw(4) << a[i];
+
+    selectionSort(a, arraySize); // sort the array
+
+    cout << "\nData items in ascending order\n";
+
+    for (int j=0; j < arraySize; ++j)
+        cout << setw(4) << a[j];
+    
+    cout << endl;
 } // end main
 
-// calculate cube of *nPtr; modifies variable number in main
-void cubeByReference(int *nPtr)
+// function to sort an array
+void selectionSort(int * const array, const int size)
 {
-    *nPtr = *nPtr * *nPtr * *nPtr; // cube *nPtr
-} // end function cubeByReference
+    int smallest; // index of smallest element
+
+    // loop over size -1 elements
+    for (int i=0; i < size - 1; ++i)
+    {
+        smallest = i; // first index of remaining array
+        // loop to find index of smallest element
+        for (int index = i + 1; index < size; ++index)
+            if (array[index] < array[smallest])
+                smallest = index;
+        
+        swap(&array[i], &array[smallest]);
+    } // end for loop
+} // end function selectionSort
+
+// swap values at memory locations to which 
+// element1Ptr and element2Ptr point
+void swap(int * const element1Ptr, int * const element2Ptr)
+{
+    int hold = *element1Ptr;
+    *element1Ptr = *element2Ptr;
+    *element2Ptr = hold;
+} // end function swap
