@@ -1,44 +1,96 @@
 /*
- * Fig 8.18: 
- * Using  subscripting and pointer notations with arrays.
+ * Fig 8.20: 
+ * Multipurpose sorting program using function pointers.
 */
 #include <iostream>
+#include <iomanip>
 using namespace std;
+
+// prototypes
+void selectionSort(int [], const int, bool (*)(int, int));
+void swap(int * const, int * const);
+bool ascending(int, int); // implements ascending order
+bool descending(int, int); // implements descending order
 
 int main()
 {
-    int b[] = { 10, 20, 30, 40}; // create 4-element array b
-    int *bPtr = b; // set bPtr to point to array b
+    const int arraySize = 10;
+    int order; // 1 = ascending, 2 = descending
+    int counter; // array index
+    int a[arraySize] = {2, 6, 4, 8, 10, 12, 89, 68, 45, 37};
 
-    // output array b using array subscript notation
-    cout << "Array b printed with:\n\nArray subscript notation\n";
+    cout << "Enter 1 to sort in ascending order,\n"
+         << "Enter 2 to sort in descending order: ";
+    cin >> order;
+    cout << "\nData items in original order\n";
 
-    for (int i = 0; i < 4; ++i)
-        cout << "b[" << i << "] = " << b[i] << "\n";
-
-    // output array b using the array name and pointer/offset notation
-    cout << "\nPointer/offset notation where "
-         << "the pointer is the array name\n";
+    // output original array
+    for (counter = 0; counter < arraySize; ++counter)
+        cout << setw(4) << a[counter];
     
-    for ( int offset1 = 0; offset1 < 4; ++offset1)
-        cout << "*(b + " << offset1 << ") = " << *(b+offset1) << endl;
+    // sort array in asending order; pass function ascending
+    // as an argument to specify ascending sorting order
+    if (order==1)
+    {
+        selectionSort(a, arraySize, ascending);
+        cout << "\nData items in ascending order\n";
+    } // end if
 
-    // output array b using bPtr and array subscript notation
-    cout << "\nPointer subscript notation\n";
+    // sort array in descending order; pass function descending
+    // as an argument to specify descending sorting order
+    else
+    {
+        selectionSort(a, arraySize, descending);
+        cout << "\nData items in descending order\n";
+    } // end else part of if...else
 
-    for ( int j = 0; j < 4; ++j)
-        cout << "bPtr[" << j << "] = " << bPtr[j] << '\n';
-
-    cout << "\nPointer/offset notation\n";
-
-    // output array b usinng bPtr and pointer/offset notation
-    for (int offset2 = 0; offset2 < 4; ++offset2)
-        cout << "*(bPtr + " << offset2 << ") = "
-            << *(bPtr + offset2 ) << endl;
+    // output sorted array
+    for (counter = 0; counter < arraySize; ++counter)
+        cout << setw(4) << a[counter];
+    
+    cout << endl;
 } // end main
 
-// return size of ptr
-size_t getSize(double *ptr)
+// multipurpose selection sort; the parameter compare is 
+// a pointer to the comparison function that determines
+// the sorting order
+void selectionSort(int work[], const int size,
+                   bool (*compare)(int, int))
 {
-    return sizeof(ptr);
+    int smallestOrLargest; // index of smallest (or largest) element
+
+    // loop over size -1 elements
+    for (int i=0; i< size -1; ++i)
+    {
+        smallestOrLargest = i; // first index of remaining vector
+        
+        // loop to find index of smallest (or largest) element
+        for (int index = i + 1; index < size; ++index)
+            if (!(*compare)(work[smallestOrLargest], work[index]))
+                smallestOrLargest = index;
+        
+        swap(&work[smallestOrLargest], &work[i]);
+    } // end loop
+} // end function selectionSort
+
+// swap values at memory locations to which 
+// element1Ptr and element2Ptr point
+void swap(int * const element1Ptr, int * const element2Ptr)
+{
+    int hold = *element1Ptr;
+    *element1Ptr = *element2Ptr;
+    *element2Ptr = hold;
+} // end function swap
+
+// determine whether element a is less than
+// element b for an ascending order sort
+bool ascending(int a, int b)
+{
+    return a < b; // returns true  if a is less than b
+} // end function ascending
+
+bool descending(int a, int b)
+{
+    return a > b; // returns true if a is greater than b
+    // end function descending
 }

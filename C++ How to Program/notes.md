@@ -155,3 +155,28 @@ passes the array and its size to function `modifyArray`.
 - Arrays and pointers are intimately related in C++ and may be used  _almost_ interchangeably. An array name can be thought of as a constant pointer. Pointers can be used to do any operation involving array subscripting.
 - The array name (which is implicitly `const`) can be treated as a pointer and used in pointer arithmetic.
 - Although array names are pointers to the beginning of the array, array names cannot be modified in artihmetic expressions, because array names are constant pointers. 
+
+### Pointer-Based String Processing
+
+- C++'s `string` class is preferred for use in new programs, because it eliminates many of the security problems and bugs that can be caused by manipulating C strings.
+- A **character constant** is an integer value represented as a character in single quotes. For example, 'z' represents the integer value of z (122 in the ASCII character set), and '\n' represents the integer value of new-line (10 in the ASCII character set).
+- A string is a series of characters treated as a single unit. A string may include letters, digits, and various special characters.
+- **String literals**, or **string constants**, in C++ are written in double quotation marks.
+- A pointer-based string is an array of characters ending with a **null character** (**'\0'**), which marks where the string terminates in memory.
+- A string literal may be used as an initializer of either a character array or a variable of type `char *``.
+- String literals have `static` storage class (they exist for the duration of the program).
+- The effect of modifying a sstring literal is _undefined_: you should always declare a pointer to a string literal as `const char *`.
+- A string can be read into a character array using stream extraction with `cin`. For example, the following statement reads a string into character array `word[20]`:
+- ```cin >> word;```
+- The `cin` object provides  the member function **getline**, which takes three arguments- a character array in which the line of text will be stored, a length, and a delimiter character.
+- A character array representing a null-terminated string can be output with `cout` and `<<`. The characters of the string are output until a terminating null character is found.
+
+### Arrays of Pointers
+
+- A commun use of an array with pointers is to form an array of pointer-base strings, referred to simply as a **string array**.
+- String arrays are commonly used with **command-line arguments** that are passed to function `main` when a program begins execution.
+
+### Function Pointers
+
+- A **pointer to a function** contains the function's address in memory. Pointers to functions can be passed to functions, returned to functions, stored in arrays, assigned to other function pointers and used to call the underlying function.
+
