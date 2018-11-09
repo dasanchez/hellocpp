@@ -179,4 +179,7 @@ passes the array and its size to function `modifyArray`.
 ### Function Pointers
 
 - A **pointer to a function** contains the function's address in memory. Pointers to functions can be passed to functions, returned to functions, stored in arrays, assigned to other function pointers and used to call the underlying function.
-
+- An example of a function prototype parameter would be:
+- ```bool (*)(int, int)```
+- This indicates a pointer to a function that receives two integers as parameters and returns a boolean type.
+ 

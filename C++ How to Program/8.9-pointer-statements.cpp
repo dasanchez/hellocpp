@@ -1,7 +1,7 @@
 /*
  * Ex 8.9: Write C++ Statements
  * Assume that long variables value1 and value2
- * have been declared and value1 = 200,000.
+ * have been declared and value1 == 200,000.
  */
 #include <iostream>
 #include <iomanip>
