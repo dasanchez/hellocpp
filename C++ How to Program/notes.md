@@ -183,3 +183,29 @@ passes the array and its size to function `modifyArray`.
 - ```bool (*)(int, int)```
 - This indicates a pointer to a function that receives two integers as parameters and returns a boolean type.
  
+ ## Chapter 9. Classes: A Deeper Look, Part 1
+
+ ### Classes concepts
+ - A "preprocessor wrapper" prevents the code in the header from being included into the same source code file more than once.
+ - Client code can access a class's `public` members via three tpes of "handles": the name of an object, a reference to an object, or a pointer to an object.
+ - Object names and references can be used with the dot (.) member selection operator to access a `public` member, and pointers can be  used with the arrow (->) member selection operator.
+ - _Predicate functions_ are access functions that can read or display data in an object.
+ - A utility function (or _helper function_) is a `private` member function that supports the operation of the class's `public` member functions, but is not intended for use by clients of the class.
+ - Defaault arguments can be used in a constructor to enable client code to initialize objeccts using a variety of arguments.
+ - A _destructor_ member function is part of every class and is used to perform "termination housekeeping" on an object before the object is destroyed.
+ - A program's correctness depends of using properly unitialized objects that have not yet been destroyed.
+- Using member functions that return a reference to `private` data is a dangerous practice. This _breaks the encapsulation of a class_.
+- Ease each access specifier only once in a class definition. Place `public` members first, where they're easy to locate.
+- Each element  of a class should have `private` visibility unless it can be proven that the element needs `public` visibility.
+- Use #ifndef, #defne, and #endif preprocessor drectives to form a preprocessor wrapper that prevents headers from being included more than once in a program.
+- You can define several _overloaded constructors_ for a class.
+- With the exception of `static const int` data members, a class's data members cannot be initialized where they're declared in the class body.
+- It's strongly recommended that these data members be initialized by the class's constructors as _there is no default initialization for fundamental-type data members_.
+- Data members can also be assigned values by _set_ functions.
+- Stream manipulator **`setfill`** specifies the **fill character** that's displayed when an integer is output in a field wider than the number of digits in the value. `setfill` is a "sticky" setting. `setw` is a "nonsticky" setting.
+- Defining a member function inside the class definition inlines the member function (if the compiler chooses to do so). This can improve performance.
+- Only the simplest and most stable member functions (i.e., whose implementations are unlikely to change) should be defined in the class header.
+- Often, classes do not have to be created "from scratch". They can include objects or other classes as members or they may be **derived** from other classes that provide attributes and behaviours the new classes can use.
+- Including class objects as members of other classes is called **composition** (or **aggregation**).
+- Deriving new classes from existing classes is called **inheritance**.
+- The compiler creates one copy (only) of the member functions separate from all objects of the class. All objects of the class _share_ this one copy.
