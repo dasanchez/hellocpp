@@ -209,3 +209,11 @@ passes the array and its size to function `modifyArray`.
 - Including class objects as members of other classes is called **composition** (or **aggregation**).
 - Deriving new classes from existing classes is called **inheritance**.
 - The compiler creates one copy (only) of the member functions separate from all objects of the class. All objects of the class _share_ this one copy.
+
+### Class Scope and Accessing Class Members
+
+- A class's data members (variables declared in the cclass definition) and member functions belong to that class's scope. Nonmeber functions are deffined at _global namespace scope_. 
+- Outside a class's scope, `public` class members are referenced through one of the  **handles** on an object- an object name, a reference to an object or a pointer to an object.
+- Member functions of a class can be overloaded, but only by other member functions of that class.
+- To overload a member funcation, provide in the  class definition a prototype for each version of the overloaded function, and provide a separate ufunction definition for each version of the function. This also applies to the class's constructors.
+ 

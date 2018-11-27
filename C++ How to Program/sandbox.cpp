@@ -1,45 +1,42 @@
 /*
- * Fig 9.3: Program to test class Time.
- * This file must be compiled with Time.cpp
+ * Fig 9.4: Demonstrating the class member access operators . and ->
 */
 
 #include <iostream>
-#include "Time.h" // include definition of class Time from Time.h
 using namespace std;
+
+// class Count definition
+class Count
+{
+    public:
+    void setX(int value)
+    {
+        x = value;
+    }
+
+    void print()
+    {
+        cout << x << endl;
+    }
+    private:
+    int x;
+};
 
 int main()
 {
-    Time t; // instantiate object t of class Time
+    Count counter; // create counter object
+    Count *counterPtr = &counter; // create pointer to counter
+    Count &counterRef = counter; // create reference to counter
 
-    // output Time object t's initial values
-    cout << "The initial universal time is ";
-    t.printUniversal(); // 00:00:00
-    cout << "\nThe initial standard time is ";
-    t.printStandard(); // 12:00:00 AM
+    cout << "Set x to 1 and print using the object's name: ";
+    counter.setX(1); // set data member  x to 1
+    counter.print(); // call member function print
 
-    t.setTime(13, 27, 6); // change time
+    cout << "Set x to 2 and print using a reference to an object: ";
+    counterRef.setX(2); // set data member x to 2
+    counterRef.print();
 
-    // output Time object t's new values
-    cout << "\n\nUniversal time after setTime is ";
-    t.printUniversal(); // 13:27:06
-    cout << "\nStandard time after setTime is ";
-    t.printStandard(); // 1:27:06 PM
-
-    // attempt to set the time with invalid values
-    try
-    {
-        t.setTime( 99, 99, 99); // all values out of range
-    } // end try
-    catch (invalid_argument &e)
-    {
-        cout << "\n\nException: " << e.what() << endl << endl;
-    } // end catch
-
-    // output t's values after  specifying invalid values
-    cout << "After attempting invalid settings:"
-        << "\nUniversal time: ";
-    t.printUniversal(); // 00:00:00
-    cout <<"\nStandard time: ";
-    t.printUniversal(); // 12:00:00 AM
-    cout << endl;
+    cout << "Set x to 3 and print using a pointer to an object: ";
+    counterPtr->setX(3);
+    counterPtr->print();
 } // end main
