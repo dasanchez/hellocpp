@@ -216,4 +216,13 @@ passes the array and its size to function `modifyArray`.
 - Outside a class's scope, `public` class members are referenced through one of the  **handles** on an object- an object name, a reference to an object or a pointer to an object.
 - Member functions of a class can be overloaded, but only by other member functions of that class.
 - To overload a member funcation, provide in the  class definition a prototype for each version of the overloaded function, and provide a separate ufunction definition for each version of the function. This also applies to the class's constructors.
- 
+
+### Separating Interface from Implementation
+
+- The header for the class definition is the class's _interface_.
+- The source fode file  for the class's member-function definitions is the _implementation_.
+
+### Access Functions and Utility Functions
+
+- **Access functions** can read or display data. **Predicate functions** are functions that test the truth or falsity of conditions.
+- A **utility function** (also called a **helper function**) is _not_ part of a class's `public` interface. Rather, it's a `private` member  function that supports the operation of the class's other member functions. 
