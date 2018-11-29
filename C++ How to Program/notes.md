@@ -226,3 +226,12 @@ passes the array and its size to function `modifyArray`.
 
 - **Access functions** can read or display data. **Predicate functions** are functions that test the truth or falsity of conditions.
 - A **utility function** (also called a **helper function**) is _not_ part of a class's `public` interface. Rather, it's a `private` member  function that supports the operation of the class's other member functions. 
+
+### Constructors with Default Arguments
+
+- Constructors can specity _default arguments_.
+- A constructor that defauls all its arguments is also a _default constructor_. There can be at most one default constructor per class.
+- Any change to the default argument values of a function requires the client code to be recompiled.
+- If a member function of a class already provides all or part of the functionality required by a constructor (or other member function) of the class, call that member function from the constructor (or other member function).
+
+
