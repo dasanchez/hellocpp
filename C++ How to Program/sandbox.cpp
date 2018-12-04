@@ -1,48 +1,37 @@
 /*
- * Fig 9.10: Demonstrating a default constructor for class Time.
- * Compile this program with SalesPerson.cpp
+ * Fig 9.13: Demonstrating the order in which constructors and
+ * destructors are called.
 */
 
 #include <iostream>
-#include <stdexcept>
-#include  "Time.h"
-
+#include "CreateAndDestroy.h"
 using namespace std;
+
+void create(void); // prototype
+
+CreateAndDestroy first(1, "(global before main)" ); // global object
 
 int main()
 {
-    Time t1; // all arguments defaulted
-    Time t2(2); // hour specified; minute and second defaulted
-    Time t3(21, 34); // hour and minute specified; second defaulted
-    Time t4(12, 25, 42); // hour, minute, and  second specified
+    cout << "\nMAIN FUNCTION: EXECUTION BEGINS" << endl;
 
-    cout << "Constructed  with: \n\nt1: all arguments defaulted\n ";
-    t1.printUniversal(); // 00:00:00
-    cout << "\n ";
-    t1.printStandard(); // 12:00:00 AM
+    CreateAndDestroy second(2, "(local automatic in main)");
+    static CreateAndDestroy third(3, "(local static in main)" );
 
-    cout << "\n\nt2: hour specified; minute and second defaulted\n ";
-    t2.printUniversal(); // 02:00:00
-    cout << "\n ";
-    t2.printStandard(); // 2:00:00 AM
+    create(); // call function to create objects
 
-    cout << "\n\nt3: hour and minute specified; second defaulted\n ";
-    t3.printUniversal(); // 21:34:00
-    cout << "\n ";
-    t3.printStandard(); // 9:34:00 PM
+    cout << "\nMAIN FUNCTION: EXECUTION RESUMES" << endl;
 
-    cout << "\n\nt4: hour, minute, and second specified\n ";
-    t4.printUniversal(); // 12:25:42
-    cout << "\n ";\
-    t4.printStandard(); // 12:25:42 PM
-
-    // attempt to initialize t5 with invalid values
-    try
-    {
-        Time t5(27, 74, 99); // all bad values specified
-    } // end try
-    catch (invalid_argument &e)
-    {
-        cout << "\n\nException while initializing t5: " << e.what() << endl;
-    } // end catch
+    CreateAndDestroy fourth(4, "(local automatic in main)");
+    cout << "\nMAIN FUNCTION: EXECUTION ENDS" << endl;
 } // end main
+
+// function to create objects
+void create(void)
+{
+    cout << "\nCREATE FUNCTION: EXECUTION BEGINS" << endl;
+    CreateAndDestroy fifth(5, "(local automatic in create)");
+    static CreateAndDestroy sixtrh(6, "(local static in create)");
+    CreateAndDestroy seventh(7, "(local automatic in create)");
+    cout << "\nCREATE FUNCTION: EXECUTION ENDS" << endl;
+} // end function create

@@ -234,4 +234,34 @@ passes the array and its size to function `modifyArray`.
 - Any change to the default argument values of a function requires the client code to be recompiled.
 - If a member function of a class already provides all or part of the functionality required by a constructor (or other member function) of the class, call that member function from the constructor (or other member function).
 
+### Destructors
+
+- The name of the destructor for a class is the **tilde character (~)** followed by the class name.
+- A class's destructor is called _implicitly_ when an object is destroyed. 
+- The destructor itself does not actually release the object's memory - it performs **termination housekeeping** before the object's memorey is reclaimed, so the memory may be reused to hold new objects.
+- Every class has a destructor. If you do not explicitly provide a destructor, the compiler creates an "empty" destructor.
+
+### When Constructors and Destructors are Called
+
+- Generally, destructor calls are  made in the _reverse order_ of the corresponding constructor calls, but the storage classes of objects can alter the order in which destructors are called.
+
+Constructors and Destructors for Objects in Global Scope
+
+- Constructors are called for objects defined in global scope _before_ any other function (including `main`) in the file begins execution.
+- The  corresponding destructors are called when `main` terminates.
+- Function **`exit`** forces a program to terminate immediately and does _not_ execute the destructors of automatic objects.
+- Function **`abort`** performs similarly to `exit` but forces the program to terminate _immediately_, without allowing the destructors of any objects to be called.
+
+Constructors and Destructors for Local Automatic Objects
+
+- The constructor for a local object is called when execution reaches the point where that object is defined. The corresponding destructor is called when execution leaves the object's scope.
+- Constructors and destructors for automatic objects are called each time execution enters and leaves the scope of the object.
+- Destructors are not called for automatic objects if the program terminates with a call to function `exit` or function `abort`.
+
+Constructors and Destructors for `static` Local Objects
+
+- The constructor for a `static` local object is called only _once_.
+- The corresponding destructor is called when `maain` terminates or the program calles function `exit`.
+- Global and `static` objects are destroyed in the _reverse_ order of their creation.
+- Destructors are _not_ called for `static` objects if the program terminates with a call to function `abort`.
 
