@@ -269,3 +269,11 @@ Constructors and Destructors for `static` Local Objects
 
 - (!) A `public` member function of a class  can return a reference to a `private` data member of that  class. The function call can be used in any way that the `private` data member can be used, including as an _lvalue_ in an assignment statement, thus _enabling clients of the class to clobber the class's `private` data at will!_ The  same problem would occur if a pointer to the `private` data were to be returned by the function.
 - Returning a reference or a pointer to a `private` data member breaks the encapsulation of the class and makes the client code dependent on the representation of the class's data; this is a dangerous practice that should be avoided.
+
+### Default Memberwise Assignment
+
+- The assignment operator (`=`) can be used to assibn an object to another object of the same type. By default, each data member of the object on the right of the assignment operator is assigned individually to the _same_ data member in the object on the left of the assignment  operator.
+- Memberwise assignment can cause serious problems when used with a clss whose data members contain pointers to dynamically allocated memory.
+- Objects may be passed as function arguments and  may be returned from functions. Such passing and returning is performed using pass-by-value by default: a copy of the object is passed or returned. In such cases, C++ creates a new object and uses a **copy constructor** to copy the original object's values into the new object. Copy constructors can case serious problems when used with a class whose data members contain pointers to dynamically allocated memory.
+- Passing an object by value is good from a security standpoint, but pass-by-value can degrade performance when making a copy of a large object.
+- Pass-by-`const`-reference is a safe, good-performing alternative. This can be immplemented with a `const` reference parameter or with a pointer-to-`const`-data parameter.

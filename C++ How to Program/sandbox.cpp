@@ -1,33 +1,27 @@
 /*
- * Fig 9.16: Demonstrating a public member function that
- * returns a reference to a private data member.
+ * Fig 9.19: Demonstrating that class objects can be assigned
+ * to each other using default memberwise assignment.
 */
 
 #include <iostream>
-#include "Time.h"
+#include "Date.h"
 using namespace std;
-
-void create(void); // prototype
 
 int main()
 {
-    Time t; // create Time object
+    Date date1(7, 4, 2004);
+    Date date2; // date2 defaults to 1/1/2000
 
-    // initialize hourRef with the reference returned by badSetHour
-    int &hourRef = t.badSetHour(20); // 20 is a valid hour
+    cout << "date1 = ";
+    date1.print();
+    cout << "\ndate2 = ";
+    date2.print();
 
-    cout << "Valid hour before modification: " << hourRef;
-    hourRef = 30; // use hourRef to set invalid value in Time object t
-    cout << "\nInvalid hour after modification: " << t.getHour();
+    date2 = date1; // default memberwise assignment
 
-    // Dangerous: Function call that returns a reference
-    // can be used as an lvalue!
-    t.badSetHour(12) = 74; // assign another invalid value to hour
-
-    cout << "\n\n**************\n"
-        << "POOR PROGRAMMING PRACTICE!!!\n"
-        << "t.badSetHour(12) as an lvalue, invalid hour: "
-        << t.getHour()
-        << "\n**************" << endl;
+    cout << "\n\nAfter default memberwise assignment, date2 = ";
+    date2.print();
+    cout << endl;
 } // end main
+
 
