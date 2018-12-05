@@ -265,3 +265,7 @@ Constructors and Destructors for `static` Local Objects
 - Global and `static` objects are destroyed in the _reverse_ order of their creation.
 - Destructors are _not_ called for `static` objects if the program terminates with a call to function `abort`.
 
+### Returning a Reference to a `private` Data Member
+
+- (!) A `public` member function of a class  can return a reference to a `private` data member of that  class. The function call can be used in any way that the `private` data member can be used, including as an _lvalue_ in an assignment statement, thus _enabling clients of the class to clobber the class's `private` data at will!_ The  same problem would occur if a pointer to the `private` data were to be returned by the function.
+- Returning a reference or a pointer to a `private` data member breaks the encapsulation of the class and makes the client code dependent on the representation of the class's data; this is a dangerous practice that should be avoided.

@@ -1,37 +1,33 @@
 /*
- * Fig 9.13: Demonstrating the order in which constructors and
- * destructors are called.
+ * Fig 9.16: Demonstrating a public member function that
+ * returns a reference to a private data member.
 */
 
 #include <iostream>
-#include "CreateAndDestroy.h"
+#include "Time.h"
 using namespace std;
 
 void create(void); // prototype
 
-CreateAndDestroy first(1, "(global before main)" ); // global object
-
 int main()
 {
-    cout << "\nMAIN FUNCTION: EXECUTION BEGINS" << endl;
+    Time t; // create Time object
 
-    CreateAndDestroy second(2, "(local automatic in main)");
-    static CreateAndDestroy third(3, "(local static in main)" );
+    // initialize hourRef with the reference returned by badSetHour
+    int &hourRef = t.badSetHour(20); // 20 is a valid hour
 
-    create(); // call function to create objects
+    cout << "Valid hour before modification: " << hourRef;
+    hourRef = 30; // use hourRef to set invalid value in Time object t
+    cout << "\nInvalid hour after modification: " << t.getHour();
 
-    cout << "\nMAIN FUNCTION: EXECUTION RESUMES" << endl;
+    // Dangerous: Function call that returns a reference
+    // can be used as an lvalue!
+    t.badSetHour(12) = 74; // assign another invalid value to hour
 
-    CreateAndDestroy fourth(4, "(local automatic in main)");
-    cout << "\nMAIN FUNCTION: EXECUTION ENDS" << endl;
+    cout << "\n\n**************\n"
+        << "POOR PROGRAMMING PRACTICE!!!\n"
+        << "t.badSetHour(12) as an lvalue, invalid hour: "
+        << t.getHour()
+        << "\n**************" << endl;
 } // end main
 
-// function to create objects
-void create(void)
-{
-    cout << "\nCREATE FUNCTION: EXECUTION BEGINS" << endl;
-    CreateAndDestroy fifth(5, "(local automatic in create)");
-    static CreateAndDestroy sixtrh(6, "(local static in create)");
-    CreateAndDestroy seventh(7, "(local automatic in create)");
-    cout << "\nCREATE FUNCTION: EXECUTION ENDS" << endl;
-} // end function create
