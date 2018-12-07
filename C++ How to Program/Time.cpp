@@ -24,16 +24,25 @@ void Time::setTime(int h, int m, int s)
     setSecond(s); // set private  field second
 } // end function setTime
 
-// POOR PRACTICE: Returning a reference to a private data member.
-int &Time::badSetHour(int hh)
+// iincrement second by one
+void Time::tick()
 {
-    if (hh>=0 && hh < 24)
-        hour = hh;
-    else    
-        throw invalid_argument("hour must be 0-23");
-    
-    return hour; // DANGEROUS reference return
-} // end  function badSetHour
+    second++;
+    if (second == 60)
+    {
+        second = 0;
+        minute++;
+        if (minute == 60)
+        {
+            minute = 0;
+            hour++;
+            if (hour == 24)
+            {
+                hour = 0;
+            }
+        }
+    }
+}
 
 // set hour value
 void Time::setHour(int h)

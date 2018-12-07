@@ -20,7 +20,7 @@ class Time
     void setMinute(int);         // set minute (after validation)
     void setSecond(int);         // set second (after validation)
 
-    int &badSetHour(int); // DANGEROUS reference return
+    void tick(); // increment second by one
 
     // get functions
     int getHour();   // return hour

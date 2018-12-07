@@ -1,27 +1,27 @@
 /*
- * Fig 9.19: Demonstrating that class objects can be assigned
- * to each other using default memberwise assignment.
+ * Ex 9.7: Enhancing class Time.
+ * Include a `tick` member function that  increments the time stored
+ * in a `Time` object by one second.
+ * Write a program that tests the `tick` member function in a loop 
+ * that prints the time in standard format during each iteration of the loop.
 */
 
 #include <iostream>
-#include "Date.h"
+#include "Time.h"
 using namespace std;
 
 int main()
 {
-    Date date1(7, 4, 2004);
-    Date date2; // date2 defaults to 1/1/2000
+    Time time(23, 58, 15); // set time to 23:40:15
+    const int loopCount = 120;
+    cout << "Starting time: ";
+    time.printUniversal();
+    cout  << endl;
 
-    cout << "date1 = ";
-    date1.print();
-    cout << "\ndate2 = ";
-    date2.print();
-
-    date2 = date1; // default memberwise assignment
-
-    cout << "\n\nAfter default memberwise assignment, date2 = ";
-    date2.print();
-    cout << endl;
+    for (int i = 0; i < loopCount; ++i)
+    {
+        time.tick();
+        time.printUniversal();
+        cout << endl;
+    }
 } // end main
-
-
