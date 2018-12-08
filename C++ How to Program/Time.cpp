@@ -19,9 +19,33 @@ Time::Time(int hour, int minute, int second)
 // set new Time value using universal time
 void Time::setTime(int h, int m, int s)
 {
-    setHour(h);   // set private field hour
-    setMinute(m); // set private field minute
-    setSecond(s); // set private  field second
+    try
+    {
+        setHour(h);   // set private field hour
+    }
+    catch (invalid_argument &ex)
+    {
+        cout << "Invalid hour value, setting to 0..." << endl;
+        setHour(0);
+    }
+    try
+    {
+        setMinute(m);
+    }
+    catch (invalid_argument &ex)
+    {
+        cout << "Invalid minute value, setting to 0..." << endl;
+        setMinute(0);
+    }
+    try
+    {
+        setSecond(s);
+    }
+    catch (invalid_argument &ex)
+    {
+        cout  << "Invalid second value, setting to 0..." << endl;
+        setSecond(0);
+    }
 } // end function setTime
 
 // iincrement second by one
