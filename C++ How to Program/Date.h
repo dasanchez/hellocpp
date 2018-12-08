@@ -6,13 +6,19 @@
 // class Date definition
 class Date
 {
-    public:
-    Date(int = 1, int = 1, int = 2000); // default constructor
+  public:
+    Date(int = 2000, int = 1, int = 1); // default constructor
+
     void print();
-    private:
+    void nextDay();
+    bool isLeapYear(const int);
+    int daysInMonth(const int month, const int year);
+
+  private:
     int month;
     int day;
     int year;
+
 }; // end class Date
 
 #endif

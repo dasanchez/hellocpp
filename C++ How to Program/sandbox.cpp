@@ -1,27 +1,28 @@
 /*
- * Ex 9.7: Enhancing class Time.
- * Include a `tick` member function that  increments the time stored
- * in a `Time` object by one second.
- * Write a program that tests the `tick` member function in a loop 
- * that prints the time in standard format during each iteration of the loop.
+ * Ex 9.8: Enhancing class Date.
+ * Perform error checking  on the initializer values for data members
+ * month, day, and year. Also, provide a member function nextDay to
+ * increment the day by one.
+ * Write a program that tests the `nextDay` member function in a loop 
+ * that prints the date during each iteration of the loop.
 */
 
 #include <iostream>
-#include "Time.h"
+#include "Date.h"
 using namespace std;
 
 int main()
 {
-    Time time(23, 58, 15); // set time to 23:40:15
-    const int loopCount = 120;
-    cout << "Starting time: ";
-    time.printUniversal();
+    const int loopCount = 10;
+    Date date(2001, 2, 24);
+    cout << "Starting date: ";
+    date.print();
     cout  << endl;
 
     for (int i = 0; i < loopCount; ++i)
     {
-        time.tick();
-        time.printUniversal();
+        date.nextDay();
+        date.print();
         cout << endl;
     }
 } // end main
