@@ -5,20 +5,33 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
+#include "Point.h"
+
 class Rectangle
 {
-  public:
-    Rectangle(float = 1, float = 1);
-    void setWidth(float);
-    void setHeight(float);
-    float getWidth();
-    float getHeight();
-    float calcPerimeter();
-    float calcArea();
+public:
+  Rectangle(Point, Point); // top left and bottom right corners
+  void setCoordinates(Point, Point);
 
-  private:
-    float width;
-    float height;
+  float getWidth();
+  float getHeight();
+  void printCoordinates();
+  float calcPerimeter();
+  float calcArea();
+  bool isSquare();
+
+private:
+  Point tlCorner;
+  Point trCorner;
+  Point brCorner;
+  Point blCorner;
+  float rightEdge;
+  float leftEdge;
+  float topEdge;
+  float bottomEdge;
+
+  float width;
+  float height;
 };
 
 #endif
