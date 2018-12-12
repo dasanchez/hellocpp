@@ -12,6 +12,8 @@ class Rectangle
 public:
   Rectangle(Point, Point); // top left and bottom right corners
   void setCoordinates(Point, Point);
+  void setPerimeterCharacter(char);
+  void setFillCharacter(char);
 
   float getWidth();
   float getHeight();
@@ -19,6 +21,7 @@ public:
   float calcPerimeter();
   float calcArea();
   bool isSquare();
+  void draw();
 
 private:
   Point tlCorner;
@@ -32,6 +35,8 @@ private:
 
   float width;
   float height;
+  char perimeterChar;
+  char fillChar;
 };
 
 #endif

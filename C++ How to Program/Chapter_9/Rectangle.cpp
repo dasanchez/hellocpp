@@ -8,6 +8,8 @@ using namespace std;
 Rectangle::Rectangle(Point p1, Point p2)
 {
     setCoordinates(p1, p2);
+    setPerimeterCharacter('+');
+    setFillCharacter('o');
 }
 
 void Rectangle::setCoordinates(Point p1, Point p2)
@@ -73,4 +75,52 @@ bool Rectangle::isSquare()
         return true;
     else
         return false;
+}
+
+void Rectangle::draw()
+{
+    // draw the shape enclosed in a 25 x 25 box:
+    int ymin = 25 - topEdge;
+    int ymax = 25 - bottomEdge;
+    int xmin = leftEdge;
+    int xmax = rightEdge;
+    cout << "ymin = " << ymin << ", ymax = " << ymax << ", xmin = " << xmin << ", xmax = " << xmax << endl;
+
+    for (int i = 0; i < 26; ++i)
+    {
+        for (int j = 0; j < 26; ++j)
+        {
+            if (i == 0 || i == 25 || j == 0 || j == 25)
+            {
+                cout << "* ";
+                if (j == 25)
+                    cout << endl;
+                continue;
+            }
+            else
+            {
+                if ((i >= ymin && i <= ymax) && (j <= xmax && j >= xmin))
+                {
+                    if (i == ymin || i == ymax || j == xmin || j == xmax)
+                        cout << perimeterChar << ' ';
+                    else
+                        cout << fillChar << ' ';
+                }
+                else
+                {
+                    cout << "  ";
+                }
+            }
+        }
+    }
+}
+
+void Rectangle::setPerimeterCharacter(char newChar)
+{
+    perimeterChar = newChar;
+}
+
+void Rectangle::setFillCharacter(char newChar)
+{
+    fillChar = newChar;
 }
