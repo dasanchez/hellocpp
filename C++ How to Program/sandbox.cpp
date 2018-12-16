@@ -1,20 +1,21 @@
 /*
- * Fig 10.3: Attempting to access a const object with non-const
+ * Fig 10.6: Testing class Increment
  * member functions. 
 */
-#include "Time.h"
+#include <iostream>
+#include "Increment.h"
 using namespace std;
 
 int main()
 {
-    Time wakeup(6, 45, 0);     // non-constant object
-    const Time noon(12, 0, 0); // constant object
+    Increment value(10, 5);
+    cout << "Before incrementing: ";
+    value.print();
 
-                        // OBJECT       MEMBER FUNCTION
-    wakeup.setHour(18); // non-const    non-const
-    noon.setHour(12);   // const        non-const
-    wakeup.getHour();   // non-const    const
-    noon.getMinute();   // const        const
-    noon.printUniversal(); // const     const
-    noon.printStandard(); // const      non-const
+    for (int j=1; j <= 3; ++j)
+    {
+        value.addIncrement();
+        cout << "After increment " << j << ": ";
+        value.print();
+    } // end for
 } // end main
