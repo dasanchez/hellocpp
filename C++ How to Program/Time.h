@@ -1,5 +1,5 @@
 /*
- * Fig 9.8: Time.h
+ * Fig 10.1: Time.h
  * Time class containing a constructor with default arguments.
  * Member functions are defined in Time.cpp
 */
@@ -11,29 +11,36 @@
 // Time abstract data type definition
 class Time
 {
-  public:
-    Time(int = 0, int = 0, int = 0); // default constructor
+public:
+  Time(int = 0, int = 0, int = 0); // default constructor
 
-    // set functions
-    void setTime(int, int, int); // set hour, minute, and second
-    void setHour(int);           // set hour (after validation)
-    void setMinute(int);         // set minute (after validation)
-    void setSecond(int);         // set second (after validation)
+  // set functions
+  void setTime(int, int, int); // set hour, minute, and second
+  void setHour(int);           // set hour (after validation)
+  void setMinute(int);         // set minute (after validation)
+  void setSecond(int);         // set second (after validation)
 
-    void tick(); // increment second by one
+  // get functions (normally declared const)
+  int getHour() const;   // return hour
+  int getMinute() const; // return minute
+  int getSecond() const; // return second
 
-    // get functions
-    int getHour();   // return hour
-    int getMinute(); // return minute
-    int getSecond(); // return second
+  void tick(); // increment second by one
 
-    void printUniversal(); // print time in universal-time format
-    void printStandard();  // print time in standard-time format
+  // get functions
+  // int getHour();   // return hour
+  // int getMinute(); // return minute
+  // int getSecond(); // return second
 
-  private:
-    int hour;   // 0 - 23 (24-hr clock format)
-    int minute; // 0 - 59
-    int second; // 0 - 59
-};              // end class Time
+  // print functions (normally declared const)
+  void printUniversal() const; // print universal time
+  // void printUniversal(); // print time in universal-time format
+  void printStandard(); // print time in standard-time format
+
+private:
+  int hour;   // 0 - 23 (24-hr clock format)
+  int minute; // 0 - 59
+  int second; // 0 - 59
+};            // end class Time
 
 #endif

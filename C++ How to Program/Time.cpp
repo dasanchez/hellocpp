@@ -2,12 +2,10 @@
  * Fig 9.9: Time.cpp
  * Member-function definitions for class Time.
 */
-
 #include <iostream>
 #include <iomanip>
 #include <stdexcept> // for invalid_argument exception class
 #include "Time.h"    // include definition of class Time from Time.h
-
 using namespace std;
 
 // Time constructor initializes each data member to zero.
@@ -21,7 +19,7 @@ void Time::setTime(int h, int m, int s)
 {
     try
     {
-        setHour(h);   // set private field hour
+        setHour(h); // set private field hour
     }
     catch (invalid_argument &ex)
     {
@@ -43,7 +41,7 @@ void Time::setTime(int h, int m, int s)
     }
     catch (invalid_argument &ex)
     {
-        cout  << "Invalid second value, setting to 0..." << endl;
+        cout << "Invalid second value, setting to 0..." << endl;
         setSecond(0);
     }
 } // end function setTime
@@ -96,25 +94,25 @@ void Time::setSecond(int s)
 }
 
 // return hour value
-int Time::getHour()
+int Time::getHour() const // get functions should be const
 {
     return hour;
 } // end function getHour
 
 // return minute value
-int Time::getMinute()
+int Time::getMinute() const
 {
     return minute;
 } // end function getMinute
 
 // return second value
-int Time::getSecond()
+int Time::getSecond() const
 {
     return second;
 } // end function getSecond
 
 // print Time in universal-time format (HH:MM:SS)
-void Time::printUniversal()
+void Time::printUniversal() const
 {
     cout << setfill('0') << setw(2) << getHour() << ":"
          << setw(2) << getMinute() << ":" << setw(2) << getSecond();
