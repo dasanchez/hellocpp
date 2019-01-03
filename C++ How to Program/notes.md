@@ -323,3 +323,8 @@ Constructors and Destructors for `static` Local Objects
 - Friendship is granted, _not_ taken. Class A must explicitly declare that class B  is its `friend`.
 - Friendship is neither symmetric nor transitive.
 - It is possible to specify overloaded functions as friends of a class. Each function intended to be a friend must be explicitly declared in the class definition as a friend of the class.
+
+### Using the `this` Pointer
+
+- Every object has access to its own address through a pointer called `this` (a C++ keyword).
+- The `this` pointer is _not_ part of the object itself. The `this` pointer is passed by the compiler as an _implicit_ argument to each of the object's non-`static` member functions.
