@@ -1,42 +1,25 @@
-// Fig 10.14: Using the this pointer to refer to object members.
+// Fig 10.17: Cascading member-function calls with the this pointer.
 
 #include <iostream>
+#include "Time.h"
 using namespace std;
-
-class Test
-{
-    public:
-    Test(int = 0); // default constructor
-    void print() const;
-    private:
-    int x;
-}; // end class Test
-
-// constructor
-Test::Test(int value)
-: x(value) // initialize x to value
-{
-    // empty body
-} // end  constructor Test
-
-// print x using implicit and explicit this pointers;
-// the parentheses around *this are required
-void Test::print() const
-{
-    // implicitly use the this pointer to access the member x
-    cout << "        x = " << x;
-
-    // explicitly use the this pointer and the arrow operator
-    // to access the member x
-    cout << "\n  this->x = " << this->x;
-
-    // explicitly use the deferenced this pointer and
-    // the dot operator to access the member x
-    cout << "\n(*this).x = " << (*this).x << endl;  
-} // end function print
 
 int main()
 {
-    Test testObject(12); // instantiate and initialize testObject
-    testObject.print();
+    Time t; // create Time object
+    // cascaded function calls
+    t.setHour(18).setMinute(30).setSecond(22);
+
+    // output time in universal and standard formats
+    cout << "Universal time: ";
+    t.printUniversal();
+
+    cout << "\nStandard time: ";
+    t.printStandard();
+
+    cout << "\n\nNew standard time: ";
+
+    // cascaded function calls
+    t.setTime(20, 20, 20).printStandard();
+    cout << endl;
 } // end main

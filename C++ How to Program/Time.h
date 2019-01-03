@@ -1,6 +1,6 @@
 /*
- * Fig 10.1: Time.h
- * Time class containing a constructor with default arguments.
+ * Fig 10.15: Time.h
+ * Cascading member function calls.
  * Member functions are defined in Time.cpp
 */
 
@@ -14,11 +14,11 @@ class Time
 public:
   Time(int = 0, int = 0, int = 0); // default constructor
 
-  // set functions
-  void setTime(int, int, int); // set hour, minute, and second
-  void setHour(int);           // set hour (after validation)
-  void setMinute(int);         // set minute (after validation)
-  void setSecond(int);         // set second (after validation)
+  // set functions (the Time & return types enable cascading)
+  Time &setTime(int, int, int); // set hour, minute, and second
+  Time &setHour(int);           // set hour (after validation)
+  Time &setMinute(int);         // set minute (after validation)
+  Time &setSecond(int);         // set second (after validation)
 
   // get functions (normally declared const)
   int getHour() const;   // return hour
@@ -34,8 +34,7 @@ public:
 
   // print functions (normally declared const)
   void printUniversal() const; // print universal time
-  // void printUniversal(); // print time in universal-time format
-  void printStandard(); // print time in standard-time format
+  void printStandard() const; // print time in standard-time format
 
 private:
   int hour;   // 0 - 23 (24-hr clock format)

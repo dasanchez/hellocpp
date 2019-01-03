@@ -328,3 +328,5 @@ Constructors and Destructors for `static` Local Objects
 
 - Every object has access to its own address through a pointer called `this` (a C++ keyword).
 - The `this` pointer is _not_ part of the object itself. The `this` pointer is passed by the compiler as an _implicit_ argument to each of the object's non-`static` member functions.
+- One interesting use of the `this` pointer is to prevent an object from being assigned to itself.
+- Another use of the `this` pointer is to enable **cascaded member-function calls** -that is, invoking multiple functions in the same statement.

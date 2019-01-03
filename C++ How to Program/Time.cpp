@@ -15,35 +15,12 @@ Time::Time(int hour, int minute, int second)
 } // end Time constructor
 
 // set new Time value using universal time
-void Time::setTime(int h, int m, int s)
+Time &Time::setTime(int h, int m, int s) // note Time & return
 {
-    try
-    {
-        setHour(h); // set private field hour
-    }
-    catch (invalid_argument &ex)
-    {
-        cout << "Invalid hour value, setting to 0..." << endl;
-        setHour(0);
-    }
-    try
-    {
-        setMinute(m);
-    }
-    catch (invalid_argument &ex)
-    {
-        cout << "Invalid minute value, setting to 0..." << endl;
-        setMinute(0);
-    }
-    try
-    {
-        setSecond(s);
-    }
-    catch (invalid_argument &ex)
-    {
-        cout << "Invalid second value, setting to 0..." << endl;
-        setSecond(0);
-    }
+    setHour(h); // set private field hour
+    setMinute(m);
+    setSecond(s);
+    return *this; // enables cascading
 } // end function setTime
 
 // iincrement second by one
@@ -67,30 +44,33 @@ void Time::tick()
 }
 
 // set hour value
-void Time::setHour(int h)
+Time &Time::setHour(int h) // note Time & return
 {
     if (h >= 0 && h < 24)
         hour = h;
     else
         throw invalid_argument("hour must be  0-23");
+    return *this; // enables cascading
 } // end function setHour
 
 // set minute value
-void Time::setMinute(int m)
+Time &Time::setMinute(int m) //note Time & return
 {
     if (m >= 0 && m < 60)
         minute = m;
     else
         throw invalid_argument("minute must be 0-59");
+    return *this; // enable cascading
 } // end function setMinute
 
 // set second value
-void Time::setSecond(int s)
+Time &Time::setSecond(int s) // note Time & return
 {
     if (s >= 0 && s < 60)
         second = s;
     else
         throw invalid_argument("second must  be 0-59");
+    return *this; // enables cascading
 }
 
 // return hour value
@@ -119,7 +99,7 @@ void Time::printUniversal() const
 } // end function printUniversal
 
 // print Time in standard-time format (HH:MM:SS AM or PM)
-void Time::printStandard()
+void Time::printStandard() const
 {
     cout << ((getHour() == 0 || getHour() == 12) ? 12 : getHour() % 12) << ":"
          << setfill('0') << setw(2) << getMinute() << ":" << setw(2)
