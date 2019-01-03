@@ -296,3 +296,30 @@ Constructors and Destructors for `static` Local Objects
 - The member initializer list executes _before_ the body of the constructor executes.
 - Declare as `const`  all of a class's member functions that  do not modify the object in which they operate. If the member function is inadvertently written to modify the object, the compiler will issue an error message.
 - Not providing a member initializer for a `const` data member is a compilation error.
+
+### Composition: Objects as Members of Classes
+
+- A class can have objects of other classes as members. This is called **composition** and is sometimes referred to as a **has-a relationship**.
+- An object's constructor can pass arguments to member-object constructors via  member initializers.
+- Member objects  are  constructed in the  order in which they're declared in the class definition (not in the order they're listed in the constructor) and before their enclosing class objects (sometimes called host objects) are  constructed.
+- If a member object is _not_ initialized through a member initializer, the member object's default constructor will be called implicitly. Values, if any, established by the default constructor can be overridden by _set_ functions.
+- A compilation error occurs if a member object is not initialized with a member initializer and the member object's class does not provide a default constructor (i.e., the member object's class defines one or more constructors but none is a default constructor).
+- Initialize member objects explicitly through member initializers. This eliminates the overhead of "doubly initializing" member objects.
+- Member objects of class types should still be private, like all other data members.
+
+### `friend` Functions and `friend` Classes
+
+- A **`friend` function** of a class is defined outside that class's scope, yet has the right to access the non-public (and public) members of the class. Standalone functions, entire classes or member functions of other classes may be declared to be friends of another class. 
+- Using `friend` functions can enhance performance.
+- To declare a function as a friend of a class, precede the function prototype in the class definition with keyword `friend`.
+- To declare all member fuctions of class `ClassTwo` as friends of class `ClassOne`, place a declaration of the form
+  ```
+  friend class ClassTwo;
+  ```
+  in the definition of class `ClassOne`.
+- Even though the prototypes for friend functions appear in the class definition, friends are not member functions.
+- Member access notions of `private`, `protected`, and `public` are not relevant to `friend` declarations, so friend declarations can be placed anywhere in a class definition.
+- Place all friendship declarations first inside the class definition's body and do not precede them with any access specifier.
+- Friendship is granted, _not_ taken. Class A must explicitly declare that class B  is its `friend`.
+- Friendship is neither symmetric nor transitive.
+- It is possible to specify overloaded functions as friends of a class. Each function intended to be a friend must be explicitly declared in the class definition as a friend of the class.
