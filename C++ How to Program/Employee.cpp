@@ -1,36 +1,43 @@
-// Fig 10.11: Employee.cpp
+// Fig 10.19: Employee.cpp
 #include <iostream>
 #include "Employee.h"
-#include "Date.h"
 using namespace std;
 
-// constructor uses member initializer list to pass initializer
-// values to constructors of member objects
-Employee::Employee(const string &first, const string &last,
-                   const Date &dateOfBirth, const Date &dateOfHire)
-    : firstName(first),       // initialize firstName
-      lastName(last),         // initialize lastName
-      birthDate(dateOfBirth), // initialize birthDate
-      hireDate(dateOfHire)    // initialize hireDate
+// define and initialize static data member at global namespace scope
+int Employee::count = 0; // cannot include keyword static
+
+// define static member function that returns number of
+// Employee objeccts instantiated (declared static in Employee.h)
+int Employee::getCount()
 {
-    // output Employee object to show  when constructor is called
-    cout << "Employee object constructor: "
-         << firstName << ' ' << lastName << endl;
+    return count;
+} // end static function getCount
+
+// constructor initializes non-static data members and
+// increments static data member count
+Employee::Employee(const string &first, const string &last)
+    : firstName(first), lastName(last)
+{
+    ++count; // increment static count of employees
+    cout << "Employee constructor for " << firstName
+         << ' ' << lastName << " called." << endl;
 } // end Employee constructor
 
-// print Employee object
-void Employee::print() const
-{
-    cout << lastName << ", " << firstName << " Hired: ";
-    hireDate.print();
-    cout << " Birthday: ";
-    birthDate.print();
-    cout << endl;
-} // end function print
-
-// output Employee object to show when its destructor is called
+// destructor deallocates dynamically allocated memory
 Employee::~Employee()
 {
-    cout << "Employee object destructor: "
-         << lastName << ", " << firstName << endl;
-} // end ~Employee destructor
+    cout << "~Employee() called for " << firstName
+         << ' ' << lastName << endl;
+    --count; // decrement static count of employees
+} // end Employee destructor
+
+// return first name of employee
+string Employee::getFirstName() const
+{
+    return firstName; // return copy of first name
+}
+
+string Employee::getLastName() const
+{
+    return lastName; // return copy of last name
+}

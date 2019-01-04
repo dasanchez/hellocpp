@@ -1,25 +1,30 @@
-// Fig 10.10: Employee.h
-// Employee class definition showing composition.
+// Fig 10.18: Employee.h
+// Employee class definition with a static data member to
+// track the number of Employee objects in memory.
 
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
 #include <string>
-#include "Date.h" // include Date class definition
 using namespace std;
 
 class Employee
 {
-    public:
-        Employee(const string &, const string  &, const Date &, const Date &);
-        void print() const;
-        ~Employee(); // provided to confirm destruction order
-    
-    private:
-        string firstName; // composition: member object
-        string lastName; // composition: member object
-        const Date birthDate; // composition: member object
-        const Date hireDate; // composition: member object
-}; // end class Employee
+  public:
+    Employee(const string &, const string &); // constructor
+    ~Employee();                              // destructor
+    string getFirstName() const;              // return first name
+    string getLastName() const;               // return last name
+
+    // static member function
+    static int getCount(); // return number of objects instantiated
+
+  private:
+    string firstName; // composition: member object
+    string lastName;  // composition: member object
+
+    // static data
+    static int count; // number of objects instantiated
+};                    // end class Employee
 
 #endif

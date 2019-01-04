@@ -1,25 +1,36 @@
-// Fig 10.17: Cascading member-function calls with the this pointer.
-
+// Fig 10.20: Static data member tracking the number of objects
+// of a class.
 #include <iostream>
-#include "Time.h"
+#include "Employee.h"
 using namespace std;
 
 int main()
 {
-    Time t; // create Time object
-    // cascaded function calls
-    t.setHour(18).setMinute(30).setSecond(22);
+    // no objects exist; use class name and binary scope resolution
+    // operator to access static member function getCount
+    cout << "Number of employees before instantiation of any object is "
+        << Employee::getCount() << endl; // use class name
 
-    // output time in universal and standard formats
-    cout << "Universal time: ";
-    t.printUniversal();
+    // the following scope creates and destroys
+    // Employee objects before main terminates
+    {
+        Employee e1("Susan", "Baker");
+        Employee e2("Robert", "Jones");
 
-    cout << "\nStandard time: ";
-    t.printStandard();
+        // two objects exist; call static member function getCount again
+        // using the class name and  the scope resolution operator.
+        cout << "Number of employees after objects are instantiated is "
+            << Employee::getCount();
 
-    cout << "\n\nNew standard time: ";
+        cout << "\n\nEmployee 1: "
+            << e1.getFirstName() << " " << e1.getLastName()
+            << "\nEmployee 2: "
+            << e2.getFirstName() << " " << e2.getLastName() << "\n\n";
+    } // end nested scope in main
 
-    // cascaded function calls
-    t.setTime(20, 20, 20).printStandard();
-    cout << endl;
+    // no objects exist, so call static member function getCount again
+    // using the class name and the scope resolution operator
+    cout << "Number of employees after objects are deleted is "
+        << Employee::getCount() << endl; // use class name
+
 } // end main

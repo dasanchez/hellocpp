@@ -330,3 +330,19 @@ Constructors and Destructors for `static` Local Objects
 - The `this` pointer is _not_ part of the object itself. The `this` pointer is passed by the compiler as an _implicit_ argument to each of the object's non-`static` member functions.
 - One interesting use of the `this` pointer is to prevent an object from being assigned to itself.
 - Another use of the `this` pointer is to enable **cascaded member-function calls** -that is, invoking multiple functions in the same statement.
+
+### 10.6 `static` Class Members
+
+- In certain cases, only _one_ copy of a variable should be _shared_ by _all_ objects of a class. A **`static` data member** is used for these and other reasons. Such a variable represents "class-wide" information.
+- Use `static` data members to save storage when a single copy of the data for all objects of a class will suffice.
+- A class's `static` data members have class scope, and they can be declared `public`, `private`, or `protected`.
+- A fundamental-type `static` data member is initialized by default to 0, and it can be initialized _once_.
+- A `static const` data member of int or enum type can be initialized in its declaration in the class definition, but all other `static` data members must be defined _at global namespace scope_ (outside the body of the class definition) and can be initialized in those definitions.
+- A class's `private` and `protected static` members are normally accessed through the class's public member functions or `friend`s. A class's `static` members exist even when no objects of that class exist. To access a `public static` class member when no objects of the class exist, simply prefix the class name and he scope resolution operator (::) to the name of the data member.
+- To access a `private` or `protected static` class member when no objects of the class exist, provide a `public` **`static` member function** and call the function by prefixing its name with the class name and scope resolution operator.
+- A static member function is a service of the class, not a specific object of the class.
+- A class's `static` members and member functions exist and can be used even if no objects of that class have been instantiated.
+- A member function should be declared `static` if it does _not_ access non-`static` data members or member functions of the class.
+- A `static` member function does not have a `this` pointer, because `static` data members and member functions exist independently of any object of a class.
+- Using the `this` pointer in a `static`  member function is a compilation error.
+- Declaring a `static` member function `cnost` is a compliation error.
