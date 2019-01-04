@@ -1,36 +1,17 @@
-// Fig 10.20: Static data member tracking the number of objects
+// Fig 10.24: Hiding a class's private data with a proxy class.
 // of a class.
 #include <iostream>
-#include "Employee.h"
+#include "Interface.h"
 using namespace std;
 
 int main()
 {
-    // no objects exist; use class name and binary scope resolution
-    // operator to access static member function getCount
-    cout << "Number of employees before instantiation of any object is "
-        << Employee::getCount() << endl; // use class name
+    Interface i(5); // create Interface object
 
-    // the following scope creates and destroys
-    // Employee objects before main terminates
-    {
-        Employee e1("Susan", "Baker");
-        Employee e2("Robert", "Jones");
+    cout << "Interface contains: " << i.getValue()
+         << " before setValue" << endl;
 
-        // two objects exist; call static member function getCount again
-        // using the class name and  the scope resolution operator.
-        cout << "Number of employees after objects are instantiated is "
-            << Employee::getCount();
-
-        cout << "\n\nEmployee 1: "
-            << e1.getFirstName() << " " << e1.getLastName()
-            << "\nEmployee 2: "
-            << e2.getFirstName() << " " << e2.getLastName() << "\n\n";
-    } // end nested scope in main
-
-    // no objects exist, so call static member function getCount again
-    // using the class name and the scope resolution operator
-    cout << "Number of employees after objects are deleted is "
-        << Employee::getCount() << endl; // use class name
-
+    i.setValue(10);
+    cout << "Interface contains: " << i.getValue()
+         << " after setValue" << endl;
 } // end main

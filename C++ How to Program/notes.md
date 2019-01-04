@@ -346,3 +346,9 @@ Constructors and Destructors for `static` Local Objects
 - A `static` member function does not have a `this` pointer, because `static` data members and member functions exist independently of any object of a class.
 - Using the `this` pointer in a `static`  member function is a compilation error.
 - Declaring a `static` member function `cnost` is a compliation error.
+
+### 10.7 Proxy Classes
+
+- A proxy class allows you to hide even the `private` data of a class from clients of the class.
+- When a class definition uses only a pointer or reference to an object of another class, the class header for htat other class is _not_ required to be included with `#include`. The compiler doesn't need to reserve space for an _object_ of the class, but it _does_ need to reserve space for the _pointer_ or _reference_.
+- A proxy class insulates client code from implementation changes.
