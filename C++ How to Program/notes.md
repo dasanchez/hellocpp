@@ -261,7 +261,7 @@ Constructors and Destructors for Local Automatic Objects
 Constructors and Destructors for `static` Local Objects
 
 - The constructor for a `static` local object is called only _once_.
-- The corresponding destructor is called when `maain` terminates or the program calles function `exit`.
+- The corresponding destructor is called when `main` terminates or the program calles function `exit`.
 - Global and `static` objects are destroyed in the _reverse_ order of their creation.
 - Destructors are _not_ called for `static` objects if the program terminates with a call to function `abort`.
 
