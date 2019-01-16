@@ -10,6 +10,7 @@ class DeckOfCards
   public:
     DeckOfCards();
     Card dealCard();
+    vector<Card> dealFiveCards();
     void shuffle();
     bool moreCards() const;
 

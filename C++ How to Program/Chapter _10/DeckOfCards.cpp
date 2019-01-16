@@ -39,6 +39,16 @@ Card DeckOfCards::dealCard()
     return deck[currentCard++];
 }
 
+vector<Card> DeckOfCards::dealFiveCards()
+{
+    vector<Card> fiveCards; 
+    for (int i = 0; i<5; ++i)
+    {
+        fiveCards.push_back(dealCard());
+    }
+    return fiveCards;
+}
+
 bool DeckOfCards::moreCards() const
 {
     return currentCard < 52;

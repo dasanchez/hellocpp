@@ -18,3 +18,13 @@ string Card::toString() const
 {
     return (string(faces[face] + " of " + suits[suit]));
 }
+
+int Card::getFace() const 
+{
+    return face;
+}
+
+int Card::getSuit() const
+{
+    return suit;
+}

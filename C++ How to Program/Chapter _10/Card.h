@@ -12,9 +12,12 @@ class Card
     static const int suitCount = 4;
 
     Card(int cardFace, int cardSuit);
+
     static string faces[13];
     static string suits[4];
     string toString() const;
+    int getFace() const;
+    int getSuit() const;
 
   private:
     int face;
