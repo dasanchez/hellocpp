@@ -1,6 +1,4 @@
-// Fig 10.5: Increment.cpp
-// Using a member initializer to initialize  a constant
-// of a built-in data type.
+// DeckOfCards class
 #include <iostream>
 #include <cstdlib>
 #include "DeckOfCards.h"
@@ -37,7 +35,7 @@ void DeckOfCards::shuffle()
 Card DeckOfCards::dealCard()
 {
     return deck[currentCard++];
-}
+ }
 
 vector<Card> DeckOfCards::dealFiveCards()
 {
