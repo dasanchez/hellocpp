@@ -11,6 +11,7 @@ class DeckOfCards
     DeckOfCards();
     Card dealCard();
     vector<Card> dealFiveCards();
+    vector<Card> dealCards(int);
     void shuffle();
     bool moreCards() const;
     

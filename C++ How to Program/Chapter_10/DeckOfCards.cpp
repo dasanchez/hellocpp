@@ -41,11 +41,18 @@ vector<Card> DeckOfCards::dealFiveCards()
 {
     vector<Card> fiveCards;
     for (int i = 0; i < 5; ++i)
-    {
         fiveCards.push_back(dealCard());
-    }
     return fiveCards;
 }
+vector<Card> DeckOfCards::dealCards(int cardsRequested)
+{
+    vector<Card> cards;
+    for (int i =0; i< cardsRequested; ++i)
+        cards.push_back(dealCard());
+    
+    return cards;
+}
+
 
 bool DeckOfCards::moreCards() const
 {
@@ -135,7 +142,7 @@ int DeckOfCards::rateHand(vector<Card> fiveCards, int handFaces[5])
     // count faces
     for (size_t i = 0; i < fiveCards.size(); ++i)
     {
-        cout << fiveCards.at(i).toString() << endl;
+        // cout << fiveCards.at(i).toString() << endl;
         faceCount[fiveCards.at(i).getFace()]++;
         suitCount[fiveCards.at(i).getSuit()]++;
         handFaces[i] = fiveCards.at(i).getFace();
@@ -221,8 +228,8 @@ int DeckOfCards::compareHands(int handOne[5], int handTwo[5])
 
 string DeckOfCards::stringRating(int rating)
 {
-    string ratings[9] = {"high card", "one pair", "two pairs",
-                         "three of a kind", "straight", "flush",
-                         "full house", "four of a kind", "straight flush"};
+    string ratings[9] = {"a high card", "a pair", "two pairs",
+                         "three of a kind", "a straight", "a flush",
+                         "a full house", "four of a kind", "a straight flush"};
     return ratings[rating];
 }

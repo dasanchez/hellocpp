@@ -15,7 +15,7 @@ class Card
 
     static string faces[13];
     static string suits[4];
-    string toString() const;
+    string toString() const; // returns card in readable format
     int getFace() const;
     int getSuit() const;
 
