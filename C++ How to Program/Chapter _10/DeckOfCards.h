@@ -13,6 +13,15 @@ class DeckOfCards
     vector<Card> dealFiveCards();
     void shuffle();
     bool moreCards() const;
+    
+    // utility functions
+    static void sortFaces(int *);
+    static int countForward(int *);
+    static int countBackward(int *);
+    static bool isStraight(int *);
+    static int rateHand(vector<Card>, int *);
+    static int compareHands(int*, int*);
+    static string stringRating(int);
 
   private:
     vector<Card> deck;

@@ -1,17 +1,31 @@
-// Fig 10.24: Hiding a class's private data with a proxy class.
-// of a class.
+/*
+10.12 Card Shuffling and Dealing
+Use the functions from Exercise 10.11 to write a program that deals two five-card
+poker hands, evaluates each hand and determines which is the better hand.
+*/
 #include <iostream>
-#include "Interface.h"
+#include "DeckOfCards.h"
 using namespace std;
 
 int main()
 {
-    Interface i(5); // create Interface object
+     // initialize deck object
+     DeckOfCards deck;
 
-    cout << "Interface contains: " << i.getValue()
-         << " before setValue" << endl;
+     cout << "Dealing deck before shuffling:";
+     int count = 1;
+     while (deck.moreCards())
+     {
+          cout << "Card # " << count++ << ": " << deck.dealCard().toString() << endl;
+     }
 
-    i.setValue(10);
-    cout << "Interface contains: " << i.getValue()
-         << " after setValue" << endl;
+     cout << "\nShuffling deck...\n\n";
+     deck.shuffle();
+
+     cout << "Dealing deck after shuffling: " << endl;
+     count = 1;
+     while (deck.moreCards())
+     {
+          cout << "Card # " << count++ << ": " << deck.dealCard().toString() << endl;
+     }
 } // end main
