@@ -128,41 +128,39 @@ int DeckOfCards::rateHand(vector<Card> fiveCards, int handFaces[5])
     int faceCount[13] = {0};
     int suitCount[4] = {0};
     int pairCount = 0;
-    int triadCount = 0;
-    int quadCount = 0;
-    int faces[5] = {0};
+    bool threeOfaKind = false;
+    bool fourOfaKind = false;
     bool isFlush = false;
 
+    // count faces
     for (size_t i = 0; i < fiveCards.size(); ++i)
     {
         cout << fiveCards.at(i).toString() << endl;
         faceCount[fiveCards.at(i).getFace()]++;
         suitCount[fiveCards.at(i).getSuit()]++;
-        faces[i] = fiveCards.at(i).getFace();
+        handFaces[i] = fiveCards.at(i).getFace();
     }
 
     // sort faces array
-    sortFaces(faces);
+    sortFaces(handFaces);
 
-    // count faces
+    // identify repeated faces
     for (int i = 0; i < 13; ++i)
     {
-        // cout << i << ": " << faceCount[i] << endl;
         if (faceCount[i] == 2)
         {
             pairCount++;
         }
         if (faceCount[i] == 3)
         {
-            triadCount++;
+            threeOfaKind = true;
         }
         if (faceCount[i] == 4)
         {
-            quadCount++;
+            fourOfaKind = true;
         }
     }
 
-    // cout << "Counting suits..." << endl;
     for (int i = 0; i < 4; ++i)
     {
         if (suitCount[i] == 5)
@@ -171,26 +169,20 @@ int DeckOfCards::rateHand(vector<Card> fiveCards, int handFaces[5])
         }
     }
 
-    // handFaces = faces;
-    for (int i = 0; i < 5; ++i)
-        handFaces[i] = faces[i];
-    // cout << endl;
-
-    if (isStraight(faces))
+    if (isStraight(handFaces))
     {
-        // cout << "Hand is straight";
         if (isFlush)
             return 8;
         else
             return 4;
     }
-    else if (quadCount == 1)
+    else if (fourOfaKind)
         return 7;
-    else if (pairCount == 1 && triadCount == 1)
+    else if (pairCount == 1 && threeOfaKind)
         return 6;
     else if (isFlush)
         return 5;
-    else if (triadCount == 1)
+    else if (threeOfaKind)
         return 3;
     else if (pairCount == 2)
         return 2;
@@ -229,8 +221,8 @@ int DeckOfCards::compareHands(int handOne[5], int handTwo[5])
 
 string DeckOfCards::stringRating(int rating)
 {
-    string ratings[9] = {"High card", "One pair", "Two pairs",
-                         "Three of a kind", "Straight", "Flush",
-                         "Full house", "Four of a kind", "Straight flush"};
+    string ratings[9] = {"high card", "one pair", "two pairs",
+                         "three of a kind", "straight", "flush",
+                         "full house", "four of a kind", "straight flush"};
     return ratings[rating];
 }

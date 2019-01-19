@@ -23,6 +23,7 @@ int main()
     int facesOne[5];
     int facesTwo[5];
     int highestCard;
+    
     // initialize deck object
     DeckOfCards deck;
 
