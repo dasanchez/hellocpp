@@ -1,4 +1,4 @@
-// Ex 10.13: Dealer.cpp
+// Ex 10.14: Dealer.cpp
 #include <iostream>
 #include "Dealer.h"
 using namespace std;
@@ -14,14 +14,14 @@ void Dealer::dealHand(vector<Card> hand)
 {
     int rating = 0;
     this->hand = hand;
-    cout << "[Dealer] Hand:" << endl;
-    for (size_t i = 0; i < this->hand.size(); ++i)
-    {
-        cout << this->hand.at(i).toString() << endl;
-    }
+    // cout << "[Dealer] Hand:" << endl;
+    // for (size_t i = 0; i < this->hand.size(); ++i)
+    // {
+    //     cout << this->hand.at(i).toString() << endl;
+    // }
     rating = DeckOfCards::rateHand(this->hand, faces);
-    cout << "Dealer hand has "
-         << DeckOfCards::stringRating(rating) << endl;
+    // cout << "Dealer hand has "
+    //      << DeckOfCards::stringRating(rating) << endl;
 
     // decide how many cards we want
     if (rating >= 4) // straight (flush or not), flush, 2+3, 4 of a kind
@@ -61,14 +61,14 @@ void Dealer::newCards(vector<Card> newCards)
             }
         }
 
-        cout << "[Dealer] Hand is now:" << endl;
-        for (size_t i = 0; i < hand.size(); ++i)
-        {
-            cout << hand.at(i).toString() << endl;
-        }
+        // cout << "[Dealer] Hand is now:" << endl;
+        // for (size_t i = 0; i < hand.size(); ++i)
+        // {
+        //     cout << hand.at(i).toString() << endl;
+        // }
 
-        cout << "Dealer hand now has "
-             << DeckOfCards::stringRating(DeckOfCards::rateHand(hand, faces)) << endl;
+        // cout << "Dealer hand now has "
+        //      << DeckOfCards::stringRating(DeckOfCards::rateHand(hand, faces)) << endl;
     }
     else
     {
@@ -97,4 +97,9 @@ void Dealer::markRepeatedCards()
             }
         }
     }
+}
+
+vector<Card> Dealer::getHand() const
+{
+    return hand;
 }

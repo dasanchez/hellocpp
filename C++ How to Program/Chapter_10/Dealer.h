@@ -1,4 +1,4 @@
-// Ex 10.13 Dealer.h
+// Ex 10.14 Dealer.h
 #ifndef DEALER_H
 #define DEALER_H
 
@@ -12,6 +12,7 @@ class Dealer
     void dealHand(vector<Card>);
     void newCards(vector<Card>);
     int cardsRequested() const;
+    vector<Card> getHand() const;
 
   private:
     vector<Card> hand;
