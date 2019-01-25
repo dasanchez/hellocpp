@@ -352,3 +352,21 @@ Constructors and Destructors for `static` Local Objects
 - A proxy class allows you to hide even the `private` data of a class from clients of the class.
 - When a class definition uses only a pointer or reference to an object of another class, the class header for htat other class is _not_ required to be included with `#include`. The compiler doesn't need to reserve space for an _object_ of the class, but it _does_ need to reserve space for the _pointer_ or _reference_.
 - A proxy class insulates client code from implementation changes.
+
+## Chapter 11. Operator Overloagin; Class string
+
+### 11.1 Introduction
+
+- A process called **operator overloading** allows C++'s operators to work with class objects.
+- An example of an overloaded operator built into C++ is `<<`, which is used _both_ as the stream insertion operator _and_ the bitwise left-shift operator.
+- You can overload _most_ operators to be used  with class objects.
+
+### 11.2 Using the Overloaded Operators of Standard Library Class `string`
+
+- Class `string`  provides  member  function `empty` to determine whether a `string` is empty. Returns `true` if  the string empty and `false` otherwise.
+- A string literal can be appended to a `string` object by using operator `+=`.
+- Class `string` provides member function `substr` to return a portion of a string as a `string` object.
+- The overloaded `=` operator handles _self-assignment_ properly. Self-assignment can be dangerous.
+- Class `string`'s overloaded `[]` operator does not perform any bounds checking. Class `string` _does_ provide  bounds checking in its member function **at**, which throws an exception if its argument is an invalid subscript. If the subscript is valid, function `at` returns the character at the specified location as a modifiable _lvalue_.
+- Function `at` returns the character at a specific index in a string (after checking that the index is in range).
+
