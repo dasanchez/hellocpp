@@ -381,7 +381,7 @@ Constructors and Destructors for `static` Local Objects
   - The assignment operator (=) may be used with _every_ class to perform memberwise assignment of the class's data members.
   - The address (&) operator returns a pointer to the object; this operator can also be overloaded.
   - The comma operator evaluates the expression to its left then the expression to its right, and retuurns the value of the latter expression. This operator also can be overloaded.
-- Rulses and Restrictions on Operator Overloading:
+- **Rules and Restrictions on Operator Overloading**:
   - The precedence of an operator cannot be changed by overloading. Parentheses can be used to force the order of evaluation, however.
   - The associativity of an operator cannot be changed by overloading.
   - You cannot change the "arity" of an operator (i.e., the number of  operands an operator takes).
@@ -390,4 +390,25 @@ Constructors and Destructors for `static` Local Objects
   - Related operators, like  `+` and `+=`, must be overloaded separately.
   - When overloading `()`, `[]`, `->`, or any of the assignment operators, the operator overloading function _must_ be declared as a class member.
 
-  
+### 11.4 Overloading Binary Operators
+
+- A binary operator can be overloaded as a non-`static` member function with one parameter of as a non-member function with two parameters (one of those parameters must be either a class object or a reference to a class object).
+- A non-member operator function is often declared as `friend`` of a class for performance reasons.
+- **Binary Overloaded Operators as Member Functions**
+  - Consider using `<` to compare two objects of a `String` class that you define. When overloading binary operator `<` as a non-`static` member function of a `String` class, if `y` and `z` are `String`-class objects, then `y < z` is treated as if `y.operator<(z)` had been written:
+  ```
+  class String
+  {
+    public:
+      bool operator<( const String & ) const;
+      ...
+  } // end class String
+  ```
+  - Overloaded operator functions for binary operators can be member functions _only_ when the _left_ operand is an object of the class in which the function is a a member.
+- **Binary Overloaded Operators as Non-Member Functions**
+  - As a non-member function, binary operator `<` must take two arguments- one of which must be an object (or a reference to an object) of the class. If `y` and `z` are `String`-class objects or refencces to `String`-class objects, then `y < z` is treated as the call `operator<(y, z)` had been written in the program:
+  ```
+  bool operator<( const String  &, const String & ) const;
+  ```
+- It's possible to overload an operator as a non-member, non-`friend` function, but such a function requiring access to a class's `private` or `protected` data would need to use `set` or `get` functions provided in that class's `public` interface. The overhead of calling these functions would cause poor performance, so these functions can be inlined to improve performance.
+
