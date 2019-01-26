@@ -412,3 +412,15 @@ Constructors and Destructors for `static` Local Objects
   ```
 - It's possible to overload an operator as a non-member, non-`friend` function, but such a function requiring access to a class's `private` or `protected` data would need to use `set` or `get` functions provided in that class's `public` interface. The overhead of calling these functions would cause poor performance, so these functions can be inlined to improve performance.
 
+### 11.5 Overloading the Binary Stream Insertion and Stream Extraction Operators
+
+- You can input and output fundamental-type data using the stream extraction operator `>>` and the stream insertion operator `<<`. 
+- The C++ class libraries overload these binary operators for each fundamental type, including pointers  and `char*` strings.
+- You can also overload these operators to perform input and output for our own types.
+- When used with `cin` and `string`s, `setw` restricts the number of characters read to the number of characters specified by its argument.
+- `istream` member `ignore` discards the specified number of characters in the input stream (one character by default).
+- Overloaded operators should mimic the functionality of their built-in counterparts- for example, the `+` operator should be overloaded to perform addition, not subtraction. 
+- Avoid excessive or inconsistent use of operator overloading, as this can make a program cryptic and difficult to read.
+- Returning a reference from an overloaded  << or >> operator function is typically successful because `cout`, `cin` and most stream objects are global, or at least long-lived. Returning a reference to an automatic variable or other temporary objects is dangerous- this can create "dangling references" to nonexisting objects.
+- Overloaded operator functions for binary operators can be member functions only when the left operand is an object of the class in which the function is a member.
+- Overloaded input and output operators are declared as `friend`s if they need to access non-`public` class members directly for performance reasons or because they class may not offfer appropriate get functions.
