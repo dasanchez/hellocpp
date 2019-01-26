@@ -370,3 +370,24 @@ Constructors and Destructors for `static` Local Objects
 - Class `string`'s overloaded `[]` operator does not perform any bounds checking. Class `string` _does_ provide  bounds checking in its member function **at**, which throws an exception if its argument is an invalid subscript. If the subscript is valid, function `at` returns the character at the specified location as a modifiable _lvalue_.
 - Function `at` returns the character at a specific index in a string (after checking that the index is in range).
 
+### 11.3 Fundamentals of Operator Overloading
+
+- C++ does not allow new operators to be created, but it allows most existing operators to be overloaded so they have meaning appropriate to the objects they are used with.
+- Operator overloading is not automatic.
+- An operator is overloaded by writing a non-`static` member function definition or non-member function definition, with a name starts with the keyword `operator` followed by the symbol for the operator being overloaded.
+- For example, the  numfction name `operator+` would be used to overload the addition operator (`+`) for use  with objeacts of a particular class.
+- When operators are overloaded as membr functions, they must be non-`static`, because they must be called on an object of the class and operate on that objects.
+- To use an operator on an object of a class, the operator must be overloaded for that class, with three exceptions:
+  - The assignment operator (=) may be used with _every_ class to perform memberwise assignment of the class's data members.
+  - The address (&) operator returns a pointer to the object; this operator can also be overloaded.
+  - The comma operator evaluates the expression to its left then the expression to its right, and retuurns the value of the latter expression. This operator also can be overloaded.
+- Rulses and Restrictions on Operator Overloading:
+  - The precedence of an operator cannot be changed by overloading. Parentheses can be used to force the order of evaluation, however.
+  - The associativity of an operator cannot be changed by overloading.
+  - You cannot change the "arity" of an operator (i.e., the number of  operands an operator takes).
+  - You cannot create new operators.
+  - The meaning of how an operator works on values of fundamental types cannot be changed by operator overloading.
+  - Related operators, like  `+` and `+=`, must be overloaded separately.
+  - When overloading `()`, `[]`, `->`, or any of the assignment operators, the operator overloading function _must_ be declared as a class member.
+
+  
