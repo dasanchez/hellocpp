@@ -424,3 +424,23 @@ Constructors and Destructors for `static` Local Objects
 - Returning a reference from an overloaded  << or >> operator function is typically successful because `cout`, `cin` and most stream objects are global, or at least long-lived. Returning a reference to an automatic variable or other temporary objects is dangerous- this can create "dangling references" to nonexisting objects.
 - Overloaded operator functions for binary operators can be member functions only when the left operand is an object of the class in which the function is a member.
 - Overloaded input and output operators are declared as `friend`s if they need to access non-`public` class members directly for performance reasons or because they class may not offfer appropriate get functions.
+
+### 11.6 Overloading Unary Operators
+
+- A unary operator for a class can be overloaded as a non-`static` member function with no arguments or as a non-member functio with one argument that must be an object (or a reference to an object) of the class.
+- Member functions that implement overloaded operators must be non-`static` so thay they can access the non-`static` data in each object of the class.
+- **Unary Overloaded Operators as Member Functions**
+  - When a unary operator such as `!` is overloaded as a member function with no arguments and the compiler sees the expression `!s` (in which `s` in an object of the class `String`), the  compiler generatess the function call s.operator!(). The function is declared as follows:
+  ```
+  class String
+  {
+    public:
+      bool operator!() const;
+  }; // end class String
+  ```
+- **Unary Overloaded Operators as Member Functions**
+  - A unary operator such as `!` may be overloaded as a non-member function with one parameter in two different ways- either with a parameter that's an object, or with a parameter that's a reference to an object. 
+  - If `s` is a `String` class object (or a reference) to a `String` class object), then `s` is treated as if the call `operator!(s)` had been written, invoking the non-member `operator~` function that's declared as follows:
+  ```
+  bool operator!( const  String &);
+  ```
