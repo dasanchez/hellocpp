@@ -487,3 +487,13 @@ Constructors and Destructors for `static` Local Objects
   - The _postfix increment operator_ returns `Date` objects by `value`, whereas the prefix increment operator returns `Date` objects _by reference_- the postfix increment operator typically returns a temporary object that contains the original value of the object before the increment occurred. C++ treats such objects as _rvalues_, which _cannot be used on the left side of an assignment_. The prefix increment operator returns the actual incremented object with its new value. Such an object _can_ be used as an _lvalue_ in a continuing expression.
 - The extra object that's created by the _postfix_ increment (or decrement) operator can result in a performance problem- especially when the operator is used in a loop. For this reason, you should prefer the overloaded _prefix_ increment and decrement operators. 
 
+### 11.8 Case Study: A `Date` Class
+
+- The `Date` class uses  overloaded prefix and postfix increment operators to add 1 to the day in a `Date` object, while causing appropriate increments to the month and year if necessary. 
+- **Date Class Prefix Increment Operator**
+  - The prefix increment operator calls utility function `helpIncrement`.
+  - The overloaded prefix increment operator returns a reference to the current `Date` object (the one that was just incremented). This occurs because the current object, `*this`, is returned as a `Date&`. This enables a preincremented `Date` object to be used as an _lvalue_, which is how the built-in prefix increment operator works for fundamental types.
+- **Date Class Postfix Increment Operator**
+  - To emulate the effect of the postincrement, we must return an unincremented copy of the `Data` object.
+  - On entry to `operator++`, we save the  current object (`*this`) in `temp`. Next, we call `helpIncrement` to increment the current `Date` object. Then, we return the unincremented copy of the object previously stoored in `temp`. This function cannot return a reference to the local `Date` object `temp`, because a local variable is destroyed when the function in which it's declared exits. Thus, declaring the return type to this function as `Date&` would return a reference to an object that no longer exists.
+  - Returning a reference (or a pointer) to a local variable is a common error for which most compilers will issue a warning.
