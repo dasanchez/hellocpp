@@ -427,7 +427,7 @@ Constructors and Destructors for `static` Local Objects
 
 ### 11.6 Overloading Unary Operators
 
-- A unary operator for a class can be overloaded as a non-`static` member function with no arguments or as a non-member functio with one argument that must be an object (or a reference to an object) of the class.
+- A unary operator for a class can be overloaded as a non-`static` member function with no arguments or as a non-member function with one argument that must be an object (or a reference to an object) of the class.
 - Member functions that implement overloaded operators must be non-`static` so thay they can access the non-`static` data in each object of the class.
 - **Unary Overloaded Operators as Member Functions**
   - When a unary operator such as `!` is overloaded as a member function with no arguments and the compiler sees the expression `!s` (in which `s` in an object of the class `String`), the  compiler generatess the function call s.operator!(). The function is declared as follows:
@@ -444,3 +444,46 @@ Constructors and Destructors for `static` Local Objects
   ```
   bool operator!( const  String &);
   ```
+
+### 11.7 Overloading the Unary Prefix and Postfix ++ and -- Operators
+
+- To overload the prefix and postfix increment operators, each overloaded operator function must have a distinct signature, so that the compiler will be able to determine which version of ++ is intended.
+
+- **Overloading the Prefix Increment Operator**
+  - Suppose we want to add 1 to the day in `Date` object `d1`. When the compiler sees the preincrementing expression `++d1`, the compiler generates the _member-function call_
+  ```
+  d1.operator++()
+  ```
+  - The prototype for this operator member function would be
+  ```
+  Date &operator++();
+  ```
+  - If the prefix increment operator is implemented as a _non-member function_, then, when the compiler sees the expression `++d1`, the compiler generates the function call
+  ```
+  operator++(d1)
+  ```
+  - The prototype for this non-member operator function would be declares as
+  ```
+  Date &operator++(Date &);
+
+- **Overloading the Postfix Increment Operator**
+  - The compiler must be able to distinguish between the signatures of the overloaded prefix and postfix increment operator functions. The _convention_ that has been adopted is that, when the compiler sees the postincrementing expression `d1++`, it generates the _member-function call_
+  ```
+  d1.operator++(0)
+  ```
+  - The prototype for this operator member function is
+  ```
+  Date operator++(int)
+  ```
+  - The argument 0 is strictly a "dummy value" that enables the compiler to distinguish between the prefix and postfix increment operator functions. The same syntax is used to differentiate between the prefix and postfix decrement operator functions.
+  - If the postfix increment is implemented as a _non-member function_, then, when the compiler sees the expression `d1++`, the compiler generates the function call
+  ```
+  operator++(d1, 0)
+  ```
+  The prototype for this function would be
+  ```
+  Date operator++(Date &, int);
+  ```
+  - The _postfix increment operator_ returns `Date` objects by `value`, whereas the prefix increment operator returns `Date` objects _by reference_- the postfix increment operator typically returns a temporary object that contains the original value of the object before the increment occurred. C++ treats such objects as _rvalues_, which _cannot be used on the left side of an assignment_. The prefix increment operator returns the actual incremented object with its new value. Such an object _can_ be used as an _lvalue_ in a continuing expression.
+- The extra object that's created by the _postfix_ increment (or decrement) operator can result in a performance problem- especially when the operator is used in a loop. For this reason, you should prefer the overloaded _prefix_ increment and decrement operators. 
+
