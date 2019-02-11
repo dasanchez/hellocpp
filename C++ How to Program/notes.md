@@ -497,3 +497,58 @@ Constructors and Destructors for `static` Local Objects
   - To emulate the effect of the postincrement, we must return an unincremented copy of the `Data` object.
   - On entry to `operator++`, we save the  current object (`*this`) in `temp`. Next, we call `helpIncrement` to increment the current `Date` object. Then, we return the unincremented copy of the object previously stoored in `temp`. This function cannot return a reference to the local `Date` object `temp`, because a local variable is destroyed when the function in which it's declared exits. Thus, declaring the return type to this function as `Date&` would return a reference to an object that no longer exists.
   - Returning a reference (or a pointer) to a local variable is a common error for which most compilers will issue a warning.
+
+### 11.9 Dynamic Memory Management
+
+- A standard C++ array data structure is fixed in size once it's created. The size is specified with a constant at compile time.
+- Sometimes it's useful to determine the size of an array _dynamically_ at execution time and then create the array.
+- C++ enables you to control the allocation and deallocation oof memory in a program for objects and for arrays for any built-in or user-defined type. This is known as **dynamic memory management** and is performed with the operators **`new`** and **`delete`**. 
+- You can use the `new` operator do cynamically **allocate** the exact amount of memory required to hold and object or array at execution time.
+- The object or array is created in the **free store** (also called the **heap**)- a _region of memory assigned to each program for storing dynamically allocated objects_.
+- Once memory is allocated in the free store, you can access it via the pointer that operator `new` returns.
+- When you no longer need the memory, you can return it to the free store by using the `delete` operator to **deallocate** the memory, which can then be reused by future `new` operations.
+- **Obtaining Dynnamic Memory with `new`**
+  - Consider the following statement:
+  ```
+  Time *timePtr = new Time;
+  ```
+  - The `new` operator allocates storage of the proper size for an object of type Time, calls the default constructor to intialize the object, and returns a pointer to the type specified  to the right of the `new` operator (a `Time *`). If `new` is unable  to find sufficient space in memroy for the object, it indicates that a error occurred by throwing an exception.
+- **Releasing Dynamic Memory with `delete`**
+  - To destroy a dynamically allocated object and free the space for the object, use the `delete` operator as follows:
+  ```
+  delete timePtr;
+  ```
+  - This statemenet calls the destructor for the object to which `timePtr` points, then deallocates the memory associated wiith the object, returning the memory to the free store.
+- Not releasing dynamically allocated memory when it's no longer needed can cause the system to run out of memory prematurely. This is sometimes called a "memory leak".
+- **Initializing Dynamic Memory**
+  - You can provide an initializer for a newly created fundamental-type variable, as in
+  ```
+  double *ptr = new double(3.14159);
+  ```
+  which initializes a newly created `double` to 3.14159 and assigns the  resulting pointer to `ptr`. The same syntax can be used to specify a comma-separated list of arguments to the constructor of an object:
+  ```
+  Time *timePtr = new Time(12, 45, 0);
+  ```
+  initializes a new `Time` object to 12:45 PM and assigns the resulting pointer to `timePtr`.
+- **Dynamically Allocating Arrays with `new[]`**
+  - YOu can also use the `new` operator to allocate arrays dynamically. For example, a 10-element integer array can be allocated and assigned to `gradesArray` as follows:
+  ```
+  int *gradesArray = new int[ 10 ];
+  ```
+  which declares `int` pointer `gradesArray` and assigns it to a pointer to the first element of a dynamically allocated 10-element array of `int`s.
+  - The size of an array created at compile time must be specified using a constant integral expression; however, a dynamically allocated array's size can be specified using _any_ non-negative integral expression that can be evaluated at execution time.
+  - When allocating an array of objects dynamically, you canot pass arguments to each object's constructor- each object is initialized by its default constructor. For fundamental types, the elements are initialized to 0 or the equivalent of 0 (`char`s are initialized to the null character, `\0`). 
+  - Since an array name is a constant pointer to the array's first element, the following is not allowed for dynamically allocated memory:
+  ```
+  int gradesArray[] = new int[ 10 ];
+  ```
+- **Releasing Dynamically Allocated Arrays with `delete[]`**
+  - To deallocate the memory to which `gradesArray` points, use the statement
+  ```
+  delete [] gradesArray;
+  ```
+  - If the pointer points to an array of objects, the statement first calls the destructor for every object in the array, then deallocates the memory.
+  - If the preceding statement did not include the square brackets ([]) and gradesArray pointed to an array of objects, the result is _undefined_.
+  - Some compilers call the destructor only for the first object in the array. Using `delete` on a null pointer (a pointer with the value of 0) has no effect.
+- Using `delete` instead of `delete []` for arrays of objects can lead to runtime logic errors. To ensure that every object in the array receives a destructor ccall, always delete memory allocated as an array with operator `delete []`. Similarly, always delete memory allocated as an individual element with operator `delete`- the result of deleting a single object with operator `delete[]` is undefined.
+
