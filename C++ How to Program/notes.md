@@ -552,3 +552,97 @@ Constructors and Destructors for `static` Local Objects
   - Some compilers call the destructor only for the first object in the array. Using `delete` on a null pointer (a pointer with the value of 0) has no effect.
 - Using `delete` instead of `delete []` for arrays of objects can lead to runtime logic errors. To ensure that every object in the array receives a destructor ccall, always delete memory allocated as an array with operator `delete []`. Similarly, always delete memory allocated as an individual element with operator `delete`- the result of deleting a single object with operator `delete[]` is undefined.
 
+### 11.10 Case Study: `Array` Class
+
+- An array is not much more than a pointer to some space in memory.
+- Pointer-based arrays have many problems, including:
+  - A program can easily "walk off" either end of an array, because C++ does not check whether subscripts fall outside the range of an array.
+  - Arrays of size n must number their elements  0, ..., n-1; alternate subscripts are not allowed.
+  - An entire array cannot be input or output at once; each array element must be read or written individually (unless the array is a null-terminated `char *` string).
+  - Two arrays cannot be meaningfully compared with equality or relational operators, because the array names are simply pointers to where the arrays begin in memory and to arrays will always be at different memory locations.
+  - When an array is passed to a general-purpose function designed to handle arrays of any size, the array's _size_ must be passed as an additional argument.
+  - One array cannot be assigned to another with the assignment operator(s), because array names are `const` pointers and a _constant_ pointer cannot be used on the left side of an assignment operator.
+- In this example, we create an `Array` class that performs range checking.
+- The class allows one array object to be assigned to another with the assignment operator. The size does not need to be passed separately to functions that receive `Array` parameters.
+- Entire `Array`s can be input or output with the stream extraction and stream insertion operators, respectively.
+- You can compare `Array`s with the equality operators `==` and `!=`.
+- The C++ Standaard Library class template `vector` provides many of these capabilities as well.
+
+#### 11.10.1 Using the `Array` Class
+
+- The array subscript operator [] is not restricted for use only with arrays; it also can be used, for example, to select elements from other kinds of _container classes_, such as linked lists, strings, and dictionaries.
+- When overloaded `operator[]` functions are defined, subscripts no longer have to be integers- characters, strings, or even objects of user-defined classes also coud be used.
+
+#### 11.10.2 `Array` Class Definition
+
+- Each `Array` object consists of a `size` member indicating the number of elements in the `Array` and an `int` pointer -`ptr`- that points to the dynamically allocated pointer-based array of integers managed by the `Array` object.
+- **Overloading the Stream Insertion and Stream Extraction Operators as `friend`s**
+  - When the compiler sees an expression like `cout << arrayObject`, it invokes non-member function `operator<<` with the call
+  ```
+  operator<<( cout, arrayObject )
+  ```
+  - When the compiler sees an expression like `cin >> arrayObject`, it invokes non-member function `operator>>` with the call
+  ```
+  operator>>( cin, arrayObject )
+  ```
+  - These stream operator functions cannot be members of class `Array`, because the `Array` object is always mentioned on the _right_ side of the stream insertion or stream extraction operator.
+- `Array`s, and objects in general, should be properly initialized as they're created.
+
+- **Array Copy Constructor**
+  - The copy constructor initializes an `Array` by making a  copy of an existing `Array` object. Such copying must be done carefully to avoid the pitfall of leaving  both Array objects pointing to the same dynamically allocated memory.
+  - This is the problem that would occur with default memberwise copying, if the compiler is allowed to define a default copy constructor for this class. 
+  - Copy constructors are invoked whenever a copy of an object is needed, such as in:
+    - passing an object by value to a function.
+    - returning an object by value from a function, or
+    - initializing an object with a copy of another object of the same class.
+  - The copy constructor is called in a declaration when an object of class `Array` is instantiated and initialized with another object  of class `Array.
+  - The copy constructor for `Array` uses a member intializer to copy the size of the initializer `Array` into data member `size`, uses `new` to obtain the memory for the internal pointer-based representation of this Array and assigns the pointer returned by `new` to data member `ptr`. Then the copy constructor uses a `for` statement to copy all the elements of the initializer `Array` into the new `Array` object.
+  - An object of a class can look at the `private` data of any other object of that class (using a haaandle that indicates which object to access).
+- The argument to a copy constructor should be a `const` reference to allow a `const` object to be copied.
+- A  copy constructor must receive its argument by reference, not by value. Otherwise, the copy constructor call results in infinite recursion because receiiving an object by value requires the copy constructor to make a copy of the argument object.
+- If the copy constructor simply copied the pointer in the source object to the target object's pointer, then both would point to the same dynamically allocated memory. The first desstructor to execute would delete the dynamically allocated memory, and the other object's `ptr` would be _undefined_, a situation called a **dangling pointer**. This woud likely result in a serious runtime error when the pointer was used.
+
+- **Array Destructor**
+  - The destructor uses `delete[]` to release the memory allocated dynamically by `new` in the constructor.
+- If after deleting dynamically allocated memory, the pointer will continue to exist in memory, set the pointer's value to 0 to indicate that the pointer no longer points to memory in the free store. By setting the pointer to 0, the program loses access to that free-store space, which could be reallocated for a differenct purpose. If you do not set the pointer to 0, your code could inadvertently access the reallocated memory, ausing subtle, nonrepeatable logic errors.
+
+- **Overloaded Assignment Operator**
+  - When the compiler sees the expression `integers1 = integers2`, the compiler invokes member function `operator=` with the call
+  ```
+  integers1.operator=( integers2 )
+  ```
+  - Member function `operator=`'s implementation tests for **self-assignment** in which an `Array` object is being assigned to itself.
+  - When `this` is equal to the right operand's address, a self-assignment is being attempted, so the assignment is skipped.
+  - If it isn't a self-assignment, then the function determines whether the sizes of the two arrays are identical; in that case, the original array of integers in the left-side `Array` object is not reallocated. Otherwise, `operator=` uses `delete` to release the memory originally allocated to the target array, copies the `size` of the source array to the `size` of the target array, uses `new` to allocate the memory for the target array and places the pointer returned by `new` into the array's `ptr` member. Then the `for` statement copies the array elements from the source array to the target array.
+  - Regardless of whether this is a self-assignment, the member function returns the current object (i.e., `*this`) as a constant reference; this enables cascaded `Array` assignments such as `x = y = z`, but prevents ones like `(x = y) = z` because `z` cannot be assigned to the `const Array` reference that's returned by `(x = y)`.
+  - If self-assignment occurs, and function `operator=` did not test for this case, `operator=` would unnecessarily copy the elements of the `Array` into itself.
+- A copy constructor, a destructor, and an overloaded assignment operator are usually provided as a group for any class that uses dynamically allocated  memory.
+- Not providing an overloaded assignment operator and a copy constructor for a class when objects of that class contain pointers to dynamically allocated memory is a logic error.
+- It's possible to prevent one object of a class from being assigned to another. This is done by declaring the assignment operator as a `private` member of the class.
+- It's possible to prevent class objects from being copied; to do this, simply make both the overloaded assignment operator and the copy constructor of that class `private`.
+
+- **Overloaded Equality and Inequality Operators**
+  - When the compiler sees the expression `integers1 == integers2`, the  compiler invokes smember function `operator==` with the call
+  ```
+  integers1.operator==( integers2 )
+  ```
+  - Member function `operator==` immediately returns `false` if the `size` membrs of the arrays are not equal. Otherwise, `operator==` compares each pair of elements. If they're all equal, the function returns `true`. The first pair of elements to differ causes the function to return `false` immediately.
+  - Member function `operator!=` uses the overloaded `operator==` function to determine whether one `Array` is equal to another, then returns the _opposite_ of that result. 
+  - Writing `operator!=` in this manner enables you to reuse `operator==`, which reduces the amount of code that must be written in the class.
+  - The full function definition for `operator!=` is in the `Array` header. This allows the compiler to _inline_ the definition of `operator!=` to eliminate the overhead of the extra function call.
+
+- **Overloaded Subscript Operators**
+  - When the compiler sees the expression `integers[5]`, it invokes the appropriate overloaded `operator[]` member function by generating the call
+  ```
+  integers1.operator[]( 5 )
+  ```
+  - The compiler creates a call to the `const` version of `operator[]` when the subscript operator is used on a `const Array` object. For examplel, if `const` object `z` is instantiated with the statement
+  ```
+  const Array z( 5 );
+  ```
+  then the `const` version of `operator[]` is requires to execute a statement such as 
+  ```
+  cout << z[ 3 ] << endl;
+  ```
+  - A program can invoke only the `const` member functions of a `const` object.
+  - Each definition of `operator[]` determines whether the subscript it receives as an argument is _in range_ and if not, each throws an `out_of_range` exception. If the subscript is in range, the non-`const` version of `operator[]` returns the appropriate array element as a reference so that it may be used as a modifiable _lvalue_. If the subscript is in range, the `const` version of `operator[]` returns a copy of the appropriate element of the array. The returned character is an _rvalue_.
