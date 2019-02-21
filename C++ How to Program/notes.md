@@ -646,3 +646,7 @@ Constructors and Destructors for `static` Local Objects
   ```
   - A program can invoke only the `const` member functions of a `const` object.
   - Each definition of `operator[]` determines whether the subscript it receives as an argument is _in range_ and if not, each throws an `out_of_range` exception. If the subscript is in range, the non-`const` version of `operator[]` returns the appropriate array element as a reference so that it may be used as a modifiable _lvalue_. If the subscript is in range, the `const` version of `operator[]` returns a copy of the appropriate element of the array. The returned character is an _rvalue_.
+
+  ### 11.11 Operators as Member Functions vs Non-Member Functions
+
+  
