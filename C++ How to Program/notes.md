@@ -647,6 +647,15 @@ Constructors and Destructors for `static` Local Objects
   - A program can invoke only the `const` member functions of a `const` object.
   - Each definition of `operator[]` determines whether the subscript it receives as an argument is _in range_ and if not, each throws an `out_of_range` exception. If the subscript is in range, the non-`const` version of `operator[]` returns the appropriate array element as a reference so that it may be used as a modifiable _lvalue_. If the subscript is in range, the `const` version of `operator[]` returns a copy of the appropriate element of the array. The returned character is an _rvalue_.
 
-  ### 11.11 Operators as Member Functions vs Non-Member Functions
+### 11.11 Operators as Member Functions vs Non-Member Functions
 
+- When an operator function is implemented as a member function, the leftmost (or only) operand _must_ be an object (or a reference to an object) of the operator's class.
+- If the left operand _must_ be an object of a different class or a fundamental type, this operator function_must_ be implemented as a non-member function.
+- A non-member operator function can be made a `friend` of a class if that function must access `private` or `protected` members of that class directly.
+- Operator member functions of a specific class are called (implicitly by the compiler) only when the _left_ operand of a binary operator is specifically an object of that class, or when the _single operand of a unary operator_ is an object of that class.
+- **Commutative Operators**
+  - You might choose a non-member function to overload an operator to enable the operator to be _commutative_.
+  - Suppose we have a _fundamental type variable_, `number`, of type `long int`, and an _object_ `bigInteger1`, of class `HugeInteger`. The addition operator (`+`) produces a _temporary_ `HugeInteger` object as the sum of a `HugeInteger` and a `long int`, _or_ as the sum of a `long int` and a `HugeInteger`. Thus, we require the addition operator to be _commutative_.
+  - The problem is that the class object _must_ appear on the _left_ of the addition operator if that operator is to be overloaded as a member function. So, we _also_ overload the operator as a non-member function to allow the `HugeInteger` to appear on the _right_ of the addition.
+  - The `operator+` function that deals with the `HugeInteger` on the left can still be a member function. The non-member function can simply swap its arguments and call the member function.
   
