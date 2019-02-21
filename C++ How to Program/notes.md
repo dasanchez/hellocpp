@@ -659,3 +659,34 @@ Constructors and Destructors for `static` Local Objects
   - The problem is that the class object _must_ appear on the _left_ of the addition operator if that operator is to be overloaded as a member function. So, we _also_ overload the operator as a non-member function to allow the `HugeInteger` to appear on the _right_ of the addition.
   - The `operator+` function that deals with the `HugeInteger` on the left can still be a member function. The non-member function can simply swap its arguments and call the member function.
   
+### 11.12 Converting between Types
+
+- The compiler knows how to perform conversions among fundamental types. You can use _cast operators_ to force conversions among fundamentaly types.
+- You must specify how to convert among user-defined types, and between user-defined types and fundamental types.
+- Such conversions can be performed with **conversion constructors**- single-argument constructors that turn objects of other types into objects of a particular class.
+- A **conversion operator** (also called a cast operator) can be used to convert an object of one class into an object of another class or into an object of a fundamental type. Such a conversion operator must be a `non-static` member function.
+- The function prototype
+```
+A::operator char *() const;
+```
+declares an overloaded cast operator function for converting an object of iser-defined type `A` into a temporary `char*` object.
+- An overloaded **cast operator function** does not specify a return type- the return type is the type to whic the object is being converted. 
+- If `s` is a class object, when the compiler sees the expression `static_cast<char *>( s )`, the compiler generates the call
+```
+s.operator char *()
+```
+The operand `s` is the class object `s` for twhich the member function `operator char *` is being invoked.
+- Overloaded cast operator functions can be defined to convert objects of user-defined types into fundamental types or into objects of other user-defined types. The prototypes
+```
+A::operator int() const;
+A::operator OtherClass() const;
+```
+declare _overloaded cast operator functions_ that can convert an object of user-defined type `A` iinto an integer or into an object of user-defined type `OtherClass`, respectively.
+- One  of the nice features of cast operators and conversion constructors is that, when necessary, the compiler can call these functions implicitly to create temporary objects. For example, if an object `s` of a user-defined `String` class appears in a program at a location where an ordinary `char *` is expected, such as
+```
+cout << s;
+```
+the compiler can call the overloaded cast-operator function `operator char *` to convert the object into a `char *` and use the resulting `char *` in the expression. With this cast operator provided for a `String` class, the stream insertion operator does not have to be overloaded to output a `String` using `cout`.
+- When a conversion constructor is used to perform an implicit conversion, C++ can apply only one implicit constructor call to try to match the needs of another overloaded operator. The compiler will not satisfy an overloaded operator's needs by performing a series of implicit, user-defined conversions.
+
+### 11.13 `explicit` Constructors
