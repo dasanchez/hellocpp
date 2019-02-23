@@ -12,7 +12,7 @@ class Array
     friend istream &operator>>(istream &, Array &);
 
   public:
-    Array(int = 10);      // default constructor
+    explicit Array(int = 10);      // default constructor
     Array(const Array &); // copy constructor
     ~Array();             // destructor
     int getSize() const;  // return size

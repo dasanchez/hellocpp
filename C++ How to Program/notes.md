@@ -690,3 +690,11 @@ the compiler can call the overloaded cast-operator function `operator char *` to
 - When a conversion constructor is used to perform an implicit conversion, C++ can apply only one implicit constructor call to try to match the needs of another overloaded operator. The compiler will not satisfy an overloaded operator's needs by performing a series of implicit, user-defined conversions.
 
 ### 11.13 `explicit` Constructors
+
+- Any single-argument constructor-except a copy constructor-can be used by the compiler to perform an implicit conversion. The constructor's argument is converted to an object of the class in which the constructor is defined. The  conversion is automatic and you need not use a cast operator.
+- In some situations, implicit conversions are undesirable or error-prone.
+- The compiler might use implicit conversions in cases that you do not expect, resulting in ambiguous expressions that generate compilation errors or result in execution-time logic errors.
+- **Preventing Implicit Conversions with Single-Argument Constructors**
+  - C++ provides the keyword **explicit** to supress implicit conversions via conversion constructors when such conversions should not be allowed.
+  - A constructor that's declared `explicit` cannot be used in an implicit conversion.
+- Use the `explicit` keywoed on single-argument constructors that should not be used by the compiler to perform impliit conversions.
