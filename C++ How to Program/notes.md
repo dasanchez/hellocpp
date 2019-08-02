@@ -701,9 +701,10 @@ the compiler can call the overloaded cast-operator function `operator char *` to
 
 ### 11.14 Building a `String` Class
 
-- Implement your own `String` class that encapsulates a dynamically allocated `char *` string and provides many capabilities that are similar to those introduced in the `Array` class.
-- The C++ standard library includes the similar, more robust class `string`.
+- The C++ standard library includes a class `string`.
 - **Overloaded Function Call Operator**
   - Overloading the **function call operator ()** is powerful, because functions can take an _arbitrary_ number of parameters.
   - In the `String` class, we overload this operator to select a substring from a `String`. The operator's two integer parameters specify the start location and the length of the substring to be selected. If the start location is out of range or the substring is negative, the operator simply returns an empty `String`. If the substring length is 0, then the substring is selected to the end of the `String` object. 
-
+  - Suppose `string1` is a `String` object containing the string "AEIOU". When the compiler encounters the  expression `string1(2, 2)`, it genertes  the member-function call  
+  `string1.operator()(2, 2)`  
+  which returns a `String` containing "IO".
