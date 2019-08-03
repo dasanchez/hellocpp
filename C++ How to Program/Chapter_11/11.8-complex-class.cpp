@@ -26,7 +26,7 @@ int main()
     z.print();
 
     x = y + z;
-    cout << "\n\nx = y + z:" << endl;
+    cout << "\n\nx = y + z:" <<  endl;
     x.print();
     cout << " = ";
     y.print();
@@ -45,10 +45,14 @@ int main()
 
     // >> input operator:
     Complex a;
+    cout << "Enter real and imaginary parts of a complex number:" << endl;
     cin >> a;
     
     // << output operator:
     cout << "a: " << a << endl;
-    
+
+    // * multiplication operator:
+    Complex b(1, 1);
+    cout << "a * b = " << endl << "   " << a << endl << " * " << b << endl << " =========" << endl << "   " << a*b << endl;
     
 } // end main

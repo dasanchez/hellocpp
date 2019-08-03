@@ -26,6 +26,12 @@ Complex Complex::operator-(const Complex &operand2) const
                    imaginary - operand2.imaginary);
 } // end function operator-
 
+Complex Complex::operator*(const Complex &operand2) const
+{
+    return Complex(real * operand2.real - imaginary * operand2.imaginary,
+    real * operand2.imaginary + imaginary * operand2.real);
+} // end function operator*
+
 // display a Complex object in the form: (a, b)
 void Complex::print() const
 {

@@ -15,6 +15,7 @@ public:
     Complex(double = 0.0, double = 0.0);      // constructor
     Complex operator+(const Complex &) const; // addition
     Complex operator-(const Complex &) const; // subtraction
+    Complex operator*(const Complex &) const; // multiplication
     void print() const;                       // output
 private:
     double real;      // real part
