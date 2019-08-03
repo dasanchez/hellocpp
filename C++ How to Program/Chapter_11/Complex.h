@@ -16,7 +16,14 @@ public:
     Complex operator+(const Complex &) const; // addition
     Complex operator-(const Complex &) const; // subtraction
     Complex operator*(const Complex &) const; // multiplication
-    void print() const;                       // output
+    bool operator==(const Complex &) const; // equality
+
+    // inequality operator
+    bool operator!=(const Complex &right) const
+    {
+        return !(*this == right); // invokes Complex::operator==
+    }        
+
 private:
     double real;      // real part
     double imaginary; // imaginary part

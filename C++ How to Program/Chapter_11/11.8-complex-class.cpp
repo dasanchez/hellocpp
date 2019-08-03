@@ -18,34 +18,19 @@ int main()
     Complex y(4.3, 8.2);
     Complex z(3.3, 1.1);
 
-    cout << "x: ";
-    x.print();
-    cout << "\ny: ";
-    y.print();
-    cout << "\nz: ";
-    z.print();
+    cout << "x: " << x << endl;
+    cout << "y: " << y << endl;
+    cout << "z: " << z << endl;
 
     x = y + z;
-    cout << "\n\nx = y + z:" <<  endl;
-    x.print();
-    cout << " = ";
-    y.print();
-    cout << " + ";
-    z.print();
-    cout << endl;
+    cout << "\nx = y + z:" << x << " = " << y << " + " << z << endl;
 
     x = y - z;
-    cout << "\n\nx = y - z:" << endl;
-    x.print();
-    cout << " = ";
-    y.print();
-    cout << " - ";
-    z.print();
-    cout << endl;
-
+    cout << "\nx = y - z:" << x << " = " << y << " - " << z << endl;
+    
     // >> input operator:
     Complex a;
-    cout << "Enter real and imaginary parts of a complex number:" << endl;
+    cout << "\nEnter real and imaginary parts of a complex number:" << endl;
     cin >> a;
     
     // << output operator:
@@ -53,6 +38,23 @@ int main()
 
     // * multiplication operator:
     Complex b(1, 1);
+    cout << "\nb: " << b << endl;
     cout << "a * b = " << endl << "   " << a << endl << " * " << b << endl << " =========" << endl << "   " << a*b << endl;
     
+    // == equality operator:
+    Complex c(1, 1);
+    cout << "\nc: " << c << endl;
+    cout << "b == c : " << (b==c) << endl;
+    c = Complex(2, 1);
+    cout << "\nc: " << c << endl;
+    cout << "b == c : " << (b==c) << endl;
+    
+    // != inequality operator:
+    cout << "\nb: " << b << endl;
+    cout << "c: " << c << endl;
+    cout << "b != c : " << (b!=c) << endl;
+    c = Complex(1, 1);
+    cout << "\nc: " << c << endl;
+    cout << "b != c : " << (b!=c) << endl;    
+
 } // end main
