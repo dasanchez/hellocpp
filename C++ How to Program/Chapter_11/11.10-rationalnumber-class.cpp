@@ -42,5 +42,26 @@ int main()
     cout << "(2, -2) is converted  to " << rn << endl;
     rn = RationalNumber(-2, 2); // keeps numerator negative
     cout << "(-2, 2) is converted  to " << rn << endl;
+    rn = RationalNumber(2);
+    cout << "(2) is converted  to " << rn << endl;
+    rn = RationalNumber(-3);
+    cout << "(-3) is converted  to " << rn << endl;
+    
+    RationalNumber rn2(2,3);
+    // addition:
+    cout << rn << " + " << rn2 << " = " << rn + rn2 << endl;
+    cout << rn2 << " + " << 5 << " = " << rn2 + 5 << endl;
+    // subtraction:
+    cout << rn << " - " << rn2 << " = " << rn - rn2 << endl;
+    cout << 5 << " - " << rn2 << " = " << (RationalNumber(5) - rn2) << endl;
+    // multiplication:
+    cout << rn << " * " << rn2 << " = " << rn * rn2 << endl;
+    cout << 5 << " * " << rn2 << " = " << (RationalNumber(5) * rn2) << endl;
+    // division:
+    cout << rn << " / " << rn2 << " = " << rn / rn2 << endl;
+    cout << 5 << " / " << rn2 << " = " << (RationalNumber(5) / rn2) << endl;
+    cout << "(4 / 6)" << " / " << rn2 << " = " << (RationalNumber(4, 6) / rn2) << endl;
+    
+
 
 } // end main
