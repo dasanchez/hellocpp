@@ -35,7 +35,7 @@ int main()
     rn = RationalNumber(2, 4); // reduce to 1/2
     cout << "(2, 4) is converted to " << rn << endl;
     rn = RationalNumber(20, 36); // reduce to 5/9
-    cout<< "(20, 36) is converted  to " << rn << endl;
+    cout << "(20, 36) is converted  to " << rn << endl;
     rn = RationalNumber(2, 2); // reduce to 1/1
     cout << "(2, 2) is converted to " << rn << endl;
     rn = RationalNumber(2, -2); // makes denominator positive
@@ -46,8 +46,8 @@ int main()
     cout << "(2) is converted  to " << rn << endl;
     rn = RationalNumber(-3);
     cout << "(-3) is converted  to " << rn << endl;
-    
-    RationalNumber rn2(2,3);
+
+    RationalNumber rn2(2, 3);
     // addition:
     cout << rn << " + " << rn2 << " = " << rn + rn2 << endl;
     cout << rn2 << " + " << 5 << " = " << rn2 + 5 << endl;
@@ -60,8 +60,37 @@ int main()
     // division:
     cout << rn << " / " << rn2 << " = " << rn / rn2 << endl;
     cout << 5 << " / " << rn2 << " = " << (RationalNumber(5) / rn2) << endl;
-    cout << "(4 / 6)" << " / " << rn2 << " = " << (RationalNumber(4, 6) / rn2) << endl;
-    
+    cout << "(4 / 6)"
+         << " / " << rn2 << " = " << (RationalNumber(4, 6) / rn2) << endl;
 
+    // less-than operator:
+    cout << rn << " < " << rn2 << " = " << (rn < rn2) << endl;
+    cout << rn2 << " < " << rn << " = " << (rn2 < rn) << endl;
+    cout << rn2 << " < " << rn2 << " = " << (rn2 < rn2) << endl;
+
+    // less-than-or-equal operator:
+    cout << rn << " <= " << rn2 << " = " << (rn <= rn2) << endl;
+    cout << rn2 << " <= " << rn << " = " << (rn2 <= rn) << endl;
+    cout << rn2 << " <= " << rn2 << " = " << (rn2 <= rn2) << endl;
+
+    // greater-than operator:
+    cout << rn << " > " << rn2 << " = " << (rn > rn2) << endl;
+    cout << rn2 << " > " << rn << " = " << (rn2 > rn) << endl;
+    cout << rn2 << " > " << rn2 << " = " << (rn2 > rn2) << endl;
+
+    // greater-than-or-equal operator:
+    cout << rn << " >= " << rn2 << " = " << (rn >= rn2) << endl;
+    cout << rn2 << " >= " << rn << " = " << (rn2 >= rn) << endl;
+    cout << rn2 << " >= " << rn2 << " = " << (rn2 >= rn2) << endl;
+
+    // equality operator:
+    cout << rn << " == " << rn2 << " = " << (rn == rn2) << endl;
+    cout << rn2 << " == " << rn << " = " << (rn2 == rn) << endl;
+    cout << rn2 << " == " << rn2 << " = " << (rn2 == rn2) << endl;
+
+    // inequality operator:
+    cout << rn << " != " << rn2 << " = " << (rn != rn2) << endl;
+    cout << rn2 << " != " << rn << " = " << (rn2 != rn) << endl;
+    cout << rn2 << " != " << rn2 << " = " << (rn2 != rn2) << endl;
 
 } // end main

@@ -20,7 +20,7 @@ RationalNumber::RationalNumber(const long val1, const long val2)
         denominator = -denominator;
         numerator = -numerator;
     }
-    
+
     // reduce numerator and denominator
     reduceFraction();
 
@@ -105,111 +105,45 @@ RationalNumber RationalNumber::operator/(const RationalNumber &op2) const
     return rn;
 } // end function operator/
 
-// less-than operator; HugeInt < HugeInt
-// bool HugeInt::operator<(const HugeInt &op2) const
-// {
-//     if (integerSize() < op2.integerSize())
-//         return true;
-//     else if (integerSize() > op2.integerSize())
-//         return false;
-//     else
-//     {
-//         // both integers have the same amount of digits
-//         for (int i = digits - integerSize(); i < digits; ++i)
-//         {
-//             if (integer[i] > op2.integer[i])
-//                 return false;
-//             else if (integer[i] < op2.integer[i])
-//                 return true;
-//         }
-//         return false;
-//     }
-// } // end function operator<
+// utility function: returns the division of the numbers
+double RationalNumber::division() const
+{
+    return static_cast<double>(numerator/denominator);
+}
 
-// less-than-or-equal-to operator; HugeInt <= HugeInt
-// bool HugeInt::operator<=(const HugeInt &op2) const
-// {
-//     if (integerSize() < op2.integerSize())
-//         return true;
-//     else if (integerSize() > op2.integerSize())
-//         return false;
-//     else
-//     {
-//         // both integers have the same amount of digits
-//         for (int i = digits - integerSize(); i < digits; ++i)
-//         {
-//             if (integer[i] > op2.integer[i])
-//                 return false;
-//             else if (integer[i] < op2.integer[i])
-//                 return true;
-//         }
-//         return true;
-//     }
-// } // end function operator<=
+// less-than operator; RationalNumber < RationalNumber
+bool RationalNumber::operator<(const RationalNumber &op2) const
+{
+    return (division() < op2.division());
+} // end function operator<
 
-// greater-than operator; HugeInt > HugeInt
-// bool HugeInt::operator>(const HugeInt &op2) const
-// {
-//     if (integerSize() > op2.integerSize())
-//         return true;
-//     else if (integerSize() < op2.integerSize())
-//         return false;
-//     else
-//     {
-//         // both integers have the same amount of digits
-//         for (int i = digits - integerSize(); i < digits; ++i)
-//         {
-//             if (integer[i] > op2.integer[i])
-//                 return true;
-//             else if (integer[i] < op2.integer[i])
-//                 return false;
-//         }
-//         return false;
-//     }
-// } // end function operator>
+// less-than-or-equal operator; RationalNumber <= RationalNumber
+bool RationalNumber::operator<=(const RationalNumber &op2) const
+{
+    return (division() <= op2.division());
+} // end function operator<=
 
-// greater-than-or-equal-to operator; HugeInt >= HugeInt
-// bool HugeInt::operator>=(const HugeInt &op2) const
-// {
-//     if (integerSize() > op2.integerSize())
-//         return true;
-//     else if (integerSize() < op2.integerSize())
-//         return false;
-//     else
-//     {
-//         // both integers have the same amount of digits
-//         for (int i = digits - integerSize(); i < digits; ++i)
-//         {
-//             if (integer[i] > op2.integer[i])
-//                 return true;
-//             else if (integer[i] < op2.integer[i])
-//                 return false;
-//         }
-//         return true;
-//     }
-// } // end function operator>=
+// greater-than operator; RationalNumber > RationalNumber
+bool RationalNumber::operator>(const RationalNumber &op2) const
+{
+    return (division() > op2.division());
+} // end function operator>=
 
-// equal-to operator; HugeInt == HugeInt
-// bool HugeInt::operator==(const HugeInt &op2) const
-// {
-//     if (integerSize() != op2.integerSize())
-//         return false;
-//     else
-//     {
-//         for (int i = digits - integerSize(); i < digits; ++i)
-//         {
-//             if (integer[i] != op2.integer[i])
-//                 return false;
-//         }
-//         return true;
-//     }
-// } // end function operator==
+// greater-than-or-equal operator; RationalNumber >= RationalNumber
+bool RationalNumber::operator>=(const RationalNumber &op2) const
+{
+    return (division() >= op2.division());
+} // end function operator>=
+
+// equal-to operator; RationalNumber == RationalNumber
+bool RationalNumber::operator==(const RationalNumber &op2) const
+{
+    return (division() == op2.division());
+} // end function operator==
 
 // overloaded output operator
 ostream &operator<<(ostream &output, const RationalNumber &num)
 {
-    // if (num.negative)
-    // cout << "- ";
     cout << num.numerator << " / " << num.denominator;
     return output;
 } // end function operator<<
