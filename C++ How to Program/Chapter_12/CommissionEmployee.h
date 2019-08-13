@@ -1,5 +1,5 @@
-// Fig 12.4: CommissionEmployee.h
-// CommissionEmployee class definition represents a commission employee.
+// Fig 12.12: CommissionEmployee.h
+// CommissionEmployee class with protected data.
 #ifndef COMMISSION_H
 #define COMMISSION_H
 
@@ -30,7 +30,7 @@ double getCommissionRate() const; // return commission rate
 double earnings() const; //calculate earnings
 void print() const; // print CommissionEmployee object
 
-private:
+protected:
     string firstName;
     string lastName;
     string socialSecurityNumber;

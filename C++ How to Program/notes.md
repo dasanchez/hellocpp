@@ -747,3 +747,10 @@ class TwoDimensionalShape : public Shape
 - Copying and pasting code from one clas to another can spread many physical copies of the same code and can spread errors throughout a system, creating a code-maintenance nightmare.
 - To avoid duplicating code, use inheritance, rather than the "copy and paste" approach, in situations where you want one class to "absorb" the data members and member functions of another class.
 - With inheritance, the common data members and member functions of all the classes the hierarchy are declared in a base class. When changes are required for these common features, you need to make the changes only in the case class- derived classes then inherit the changes.
+- The **base-class initializer syntax** uses a member initializer to pass arguments to the base-class constructor. C++ requires that a derived-class constructor call its base-class constructor to initialize the base-class data members that are inherited into the derived class.
+- THe base class's header must be incluses in the derived class's header.
+- When base-class data members are decclared as `protected`, derived classes can modify the data directly. 
+- Inheriting `protected` data members slightly improves performance, because we can directly access the members without incurring the overhead of calls to set or get member functions.
+- In most cases, it's better to use `private` data members to encourage proper software engineering, and leave code optimization issues to the compiler.
+- It's appropriate to use the `protected` access specifier when a base class should provide a service only to its derived classes and friends.
+- Declaring base-class data members `private`` enables you to change the base-class implementation without having to change derived-class implementations.

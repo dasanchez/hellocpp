@@ -1,4 +1,4 @@
-// Fig 12.8: BasePlusCommmissionEmployee.cpp
+// Fig 12.11: BasePlusCommmissionEmployee.cpp
 // Class BasePlusCommissionEmployee member-function definitions.
 #include <iostream>
 #include "BasePlusCommissionEmployee.h" // CommissionEmployee class definition
@@ -8,80 +8,11 @@ using namespace std;
 BasePlusCommissionEmployee::BasePlusCommissionEmployee(
     const string &first, const string &last, const string &ssn,
     double sales, double rate, double salary)
+    // explicitly call base-class constructor
+    : CommissionEmployee(first, last, ssn, sales, rate)
 {
-    firstName = first;          // should validate
-    lastName = last;            // should validate
-    socialSecurityNumber = ssn; // should validate
-    setGrossSales(sales);       // validate and store gross sales
-    setCommissionRate(rate);    // validate and store commission rate
     setBaseSalary(salary);
 } // end BasePlusCommissionEmployee cconstructor
-
-// set first name
-void BasePlusCommissionEmployee::setFirstName(const string &first)
-{
-    firstName = first; // should validate
-} // end function setFirstName
-
-// return first name
-string BasePlusCommissionEmployee::getFirstName() const
-{
-    return firstName;
-} // end function getFirstName
-
-// set last name
-void BasePlusCommissionEmployee::setLastName(const string &last)
-{
-    lastName = last; // should validate
-} // end function setFirstName
-
-// return last name
-string BasePlusCommissionEmployee::getLastName() const
-{
-    return lastName;
-} // end function getLasttName
-
-// set social security number
-void BasePlusCommissionEmployee::setSocialSecurityNumber(const string &ssn)
-{
-    socialSecurityNumber = ssn; // should validate
-} // end function setSocialSecurityNumber
-
-// return social security number
-string BasePlusCommissionEmployee::getSocialSecurityNumber() const
-{
-    return socialSecurityNumber;
-} // end function getSocialSecurityNumber
-
-// set gross sales amount
-void BasePlusCommissionEmployee::setGrossSales(double sales)
-{
-    if (sales >= 0.0)
-        grossSales = sales;
-    else
-        throw invalid_argument("Gross sales must be >= 0.0");
-} // end function setGrossSales
-
-// return gross sales amount
-double BasePlusCommissionEmployee::getGrossSales() const
-{
-    return grossSales;
-} // end function getGrossSales
-
-// set commission rate
-void BasePlusCommissionEmployee::setCommissionRate(double rate)
-{
-    if (rate > 0.0 && rate < 1.0)
-        commissionRate = rate;
-    else
-        throw invalid_argument("Commission rate must be > 0.0 and < 1.0");       
-} // end funcation setCommissionRate
-
-// return commission rate
-double BasePlusCommissionEmployee::getCommissionRate() const
-{
-    return commissionRate;
-} // end function getCommissionRate
 
 // set base salary
 void BasePlusCommissionEmployee::setBaseSalary(double salary)
@@ -101,6 +32,7 @@ double BasePlusCommissionEmployee::getBaseSalary() const
 // calculate earnings
 double BasePlusCommissionEmployee::earnings() const
 {
+    // derived class cannot access the base class's private data
     return baseSalary + (commissionRate * grossSales);
 } // ed function earnings
 
