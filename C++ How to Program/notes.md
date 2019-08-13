@@ -353,7 +353,7 @@ Constructors and Destructors for `static` Local Objects
 - When a class definition uses only a pointer or reference to an object of another class, the class header for htat other class is _not_ required to be included with `#include`. The compiler doesn't need to reserve space for an _object_ of the class, but it _does_ need to reserve space for the _pointer_ or _reference_.
 - A proxy class insulates client code from implementation changes.
 
-## Chapter 11. Operator Overloagin; Class string
+## Chapter 11. Operator Overloading; Class string
 
 ### 11.1 Introduction
 
@@ -708,3 +708,42 @@ the compiler can call the overloaded cast-operator function `operator char *` to
   - Suppose `string1` is a `String` object containing the string "AEIOU". When the compiler encounters the  expression `string1(2, 2)`, it genertes  the member-function call  
   `string1.operator()(2, 2)`  
   which returns a `String` containing "IO".
+
+## Chapter 12. Object-Oriented Programming: Inheritance
+
+### 12.1 Introduction
+
+- **Inheritance** is a form of software reuse in which you create a class that absorbs an existing class's capabilities, then _customizes_ or enhances them.
+- Software reuse saves time during program development by taking advantage of proven, high-quality software.
+- You can specify that a new class should **inherit** the members of an existing class. This existing class is called the **base class**, and the new class is called the  **derived class**. A derived class represents a more specialized group of objects.
+- C++ offers `public`, `protected`, and `private` inheritance.
+- With `public` inheritance, every object of a derived class is also an object of that derived class's base class. 
+- We distinguish betwween the **_is-a_ relationship** and the _has-a_ relationship. The is-a relationship represents inheritance. The has-a relationship represents composition.
+
+### 12.2 Base Classes and Derived Classes
+
+- Base classes tenfd to be _more general_ and derived classes tend to be _more specific_.
+- Base classes: Student, Shape, Account; Derived classes: GraduateStudent, UndergraduateStudent, Circle, Triangle, Rectangle, Sphere, Cube, CheckingAccount, SavingsAccount.
+- Inheritance relationships form **class hierarchies**. A base class exists in a hierarchical relationship with its derived classes. A class becomes either a base class, a derived class, or both.
+- With **single inheritance**, a class is derived from _one_base class. With **multiple inheritance**, a derived class inherits from _two or more_ (possibly unrelated) base classes.
+- To specify that class `TwoDimensionalShape` is derived from (or inherits from) class `Shape`, the definition could begin as follows:
+```
+class TwoDimensionalShape : public Shape
+```
+- This is an example of **`public` inheritace, the most commonly used form.**
+- With all forms of inheritance, `private` members of a base class are _not_ accessible directly from that class's derived classes, but these `private` base-class members are still inherited.
+- With `public` inheritance, all other base-class members retain their original member access when they become members of the derived class. Through these inherited base-class members, the derived class can manipulate `private` members of  the base class. `friend` functions are _not_ inherited.
+
+### 12.3 `protected` Members
+
+- A base class's `public` members are accessible within its body and anywhere the program has a handle (i.e, a name, reference, or pointer) to an object of that class or one of its derived classes.
+- A base class's `private` members are accessible only within its body and to the `friends` of that base class.
+- Using `protected` access offers an intermediate level of protection between `public` and `private` access.
+- A base class's `protected` members can be accessed within the body of that base class, by members and `friend`s of that base class, and by members and `friend`s of any classes derived from that base class.
+- When a derived-class member function _redefines_ a base-class member function, the  base-class member can still be accessed from the derived class by preceding the base-class member name with the base-class name and the scope resolution operator (::).
+
+### 12.4 Relationship between Base Classes and Derived Classes
+
+- Copying and pasting code from one clas to another can spread many physical copies of the same code and can spread errors throughout a system, creating a code-maintenance nightmare.
+- To avoid duplicating code, use inheritance, rather than the "copy and paste" approach, in situations where you want one class to "absorb" the data members and member functions of another class.
+- With inheritance, the common data members and member functions of all the classes the hierarchy are declared in a base class. When changes are required for these common features, you need to make the changes only in the case class- derived classes then inherit the changes.
