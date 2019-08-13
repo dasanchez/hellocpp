@@ -754,3 +754,13 @@ class TwoDimensionalShape : public Shape
 - In most cases, it's better to use `private` data members to encourage proper software engineering, and leave code optimization issues to the compiler.
 - It's appropriate to use the `protected` access specifier when a base class should provide a service only to its derived classes and friends.
 - Declaring base-class data members `private`` enables you to change the base-class implementation without having to change derived-class implementations.
+- Using a member function to access a data member's value can be slightly slower than accessing the data directly. However, today's optimizing compilers are carefully designed to perform many optimizations implicitly.
+- Write code that adheres to proper software engineering principles, and leave optimization to the compiler: "Do not second-guess the compiler".
+- The syntax to invoke a redefined base-class member function from a derived class is the base-class name and the scope resolution operator (::) before the base-class member-function name. 
+- When a base-class member function is redefined in a derived class, the derived-class version often calls the base-class version to do additional work. Failure to use the :: operator prefixed with the name of the base class when referencing the base class's member function causes infinite recursion.
+
+### 12.5 Constructos and Destructors in Derived Classes
+
+- When a program creates a derived-class object, the derived-class constructor immediately calls the base-class constructor, the base-class constructor executes, then the derived class's member initializers execute and finally the derived-class constructor's body executes. This process cascades up the hierarchy if it contains more than two levels.
+- Destructors for derived-class objects are called in the reverse order in which their corresponding constructors are called.
+- Base-class constructors, destructors and overloaded assignment operators are _not_ inherited by derived classes. Derived-class constructors, destructors and overloaded assignment operators, however, can call base-class versions.

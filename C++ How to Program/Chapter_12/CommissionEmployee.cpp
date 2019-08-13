@@ -1,4 +1,4 @@
-// Fig 12.5: CommmissionEmployee.cpp
+// Fig 12.14: CommmissionEmployee.cpp
 // Class CommissionEmployee member-function definitions.
 #include <iostream>
 #include "CommissionEmployee.h" // CommissionEmployee class definition
@@ -8,10 +8,8 @@ using namespace std;
 CommissionEmployee::CommissionEmployee(
     const string &first, const string &last, const string &ssn,
     double sales, double rate)
+    : firstName(first), lastName(last), socialSecurityNumber(ssn)
 {
-    firstName = first;          // should validate
-    lastName = last;            // should validate
-    socialSecurityNumber = ssn; // should validate
     setGrossSales(sales);       // validate and store gross sales
     setCommissionRate(rate);    // validate and store commission rate
 } // end CommissionEmployee cconstructor
@@ -85,14 +83,15 @@ double CommissionEmployee::getCommissionRate() const
 // calculate earnings
 double CommissionEmployee::earnings() const
 {
-    return commissionRate * grossSales;
+    return getCommissionRate() * getGrossSales();
 } // ed function earnings
 
 // print  CommissionEmployee object
 void CommissionEmployee::print() const
 {
-    cout << "commission employee: " << firstName << ' ' << lastName
-    << "\nsocial security number: " << socialSecurityNumber
-    << "\ngross sales: " << grossSales
-    << "\ncommission rate: " << commissionRate; 
+    cout << "commission employee: " 
+    << getFirstName() << ' ' << getLastName()
+    << "\nsocial security number: " << getSocialSecurityNumber()
+    << "\ngross sales: " << getGrossSales()
+    << "\ncommission rate: " << getCommissionRate(); 
 } // end function print
