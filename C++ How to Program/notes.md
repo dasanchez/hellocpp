@@ -779,3 +779,44 @@ class TwoDimensionalShape : public Shape
 
 - At the design stage of an object-oriented system, the designer determines that certain classes are closely related. The designer should "factor out" common attributes and behaviours and place these in a base class, then use inheritance to form derived classes.
 - Creating a derived class does not affect its base class's source code. Inheritane preserves the integrity of a base class.
+
+## Chapter 13: Polymorphism
+
+### 13.1 Introduction
+
+- Polymorphism enables you to "program in the general" rather than "program in the specific"- it enables you to write programs that process objects of classes that are part of the same class hierarchy as if they were all objects of they hierarchy's base class.
+- Polymorphism works off base-class pointer handles and base-class reference handles, but not name handles.
+- You can design systems that are easily _extensible_: new classes can be added with little or no modification to the general portions of the program, as long as the new classes are part of the inheritance hierarchy theat the program processes generically.
+
+### 13.2 Introduction to Polymorphism: Polymorphic Video Game
+
+- A polymorphic screen manager facilitates adding new classes to a syste with minimal modifications to its code.
+- Suppose we want to add objects of class `Mercurian` to our video game: we must build a class `Mercurian` that inherits from `SpaceObject` , but provides its own definition of member function `draw`.
+- You can use polymorphism to accomodate additional classes, including ones that were not even envisioned when then system was created.
+- Polymorphism enables you to deal in generalities and let the execution-time environment concern itself with the specifics.
+
+### 13.3 Relationships Among Objects in an Inheritance Hierarchy
+
+- If we assign the address of a derived-class object to a base-class pointer, invoking a function via that pointer invokes the base-class functionality in the derived-class object: the type of the handle determines which function is called.
+- Assigning the address of a base-class object to a derived-class pointer results in a compilation error.
+- If we assign  the address of a derived-class object to a base-class pointer, the base-class pointer  can be used to invoke only the base-class functionality. 
+- With public inheritance, an object of a derived class can be treated as an object of its base class. Howerver, we cannot treat a base-class object as an object of any of its derived classes.
+- The invoked functionality depends on the  type of the pointer  (or reference) used to invoke the function, not the type of object for which the member function is called.
+
+#### 13.3.3 Derived-Class Member Function Calls via Base-Class Pointers
+
+- The compiler allows us to invoke _only_ base-class member functions off a base-class pointer. If a base-class pointer is aimed at a derived-class object and an attempt is made to acces a derived-class-only-member function, a compilation error will occur.
+- The compiler will allow access to derived-class-only members from a base-class pointer that's aimed at a derived-class object _if_ we explicitly cast the base-class pointer to a derived-class pointer: this is known as **downcasting**.
+- Downcasting is a potentially dangerous operation.
+
+#### 13.3.4 Virtual Functions
+
+- With `virtual` functions, the type of the object, not the type of the handle used to invoke the member function, determines which version of a `virtual` function to invoke.
+- Declare the function in the base class as a `virtual` function, and then override it in each of the derived classes to obtain the desired functionality.
+- An overridden function in a derived class has the same signature and return type (prototype) as  the function it overrides in its base class.
+- We declare a `virtual` function by preceding the function's prototype with the keyword `virtual` in the base class.
+- Once a function is declared `virtual`, it remains `virtual` all the way down the inheritance hierarchy from that point, even if that function is not explicitly declared `virtual` when a derived class overrides it.
+- Even though certain functions  are implicitly virtual because of a declaration made higher in the class hierarchy, explicitly declare these functions `virtual` at every level of the class hierarchy to promote program clarity.
+- When a derived class chooses not to override a `virtual` function from its base class, the derived class simply inheirts its base class's `virtual` function implementation.
+- Choosing the appropriate function to call at execution time (rather than at compile time) is known ad **dynamic binding** or **late binding**.
+- When a `virtual` function is called by referencing a specific object by name and using the dot member-selection operator, the function invocation is resolved at compile time (this is called **static binding**) and the `virtual` function that's called is the one defined for (or inherited by) the  class of that particular object- this is not polymorphic behaviour.
