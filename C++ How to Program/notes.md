@@ -764,3 +764,18 @@ class TwoDimensionalShape : public Shape
 - When a program creates a derived-class object, the derived-class constructor immediately calls the base-class constructor, the base-class constructor executes, then the derived class's member initializers execute and finally the derived-class constructor's body executes. This process cascades up the hierarchy if it contains more than two levels.
 - Destructors for derived-class objects are called in the reverse order in which their corresponding constructors are called.
 - Base-class constructors, destructors and overloaded assignment operators are _not_ inherited by derived classes. Derived-class constructors, destructors and overloaded assignment operators, however, can call base-class versions.
+
+### 12.6 `public`, `protected` and `private` Inheritance.
+
+| Base-lass member access specifier | public inheritance         | protected inheritance      | private inheritance      |  |
+|-----------------------------------|----------------------------|----------------------------|--------------------------|--|
+| public                            | public in derived class    | protected in derived class | private in derived class |  |
+| protected                         | protected in derived class | protected in derived class | private in derived class |  |
+| private                           | hidden in derived class    | hidden in derived class    | hidden in derived class  |  |
+
+- `private` and `protected` inheritance are not _is-a_ relatonships.
+
+### 12.7 Software Engineering with Inheritance
+
+- At the design stage of an object-oriented system, the designer determines that certain classes are closely related. The designer should "factor out" common attributes and behaviours and place these in a base class, then use inheritance to form derived classes.
+- Creating a derived class does not affect its base class's source code. Inheritane preserves the integrity of a base class.

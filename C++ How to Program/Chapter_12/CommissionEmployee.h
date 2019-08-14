@@ -9,8 +9,8 @@ using namespace std;
 class CommissionEmployee
 {
 public:
-CommissionEmployee(const string &, const string &, const string &,
-    double = 0.0, double = 0.0);
+CommissionEmployee(const string & = "", const string & = "", const string & = "",
+    double = 0.0, double = 0.01);
 
 void setFirstName(const string &); // set first name
 string getFirstName() const; // return first name
