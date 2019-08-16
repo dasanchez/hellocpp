@@ -820,3 +820,43 @@ class TwoDimensionalShape : public Shape
 - When a derived class chooses not to override a `virtual` function from its base class, the derived class simply inheirts its base class's `virtual` function implementation.
 - Choosing the appropriate function to call at execution time (rather than at compile time) is known ad **dynamic binding** or **late binding**.
 - When a `virtual` function is called by referencing a specific object by name and using the dot member-selection operator, the function invocation is resolved at compile time (this is called **static binding**) and the `virtual` function that's called is the one defined for (or inherited by) the  class of that particular object- this is not polymorphic behaviour.
+
+### 13.4 Type Fields and `switch` Statements
+
+- One way to determine the type of an object is to use a `switch` statement to check the value of a field in the object. This allows us to distinguish among object types, then invoke an appropriate action for a particular object.
+- Using `switch` logic exposes programs to a variety of potential problems.
+- Polymorphic programming can eliminate the need for `switch` logic.
+- An interesting consequence of using polymorphism is that programs take on a simplified appearance. This simplification facilitiates testing, debugging, and program maintenance.
+
+### 13.5 Abstract Classes and Pure `virtual` Functions
+
+- There are cases in which it's useful to define classes from which you never intend to instantiate any objects. Such classes are called **abstract classes**. We refer to them as **abstract base classes** because they are normally used as base classes in inheritance hierarchies.
+- These classes cannot be ussed to instantiate objects, because they are incomplete- derived classes must define the "missing pieces" before objects of these classes can be instantiated.
+- Classes that can be used to instantiate objects are called **concrete classes**.
+
+**Pure Virtual Functions** 
+
+A class is made abstract by declaring one or more of its `virtual` functions to be "pure". A **pure virtual function** is specified by placing "= 0" in its declaration, as in
+
+```
+virtual void draw() const = 0; // pure virtual function
+```
+
+The "=0" is a **pure specifier**. Pure `virtual` functions do not provide implementation.
+- A pure virtual function _requires_ the derived class to override the function for that derived class to be concrete; otherwise the derived class remains abstract.
+- An abstract class defines a common public interface for the various classes in a class hierarchy. An abstract class contains one or more pure `virtual` functions that concrete derived classes must override. An abstract class also can have data members and concrete functions (including constructors and destructors), which are subject to the normal rules of inheritance by derived classes.
+- Although we canot instantiate objects of an abstract base class, we can use the abstract base class to declare pointers and references that can refer to objects of any concrete classes derived from the abstract class.
+
+**Device Drivers and Polymorphism**
+
+- An object-oriented operating system might use an abstract base class to provide an interface appropriate for all device drivers. Then, through inheritance from that abstract base class, derived classes are formed that all operate similarly.
+- This architecture allows new devices to be added to a system easily, even after the operating system has been defined.
+
+**Iterators and Polymorphism**
+
+- It's common in object-oriented programming to define an **iterator class** that can traverse all the objects in a container (such as an array). Iterators often are used in polymorphic programming to traverse an array or a linked list of pointers to objects from various levels of a hierarchy. The pointers in such a list are all base-class pointers.
+
+### 13.6 Case Study: Payroll System Using Polymorphism
+
+- We use an abstract class and polymorphism to perform payroll calculations based on the type of employee.
+- A derived class can inherit interface and/or implementation from a base class. Hierarchies designed for **implementation inheritance** tend to have their functionality high in the hierarchy, and hierarchies designed for **interface inheritance** tend to have their functionaliity lower in the hierarchy.

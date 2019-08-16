@@ -1,4 +1,4 @@
-// Fig 12.15: BasePlusCommmissionEmployee.cpp
+// Fig 13.16: BasePlusCommmissionEmployee.cpp
 // Class BasePlusCommissionEmployee member-function definitions.
 #include <iostream>
 #include "BasePlusCommissionEmployee.h" // CommissionEmployee class definition
@@ -18,9 +18,9 @@ BasePlusCommissionEmployee::BasePlusCommissionEmployee(
 void BasePlusCommissionEmployee::setBaseSalary(double salary)
 {
     if (salary >= 0.0)
-    baseSalary = salary;
+        baseSalary = salary;
     else
-    throw  invalid_argument("Salary must be >= 0.0");
+        throw invalid_argument("Salary must be >= 0.0");
 } // end function setBaseSalary
 
 // return base salary
@@ -33,13 +33,13 @@ double BasePlusCommissionEmployee::getBaseSalary() const
 double BasePlusCommissionEmployee::earnings() const
 {
     // derived class cannot access the base class's private data
-    return baseSalary + CommissionEmployee::earnings();
+    return getBaseSalary() + CommissionEmployee::earnings();
 } // ed function earnings
 
 // print  CommissionEmployee object
 void BasePlusCommissionEmployee::print() const
 {
     cout << "base-salaried ";
-    CommissionEmployee::print();
+    CommissionEmployee::print(); // code reuse
     cout << "\nbase salary: " << getBaseSalary();
 } // end function print
