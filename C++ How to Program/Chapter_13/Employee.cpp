@@ -13,6 +13,11 @@ const string &ssn)
     // empty body
 } // end Employee constructor
 
+Employee::~Employee()
+{
+    // empty body
+}
+
 // set first name
 void Employee::setFirstName(const string &first)
 {

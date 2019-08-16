@@ -883,3 +883,11 @@ The "=0" is a **pure specifier**. Pure `virtual` functions do not provide implem
 - **Runtime type information (RTTI)** and **dynamic casting** enable a program to determine the type of an object at execution time and act on that object accordingly.
 = Operator `typeid` returns a reference to ab object of class `type_info` that contains the information about the type of its operand, including the name of that type.
 - When invoked, `type_info` member function **name** returns a pointer-based string that contains the type name of the argument passed to `typeid`. The string returned by `type_info` member function `name` may vary by compiler.
+
+### 13.9 Virtual Destructors
+
+- If a derived-class object with a nonvirtual destructor is destroyed explicitly by applying the `delete` operator to a base-class pointer to the object, the C++ standard specifies that the behaviour is undefined.
+- The simple solution to this problem is to create a **`virtual` destructor** in the base class. This makes all derived-class destructors `virtual` even they do not have the same name as the base-class destructor.
+- The base-class destructor automatically executes after the derived-class destructor.
+- If aa class has `virtual` functions, provide a `virtual` destructor, even if one is not required for the class. This ensures that a custom derived-class destructor if there is one) will be invoked when a derived-class object is deleted via a base class pointer.
+- Constructors cannot be virtual. Declaring a constructor `virtual` is a compilation error.
