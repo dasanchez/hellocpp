@@ -860,3 +860,26 @@ The "=0" is a **pure specifier**. Pure `virtual` functions do not provide implem
 
 - We use an abstract class and polymorphism to perform payroll calculations based on the type of employee.
 - A derived class can inherit interface and/or implementation from a base class. Hierarchies designed for **implementation inheritance** tend to have their functionality high in the hierarchy, and hierarchies designed for **interface inheritance** tend to have their functionaliity lower in the hierarchy.
+
+### 13.7 Polymorphism, Virtual Functions and Dynamic Binding "Under the Hood"
+
+- The STL components were implemented without polymorphism and virtual functions to avoid the associated execution-time overhead and achieve optimal performance.
+- Polymorphism is accomplished through three levels of pointers, i.e., triple indirection. 
+- When C++ compiles a class that has one or more `virtual` functions, it buils a **virtual function table (vtable)** for that  class. An executing program uses the _vtable_ to select the proper function implementation each time a `virtual` function of that class is called.
+- Any class that has one or more null pointers in its _vtable_ is an abstract class.
+- Classes without any null _vtable_ pointers are concrete classes. 
+
+**Three Levels of Pointers to Implement Polymorphism**
+
+- One level is the function pointers in the _vtable_. These point to the actual functions that execute whtn a `virtual` function is invoked.
+- Whenever an object of a class with one or more `virtual` functions is instantiated, the compiler attaches to the object a pointer to the _vtable_ for that class. This is the second level of pointers.
+- The third level of pointers simply contains the handles to the objects that receive the `virtual` function calls. The handles in this level may also be references.
+- The pointer dereferencing operations and memory accesses that occur on every `virtual` function call require some additional execution time. The _vtables_ and the _vtable_ pointers added to the objects require some additional memory.
+- Polymorphism, as typically implemented with `virtual` functions and dynamic binding in C++, is efficient. You can use these capabilities with nominal impact on performance.
+- Polymorphism's overhead is acceptable for most applications. But in some situations, such as real-time applications with stringent performance requirements, polymorphism's overhead may be too high.
+
+### 13.8 Case Study: Payroll System Using Polymorphism and Runtime Type Information with Downcasting, `dynamic_cast`, `typeid` and `type_info`
+
+- **Runtime type information (RTTI)** and **dynamic casting** enable a program to determine the type of an object at execution time and act on that object accordingly.
+= Operator `typeid` returns a reference to ab object of class `type_info` that contains the information about the type of its operand, including the name of that type.
+- When invoked, `type_info` member function **name** returns a pointer-based string that contains the type name of the argument passed to `typeid`. The string returned by `type_info` member function `name` may vary by compiler.
