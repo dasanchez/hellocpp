@@ -9,7 +9,7 @@ class SalariedEmployee : public Employee
 {
     public:
     SalariedEmployee(const string &, const string &,
-    const string &, double = 0.0);
+    const string &, int, int, int, double = 0.0);
     void setWeeklySalary(double); // set weekly salary
     double getWeeklySalary() const; // return weekly salary
 

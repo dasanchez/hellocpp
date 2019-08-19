@@ -7,9 +7,9 @@ using namespace std;
 // constructor
 BasePlusCommissionEmployee::BasePlusCommissionEmployee(
     const string &first, const string &last, const string &ssn,
-    double sales, double rate, double salary)
+    int year, int month, int day, double sales, double rate, double salary)
     // explicitly call base-class constructor
-    : CommissionEmployee(first, last, ssn, sales, rate)
+    : CommissionEmployee(first, last, ssn, year, month, day, sales, rate)
 {
     setBaseSalary(salary);
 } // end BasePlusCommissionEmployee cconstructor

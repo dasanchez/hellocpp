@@ -8,8 +8,8 @@
 class CommissionEmployee : public Employee
 {
 public:
-    CommissionEmployee(const string & = "", const string & = "", const string & = "",
-                       double = 0.0, double = 0.01);
+    CommissionEmployee(const string &, const string &, const string &,
+                       int, int, int, double grossSales = 0.0, double commissionRate = 0.01);
 
     void setCommissionRate(double);   // set commission rate (percentage)
     double getCommissionRate() const; // return commission rate

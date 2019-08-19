@@ -7,8 +7,8 @@ using namespace std;
 // constructor
 CommissionEmployee::CommissionEmployee(
     const string &first, const string &last, const string &ssn,
-    double sales, double rate)
-    : Employee(first, last, ssn)
+    int year, int month, int day, double sales, double rate)
+    : Employee(first, last, ssn, year, month, day)
 {
     setGrossSales(sales);    // validate and store gross sales
     setCommissionRate(rate); // validate and store commission rate
