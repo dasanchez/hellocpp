@@ -934,3 +934,26 @@ template< typename T >
 ```
 - to specify a class-template definition with type parameter T which acts as sa placeholder for the type of the class to be created. You need not specifically use identifier T, any valid identifier can be used.
 - The member-function definitions of a class template are function templates. The member-function definitions that appear outside the class template definition each befin with the header `template< typename T >`.
+
+### 14.5 Nontype Parameters and Default Types for Class Templates
+
+- It's possible to use **non-type template parameters**, which can have default arguments and are treated as `const`s. The template header could be modified to take an `int` elements parameter as follows:
+```
+template< typename T, int elements > // nontype parameter elements
+```
+- In addition, a type parameter can specify a **default type**. For example:
+```
+template< typename T = string> // defaults to type string
+```
+- Default type parameters must be the _rightmost_ (trailing) parameters in a template's type-parameter list.
+- When appropriate, specify the size of a container class (such as an array or a stack class) at compile time (possibly through a nontype template parameter). This eliminates the execution-time overhead of using `new` to create the space dynamically.
+- Specifying the size of a container at compile time avoids the potentially fatal execution-time error if `new` is unable to obtain the needed memory.
+- In some cases, it may not be possible to use a particular type with a class template. If a particular user-defined type will not work with the template or requires customized processing, you can define an ****explicit specialization** of the class template for a particular type:
+```
+template<>
+class Stack< Employee >
+{
+  // body of class definition
+};
+```
+- The `Stack<Employee>` explicit specialization is a complete replacement for the `Stack` class template that is specific to type `Employee`- it does not use anything from the original class template and can even have different members.
