@@ -1,5 +1,5 @@
 // Ex 14.6: Operator Overloads in Templates
-// Write a simple function template for presudcate function isEqualTo
+// Write a simple function template for predicate function isEqualTo
 // that compares is two arguments of the same type with the equality
 // operator (==) and returns true if they are equal and false otherwise.
 // Use this function template in a program that calls isEqualTo only with
