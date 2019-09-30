@@ -957,3 +957,78 @@ class Stack< Employee >
 };
 ```
 - The `Stack<Employee>` explicit specialization is a complete replacement for the `Stack` class template that is specific to type `Employee`- it does not use anything from the original class template and can even have different members.
+
+## Chapter 15: Stream Input/Output
+
+### 15.1 Introduction
+
+- Many of the I/O features that we'll discuss are object-oriented. This styeof I/O makes use of other C++ features, such as references, function overloading and operator overloading.
+- C++ uses **type-safe I/O**. Each I/O operation is executed in a manner sensitive to the data type. Improper data cannot "sneak" through the system.
+- Uses can specity how to perform I/O for objects of user-defined types by overloading the stream insertion operator (<<) and the stream extraction operator (>>). This extensibility is one of C++'s most valuable features.
+
+### 15.2 Streams
+
+- C++ I/O occurs in **streams**, which are sequences of bytes. In input operations, the bytes flow from a device to main memory. In output operations, bytes flow from main memory to a device.
+- C++ provides both "low-level" and "high-level" I/O capabilities. Low-level I/O capabilities (**unformatted I/O**) specify that some number of bytes should be transferred device-to-memory or memory-to-device. In such transfers, the individual byte is the item of interest. Such low-level capabilities provide high-speed, high-volume transfers but are not particularly convenient.
+- Programmers generally prefer a higher-level vew of I/O (**formatted I/O**) in which bytes are grouped into meaningful units, such as integers, floating-point numbers, character strings and user-defined bytes. These type-oriented capabilities are satisfactory for most I/O other than high-volume file processing.
+- Using unformatted I/O can lead to portability problems, because unformatted data is not portable across all platforms.
+
+#### 15.2.1 Classic Streams vs. Standard Streams
+- In the past, the C++ **classic stream libraries** enabled input and output of `char`s. Because a `char` normally occupies one byte, it can only represent a limited set of characters (such as the ASCII character set).
+- C++ includes the **standard stream libraries**, which enable developers to build systems capable of performing I/O operations with Unicode characters. For this purpose, C++ includes an additional character type caled **wchar_t**, which among other uses can store Unicode characters.
+- The C++ standard also redesigned the classic C++ stream classses as class templates with separate specializations for processing characters of types `char` and `wchar_t`, respectively.
+
+#### 15.2.2 `iostream` Library Headers
+
+- The C++ `iostream` library provides hundres of I/O capabilities. Several headers contain portions of the library interface.
+- The `<iostream>` declares basic services required for all stream-I/O operations. It defines the `cin`, `cout`, `cerr` and `clog` objects, which correspond to the standard input stream, standard output stream, unbuffered standard error stream, and the buffered standard error stream. Both unformatted and formatted I/O services are provided.
+- The `<iomanip>` header declares services useful for performing formatted I/O with so-called **paameterized stream manipulators**, such as `setw` and `setprecision`.
+- The `<fstream>` headers declares services for file processing.
+- C++ implementations generaly contain other I/O-related libraries that provide system-specific capabilities, such as the controlling of special-purpose devices for audio and video I/O.
+
+### 15.2.3 Stream Input/Output Classes and Objects
+
+- The `iostream` library provides many templates for handling common I/O operations.
+- Class template **basic_istream** supports stream-input operations, class template, class tempalte **basic_ostream** supports stream-output operations, and class template **basic_iostream** supports both stream-input and stream-output operations.
+- Each template has a predefined template specialization that enables `char` I/O.
+- In addition, the `iostream` library provides a set of `typedef`s that provide aliases or these template specializations.
+- The `typedef` specified declares synonyms (aliases) for data types. You'll sometimes use `typedef` to create shorter or more readable types. For example, the statement `typedef Card *CardPtr;` defines an additional type name, CardPtr, as a synonym for type `Card *`. Creating a name using `typedef` does not create a data type, only a type name.
+- The `typedef` **istream** represents a specialization of `basic_istream` that enables `char` input.
+- The `typedef` **ostream** represents a specialization of `basic_ostream` that enables `char` output.
+- The `typedef` **iostream** represents a specialization of `basic_ostream` that enables both `char` input and output.
+
+
+**Stream-I/O Template Hierarchy and Operator Overloading**
+
+- Templates `basic_istream` and `basic_ostream` both derive through single ingeritance from basic template `basic_ios`. 
+- Template `basic_iostream` derives through multiple inheritance from templates `basic_istream` and `basic_ostream`.
+- Operator overloading provides a convenient notation for performing input/output.
+
+**Standard Stream Objects `cin`, `cout`, `cerr` and `clog`**
+
+- Prefefined object `cin` is a `istream` instance and is said to be "connected to" the stadard input device, which is usually the keyboard. The stream extraction operator (>>) as used in the following statement causes a value for integer variable `grade` to be input from `cin` to memory:
+
+```
+cin >> grade; // data "flows" in the direction of the arrows
+```
+
+The compiler determines the data type of `grade` and selects the appropriate overloaded stream extraction operator. Assuming that `grade` has been declared properly, the stream extraction operator does not require additional type information. The `>>` operator is overloaded to input data items of fundamental data types, strings, and pointer values.
+- The predefined object `cout` is an `ostream` instance and is said to be "connected to" the standard output device, which usually is the display screen. The stream insertion operator (`<<`), as used in the following statement, causes the value of variable `grade` to be output from memory to the standard output device:
+
+```
+cout << grade; // data "flows" in the direction of the arrows
+```
+
+- The predefined object `cerr` is an `ostream` instance and is said to be "connected to" the standard error device, normally the screen. Outputs to object `cerr` are **unbuffered**, implying that each stream insertion to `cerr` causes its output to appear immediately-- this is appropriate for notifying a user promptly about errors.
+- The predefined object `clog` is an instance of the `ostream` class and is said to be "connected to" the standard error device. Outputs to `clog` are **buffered**. This means that each insertion to `clog` could cause its output to be held in a buffer (an area in memory) until the buffer is filled or until the buffer is flushed.
+- Bufferin is an I/O performance-technique discussed in operating-systems courses.
+
+**File-Processing Templates**
+
+- C++ file processing uses class templates `basic_ifstream` (for file input), `basic_ofstream` (for file output) and `basic_fstream` (for file input and output).
+- typedef `ifstream` represents a specialization of `basic_ifstream` that enables `char` input from a file.
+- typedef `ofstream` represents a specialization of `basic_ofstream` that enables `char` output to a file.
+
+### 15.3 Stream Output
+
+- Formatted and unformatted output capabilities are provided by `ostream`
