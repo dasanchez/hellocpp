@@ -1031,4 +1031,66 @@ cout << grade; // data "flows" in the direction of the arrows
 
 ### 15.3 Stream Output
 
-- Formatted and unformatted output capabilities are provided by `ostream`
+- Formatted and unformatted output capabilities are provided by `ostream`. These include:
+  - output of standard odata types with the stream insertion operator (`<<`)
+  - output of characters via the `put` member function
+  - unformatted output via the `write` member function
+  - output of integers in decimal, octal, and hexadecimal formats
+  - output of floating-point values with various precision, with forced decimal points, in scientific notation, and in fixed notation
+  - output of data justified in fields of designated widths
+  - output of data in fields padded with specified characters
+  - output of uppercase letters in scientific notation and hexadecimal notation
+
+#### 15.3.1 Output of `char*` Variables
+
+- C++ determines data types automatically, but this sometimes gets in the way.
+- Suppose we want to print the address stored in a `char*` pointer. The `<<` operator has been overloaded to output a `char*` as a _null-terminated string_. To output the _address_, you can cast the `char*` to a `void*` (this can be done to any pointer variable).
+
+#### 15.3.2 Character Output Using Member Function `put`
+
+- We can use the `put` member function to output characters. For example, the statement `cout.put( 'A' );` displays a single character A. Calls to `put` may be cascaded, as in the  statement `cout.put('A').put('\n');` which outputs the  letter A followed by a newline character.
+- The dot operator (`.`) associates from left to right, and the `put` member function returns a reference to the `ostream` object that received the `put` call.
+- The `put` function also may be called with a numeric expression that represents an ASCII value, as in the following statement, which also outputs A: `cout.put(65);`
+
+### 15.4 Stream Input
+
+- Formatted and unformatted input capabilities are provided by `istream`.
+- The strea extraction operator (`>>`) normally skips **white-space characters** in the input stream.
+- After each input, the stream extraction operator returns a _reference_ to the stream object that received the extraction message (e.g. `cin`). If that reference is used as a condition, the stream's overloaded `void *` cast operator function is implicitly invoked to convert the reference into a non-null pointer value or the null pointer based on the success or failure of the last input operation.
+- A non-null pointer converts to the `bool` value `true` to indicate success and the null pointer converts to the `bool` value `false` to indicate failure.
+- When an attempt to read past the end of a stream, the stream's overloaded `void *` cast operator returns the null pointer to indicate end-of-file.
+- Each stream object contains a set of **state bits** used to control the stream's state. These bits are used by the stream's overloaded `void *` cast operator to determine whether to return a non-null pointer or the null pointer. Stream extraction causes the stream's **failbit**  to be set if data of the wrong type is input and causes the stream's **badbit** to be set if the  operation fails.
+
+#### 15.4.1 `get` and `getline`  Member  Functions
+
+- The `get`  member function with no arguments inputs one character from the designated stream and returns is as the value of the function call. This version of `get`  returns `EOF` when end-of-file is encountered on the stream.
+
+**Using Member Functions `eof`, `get` and `put`**
+
+- The value of `cin.eof()` is `false` (`0` on the output).
+- The `get` member function with a character-reference arguments inputs the next character from the input stream (even white-space characters) and stores it in the character argument.
+- When `get` is used with three arguments, these are a character array, a size limit and a delimiter. It either reads one fewer than the specified maximum number of characters and terminates or terminates as soon as the delimiter is read. A null character is inserted to terminate the input string in the character array used as a buffer by the program.
+- The delimiter is not placed in the character array but does remain in the input stream (the delimiter will be the next character read).
+
+**Comparing `cin` and `cin.get`
+
+- The call to `cin.get` does not specify a delimiter, so the default '\n' character is used.
+
+**Using Member Function `getline`**
+
+- Member function `getline` operates similarly to the third version of the `get` member function and inserts a null character after the line in the character array.
+- The `getline` function removes the delimiter from the stream, but does not store it in the character array.
+
+#### 15.4.2 `istream` Member Functions `peek`, `putback` and `ignore`
+
+- The `ignore` member function of `istream` reads and discards a designated number of characters (the default is one) or terminates upon encountering a designated delimiter.
+- The `putback` member function places the previous character obtained by a `get` from an input stream back into that stream. This is useful for applications that scan an input stream looking for a field beginning with a specific character.
+- The `peek` member functinoo returns the next character from an input stream but does not remove the character from the stream.
+
+#### 15.4.3 Type-Safe I/O
+
+- C++ Offers _type-safe I/O_. The << and >> operators are overloaded to accept data items of specific types. If unexpected data is processed, various error bits are set, which the user may test to determine whether an I/O operation succeeded or failed.
+- If operators << and >> have not been overloaded for a user-defined type and you attempt to input into or output the contents of an object of that user-defined type, the compiler returns an error. This enables to program to "stay in control".
+
+### 15.5 Unformatted I/O Using `read`, `write` and `gcount`
+
