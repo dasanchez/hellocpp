@@ -1094,3 +1094,47 @@ cout << grade; // data "flows" in the direction of the arrows
 
 ### 15.5 Unformatted I/O Using `read`, `write` and `gcount`
 
+- Unformatted input/output is performed using the `read` and `write` member functions of `istream` and `ostream`, respectively. `read` inputs bytes to a character array in memory; `write` outputs bytes from a character array. These bytes are not formatted in any way.
+- The call
+```
+char buffer[] = "HAPPY BIRTHDAY";
+cout.write( buffer, 10);
+```
+outputs the first 10 bytes of buffer.
+- The `read` member function inputs a designated number of characters into a character array. If fewer than the designated number of characters are read, `failbit` is set. Member function `gcount` reports the number of characters read by the last input operation.
+
+### 15.6 Introduction to Stream Manipulators
+
+- The stream manipulators provide capabilities such as setting field widths, setting precision, setting and unsetting format state, setting the fill character in fields, flushing streams, inserting a newline into the output sstream, inserting a null character into the output stream and skipping white space in the input stream.
+
+#### 15.6.1 Integral Stream Base: dec, oct, hex and setbase
+
+- Integers are interpreted normally as decimal values.
+- To change the base in which integers are interpreted on a stream,
+  - insert the `hex` manipulator to set the base to hexadecimal
+  - insert the `oct` manipulator to set the base to octal
+  - insert the `dec` manipulator to reset the stream decimal
+- A stream's base also may be changed by the `setstream` manupulator, which takes an `int` argument of 10, 8, or 16. Using `setbase` (or any other parameterized manipulator) requires the inclusion of the `<iomanip>` header.
+- The stream base value remains the same until changed explicitly; `setbase` settings are "sticky".
+
+#### 15.6.2 Floating-Point Precision (`precision`, `setprecision`)
+
+- We can control the **precision** of floating-point numbers by using either the `setprecision` stream manipulator or the `precision` member function of `ios_base`. A call to either of these sets the precision for all subsequenct output operations until the next precision-setting call.
+- A call to member function `precision` with no argument returns the current precision setting.
+
+#### 15.6.3 Field Width (width, setw)
+
+- The `width` member function (of base class `ios_base`) sets the field width and returns the previous width.
+- If values output are narrower than the field width, **fill characters** are inserted as **padding**.
+- A value wider than the designated width will not be truncated - the full number will be printed.
+- The `width` function with no argument returns the current setting.
+- The width setting applies only for the next insertion or extraction (the width setting is not sticky). Afterward, the width is set implicitly to 0.
+- When a field is not sufficiently wide to handle outputs, the outputs print as wide as necessary.
+- The `setw` stream manipulator also may be used to set the field width.
+
+#### 15.6.4 User-Defined Output Stream Manipulators
+
+- You can create your own manipulators.
+- For output stream manipulators, the return type and parameter must be of type `ostream &`.
+
+### 15.7 Stream Format States and Stream Manipulators
