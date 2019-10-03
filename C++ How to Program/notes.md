@@ -1138,3 +1138,27 @@ outputs the first 10 bytes of buffer.
 - For output stream manipulators, the return type and parameter must be of type `ostream &`.
 
 ### 15.7 Stream Format States and Stream Manipulators
+
+| Manipulator | Description                                                                                              |
+|-------------|----------------------------------------------------------------------------------------------------------|
+| `skipws`    | Skip white-space characters on an input stream. This setting is reset with stream manipulator `noskipws` |
+| `left`      | Left justify output in a field. Padding characters appear to the right if necessary.                     |
+| `right`     | Right justify output in a field. Padding characters appear to the left if necessary.                     |
+| `internal` | Indicate that a number's sign should be left justified in a field and a number's magnitude should be right justified in that same field. |
+| `boolalpha` | Specify that `bool` values should be displayed as the word `true` or `false`. The manipulator `noboolalpha` sets the stream back to displaying `bool` values as 1 and 0. |
+| `showbase` | Specify that the base of a number is to be output ahead of the number. This setting is reset with stream manipulator `noshowbase`. |
+| `showpoint` | Specify that floating-point numbers should be output with a decimal point. This is used normally with `fixed` to guarantee a certain number of digits tot he right of the decimal point, even if they're zeroes.s This setting is reset with sstream manuipulator `noshowpoint`. |
+| `uppercase` | Specify that uppercase letters should be used in a hex integer and that uppercase E should be used when representing a floating-point value in scientific notation. This setting is reset with stream manipulator `nouppercase`. |
+| `showpos` | Specify that positive numbers should be preceded by a plus sign. This setting is reset with stream manupulator `noshowpos`. |
+| `scientific` | Specify output of a plloating-point value in scientific notation. |
+| `fixed` | Specify output of a floating-point value in fixed-point notation with a specific number of digits to the right of the decimal point.
+
+- The `fill` member function speciifes the fill character to be used with justified fields; spaces are used for padding by default. The function returns the prior padding character.
+- The `set-fill` manipulator also ssets the padding character.
+
+#### 15.7.8 Setting and Resetting the Format State ia Member Function `flags`
+
+- Member function `flags` without an argument returns the current format settings as a `fmtflags` fata type (of class `ios_base`), which represents the **format state**.
+- Member function `flags` with a `fmtflags` argument sets the format state as specified by the argument and returns the prior state settings.
+
+### 15.8 Stream Error States
