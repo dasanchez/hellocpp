@@ -1162,3 +1162,18 @@ outputs the first 10 bytes of buffer.
 - Member function `flags` with a `fmtflags` argument sets the format state as specified by the argument and returns the prior state settings.
 
 ### 15.8 Stream Error States
+
+- The state of a stream may be tested through bts in class `ios_base`.
+
+- The `eofbit` is set for an input stream after end-of-life is encountered. A program can use member function `eof` to determine whether end-of-file has been encountered on a stream after an attempt to extract data beyond the end of the stream.
+- The `failbit` is set for a stream when a format error occurs on the stream and no characters are input. Usually, recovering from such errors is possible.
+- The `badbit` is set for a stream when an error occurs that results in the loss of data. Generally, such serious failures are nonrecoverable.
+- The `goodbit` is set for a stream if non of the bits `eofbit`, `failbit` or `badbit` is set for the stream.
+- The `rdtstate` member function returns the stream's error state.
+- the `clear` member function is uses to restore a stream's state to "good", so that I/O can process on that stream.
+- The statement `cin.clear(ios::failbit)` **sets** the failbit.
+
+### 15.9 Tying an Output Stream to an Input Stream
+
+- C++ provides member function `tie` to synchronize the operation of an `istream` and an `ostream` to ensure that outputs appear before their subsequet inputs.
+- The call `cin.tie(&cout);` ties cout to cin. To untie an input stream`inputStream`, from an output stream, use the call `inputStream.tie(0);`.
