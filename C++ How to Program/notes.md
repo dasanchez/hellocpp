@@ -1175,5 +1175,5 @@ outputs the first 10 bytes of buffer.
 
 ### 15.9 Tying an Output Stream to an Input Stream
 
-- C++ provides member function `tie` to synchronize the operation of an `istream` and an `ostream` to ensure that outputs appear before their subsequet inputs.
+- C++ provides member function `tie` to synchronize the operation of an `istream` and an `ostream` to ensure that outputs appear before their subsequent inputs.
 - The call `cin.tie(&cout);` ties cout to cin. To untie an input stream`inputStream`, from an output stream, use the call `inputStream.tie(0);`.
