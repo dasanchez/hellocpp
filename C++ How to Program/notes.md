@@ -1177,3 +1177,40 @@ outputs the first 10 bytes of buffer.
 
 - C++ provides member function `tie` to synchronize the operation of an `istream` and an `ostream` to ensure that outputs appear before their subsequent inputs.
 - The call `cin.tie(&cout);` ties cout to cin. To untie an input stream`inputStream`, from an output stream, use the call `inputStream.tie(0);`.
+
+## Chapter 16: Exception Handling: A Deeper Look
+
+### 16.1 Introduction
+
+- An exception is an indication of a problem that occurs during a program's execution
+- Exception handling enables you to create appliccations that can resolve (or handle) exceptions.
+- Robust, fault-tolerant programs that can deal with problems continue executing or terminate gracefully.
+- Exception handling provides a standard mechanism for processing errors. This is especially important when working on a project with a large team of programmers.
+
+### 16.2 Example: Handling an Attempt to Divide by Zero
+
+- In C++, division by zero using integer arithmentic typically causes a program to terminate prematurely. In floating-point arithmentic, some implementations allow it, which results in INF or -INF.
+- Class `runtime_error` is a derived class of Standard Library class `exception`, and is the C++ standard base class for representing runtime errors.
+- A typical exception class that derives from the `runtime_error` class defines only a constructor that passes an error-message string to the base-class `runtime_error` constructor.
+- Every exception class that derives directly or indirectly from `exception` containst the `virtual` function `what`, which returns an exception object's error message.
+- You are not required to derive a custom exception class, but doing so allows you to use the `virtual` function `what` to obtain an appropriate error message.
+- A `try` block encloses statements that might cause exceptions and statements that would be skipped if an exception occurs.
+- Exceptions may surface through explicily mentioned code in a `try` block, through calls to other functions and through deeply nested function calls initiated by code in a `try` block.
+- At least one `catch` handler must immediately follow each `try` block. The exception parameter is declared as a _reference_ to the type of exception the `catch` handler can process.
+- When an exception occurs in a `try` block, the `catch` handler that executes is the one whose type matches the thrown exception that occurred. If an exception paramenter includes an optional parameter name, the `catch` handler can use that parameter name to interact with the caught exception in the body of the `catch` handler.
+- A `catch` handler typically reports the error to the user, logs it to a file, terminates the program gracefully or tries an alternate strategy to accomplish the failed task.
+- It's a syntax error to place code between a `try` block and its corresponding `catch` handlers or between its `catch` handlers.
+- Each `catch` handler can have only a single parameter.
+- It's a logic error to catch the same type in two different `catch` handlers following a single `try` block.
+
+** Termination Model of Exception Handling **
+
+- When a `catch` handler finishes processing by reaching its closing right brace, the exception is considered handled and the local variables defined within the `catch` handler go out of scope. Program control does not  eturn to the point at which the exception occurred (known as the **throw point**), because the `try` block has expired. This is  known as the **termination model of exception handling**. Some languages use the  **resumption model of exception handling**, in which control resumes just after the throw point.
+- If the `try` block completes its execution successfully, then the program ignores the `catch` handlers and program control continues with the first statement after the last `catch` following that `try` block.
+- If an exception that occurs in a `try` block has no matching `catch` handler, or if an exception occurs in a statement that is not in a `try` block, the function that contains the  statement terminates immediately, and the program attempts to locate an enclosing `try` block in the calling function. This process is called **stack unwinding**.
+- Normally, a `throw` statement specifies one operand. The operand of a `throw` can be of any type. If the operand is an object, we call it an **exception object**. However, a `throw` operand also can assume other values, such as the value of an expression that does not result  in an object of a classs (`throw x > 5`), or the value  of an `int` (`throw 5`).
+
+- Use caution when throwing the result of a conditional expression (`?:`)- promotion rules could cause the value to be of a type different fromt the one expected.
+- **A function should throw an exception before the error has an opportunity to occur**.
+- Catching an exception object by reference eliminates the overhead of copying the object that represents the thrown exception.
+- Associating each type of runtime error with an appropriately named exception object improves program clarity.
