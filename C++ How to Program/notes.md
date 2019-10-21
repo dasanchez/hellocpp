@@ -1225,3 +1225,9 @@ outputs the first 10 bytes of buffer.
 - When no exception occurs, exception-handling code incurs little or no performance penalty. Thus, programs that implement exception handling operate more efficiently than do programs that intermix error-handling code with program logic.
 - Functions with common error conditions should return 0 or NULL (or other appropriate values, such as `bool`s) rather than throw exceptions. A program calling such a function can check the return value to determine success or failure of the function call.
 - When a predefined component encounters a problem, that component needs a mechanism to communicate the problem to the application-specific compnent- the predefined component cannot know in advance how each application processes a problem that occurs.
+
+### 16.4 Rethrowing an Exception
+
+- It's possible that an exception handler, upon receiving an exception, might decide either that it cannot process that exception or that it can process the exception only partially. In such cases, the handler can *defer the exception handline (or a portion of it) to antoher exception handler*. In either case, you achieve this by **rethrowing the exception** via the statement `throw;`.
+- The next enclosing `try` block detects the rethrown exception, which a `catch` handler listed  after that enclosing `try` block attempts to handle.
+- Executing an empty `throw` statement outside a `catch` handler calls function `terminate`, which abandons exception processing and terminates the program immediately.
