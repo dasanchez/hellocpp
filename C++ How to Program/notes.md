@@ -1214,3 +1214,14 @@ outputs the first 10 bytes of buffer.
 - **A function should throw an exception before the error has an opportunity to occur**.
 - Catching an exception object by reference eliminates the overhead of copying the object that represents the thrown exception.
 - Associating each type of runtime error with an appropriately named exception object improves program clarity.
+
+### 16.3 When to Use Exception Handling
+
+- Exception handling is designed to process **synchronous errors**, which  occur when a statement executes, such as out-of-range subscripts, arithmetic over flow, division by zero, invalid function parameters, and unsuccessful memory allocation.
+- Exception handling is not designed to process errors associated ith **asynchronous events** (disk I/O completions, network message arrivals, mouse clicks and keystrokes), which occur in parallel with, and independent of, the program's flow of control.
+- Exception handling provides a single, uniform technique for processing problems. This helps programmers on large projects understand each other's error-processing code.
+- Avoid using exceltion handling as an alternate form of flow of control.
+- Exception handling enables predefined software components to communicate problems to application-specific components, which can then process the problems in an application-specific manner.
+- When no exception occurs, exception-handling code incurs little or no performance penalty. Thus, programs that implement exception handling operate more efficiently than do programs that intermix error-handling code with program logic.
+- Functions with common error conditions should return 0 or NULL (or other appropriate values, such as `bool`s) rather than throw exceptions. A program calling such a function can check the return value to determine success or failure of the function call.
+- When a predefined component encounters a problem, that component needs a mechanism to communicate the problem to the application-specific compnent- the predefined component cannot know in advance how each application processes a problem that occurs.
