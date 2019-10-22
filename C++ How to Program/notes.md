@@ -1231,3 +1231,23 @@ outputs the first 10 bytes of buffer.
 - It's possible that an exception handler, upon receiving an exception, might decide either that it cannot process that exception or that it can process the exception only partially. In such cases, the handler can *defer the exception handline (or a portion of it) to antoher exception handler*. In either case, you achieve this by **rethrowing the exception** via the statement `throw;`.
 - The next enclosing `try` block detects the rethrown exception, which a `catch` handler listed  after that enclosing `try` block attempts to handle.
 - Executing an empty `throw` statement outside a `catch` handler calls function `terminate`, which abandons exception processing and terminates the program immediately.
+
+### 16.6 Processing Unexpected Exceptions
+
+- Function `unexpected` calls the function registered with function `set_unexpected` (defined in header `<exception>`). If no function has been registered in this manner, function `terminate` is called by default. Cases in which function `terminate` is called include:
+  1. the exception mechanism cannot find a matching `catch` for a thrown exception
+  2. a destructor attemprs to `throw` an exception during sstack unwinding
+  3. an attempt is made to rethrow an exception when ther's no exception currently being handled
+  4. a call to function `unexpected` defaults to calling function `terminate`
+
+- Function `set_terminate` can specify the function to invoke when `terminate` is called. Otherwise, `terminate` calls `abort`, which terminates the program without calling the destructors of any remaining objects of automatic or static storage class. This could lead to resource leaks when a program terminates prematurely.
+- Aborting a program component due to an uncaught exception could leave a resource - such as a file stream or an I/O device - in a state in which other programs are unable to acquire the resource. This is known as a **resource leak**.
+- Function `set_terminate` and function `set_unexpected` each return a pointer to the last function called by `terminate` and `unexpected`. This enables you to save the function pointer so it can be restored later.
+- Functions `set_terminate` and `set_unexpected` take as arguments pointers to functions with `void` return types and no arguments.
+
+### 16.7 Stack Unwinding
+
+
+- When an exception is thrown but not cuaght in a particular scope, the function call stack is "unwound", and an attempt is made to `catch` the exception in the next outer `try...catch` block.
+- Unwinding the function call stacck means that the function in which the exception was not caught terminates, all local variables in that  function are destroyed and control returns to the statement that originally invoked that function.
+- If no `catch` handler ever catches this exception, function `terminate` is called to terminate the program.
