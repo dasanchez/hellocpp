@@ -1251,3 +1251,11 @@ outputs the first 10 bytes of buffer.
 - When an exception is thrown but not cuaght in a particular scope, the function call stack is "unwound", and an attempt is made to `catch` the exception in the next outer `try...catch` block.
 - Unwinding the function call stacck means that the function in which the exception was not caught terminates, all local variables in that  function are destroyed and control returns to the statement that originally invoked that function.
 - If no `catch` handler ever catches this exception, function `terminate` is called to terminate the program.
+
+### 16.8 Constructors, Destructors and Exception Handling
+
+- How should an object's constructor respond when `new` fails because it was unable to allocate required memory for storing that object's internal representation? 
+- The preferred method is to require the constructor to `throw` an exception that contains the error information, thus offering an opportunity for the program to handle the failure.
+- Before an exception is thrown by a constructor, destructors are called for any member  objects built as part of the object being constructed. Destructors are called for every automatic object constructed in a `try` block before an exception is thrown.
+- An exception could preclude the operation of code that would normally release a resource, causing a resource leak. One technique to resolve this problem is to initialize a local object to acquire the resource. When an exception occurs, the destructor for that object will be invoked and can free the resource.
+- When an exception is thrown from the constructor for an object that's created in a `new` expression, the dynamically allocated memory for that object is released.
