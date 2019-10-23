@@ -1259,3 +1259,26 @@ outputs the first 10 bytes of buffer.
 - Before an exception is thrown by a constructor, destructors are called for any member  objects built as part of the object being constructed. Destructors are called for every automatic object constructed in a `try` block before an exception is thrown.
 - An exception could preclude the operation of code that would normally release a resource, causing a resource leak. One technique to resolve this problem is to initialize a local object to acquire the resource. When an exception occurs, the destructor for that object will be invoked and can free the resource.
 - When an exception is thrown from the constructor for an object that's created in a `new` expression, the dynamically allocated memory for that object is released.
+
+### 16.9 Exceptions and Inheritance
+
+- Various exception classes can be derived from a common base class.
+- If a `catch` handler catches a pointer or reference to an exception object of a base-class type, it also can `catch` a pointer or reference to all objects of classes publicly derived from that base class - this allows for polymorphic processing of related errors.
+- Using inheritance with exceptions enables an exception handler to `catch` related errors with concise notation. One approach is to `catch` each type of pointer or reference to a derived-class exception object individually, but a more concise approach is to `catch` pointers or references to base-class exception objects instead.
+- Catching pointers or references to derived-class exception objects individually is error prone, especiallly if you forget to test explicitly for one or more of the derived-class pointer or reference types.
+
+### 16.10 Processing `new` Failures
+
+- The C++ standard specifies that, when operator `new` fails, it `throw`s a **bad_alloc** exception (defined in header `<new>`).
+- The C++ standard specifies that compilers can use an older version of `new` that returns 0 upon failure. For this purpose, header `<new>` defines object `nothrow`, which is uses as follows:
+```
+double *ptr = new( nothrow ) double[50000000];
+```
+- The preceding statement uses the version of `new` that does not throw `bad_alloc` exceptions to allocate an array of 50,000,000 `double`s.
+- To make programs more robust, use the version of `new` that throws `bad_alloc` exceptions on failure.
+- An additional feature for handling `new` failures is function `set_new_handler`. This function takes as its argument a pointer to a function that takes no arguments aand returns void. This pointer points to the function that will be called if `new` fails. This provides you with a uniform approach to handling all `new` failures, regardless of where a failure occurs in the program.
+- Once `set_new_handler` register s a **`new` handler** in the program, operator `new` does not throw `bad_alloc` on failure; rather, it defers the error handling to the `new`-handler function.
+- The C++ standard specifies that the `new`-handler function should perform one of the following tasks:
+  1. Make more memory available by deleting other dynamically allocated memory (or telling the user to close other applications) and return to operator `new` to attempt to allocate memory again.
+  2. Throw an exception of type `bad_alloc`.
+  3. Call function `abort` or `exit` (both found in header `<cstdlib>`) to terminate the program.
