@@ -1282,3 +1282,23 @@ double *ptr = new( nothrow ) double[50000000];
   1. Make more memory available by deleting other dynamically allocated memory (or telling the user to close other applications) and return to operator `new` to attempt to allocate memory again.
   2. Throw an exception of type `bad_alloc`.
   3. Call function `abort` or `exit` (both found in header `<cstdlib>`) to terminate the program.
+
+### 16.11 Class unique_ptr and Dynamic Memory Allocation
+
+- A common programming practice is to allocate dynamic memory, assign the address of that memory to a pointer, use the pointer to manipulate the memory and deallocate the memory with `delete` when the memory is no longer needed.
+- If an exception occurs after successful memory allocation but before the `delete` statement executes, a _memory leak_ could occur. The C++ standard provides class template `unique_ptr` in header `<memory>` to deal with this situation.
+- An object of class `unique_ptr` maintains a pointer to dynamically allocated memory. When a `unique_ptr` object destructor is called, it performs a `delete` operation on its pointer data member. Class template `unique_ptr` provides overloaded operators `*` and `->` so tht a `unique_ptr` object can be used just as a regular pointer variable is.
+- Only one `unique_ptr` at a time can own a dynamically allocated object and the  object cannot be an array. By using its overloaded assignment operator or copy constructor, a `unique_ptr` can transfer ownership of the dynamic memory it manages.
+- The last `unique_ptr` object that maintains the pointer to the dynamic memory will delete the memory.
+
+### 16.12 Standard Library Exception Hierarchy
+
+- Immediate derived classes of base-class `exception` include `runtime_error` and `logic_error`, both defined in header `<stdexcept>`. Each of them has several derived classes.
+- Also derived from `exception` are the exceptions thrown by c++ operators: `bad_alloc`, `bad_cast`, `bad_typeid`, and `bad_exception`.
+- Placing a `catch` handler that catches a base-class object before a `catch` that catches an object of a class derived from that base class is a logic error. The base-class `catch` catches all objects of classes derived from that base class, so the derived-class `catch` will never execute.
+- Derived classes for `logic_error` are `invalid_argument`, `length_error`, and `out_of_range`.
+- Derived classes for `runtime_error` are `overflow_error` and `underflow_error`.
+- Exception classes need not be derived from class `exception`, so catching type `exception` is not guaranteed to `catch` all exceptions a program could encounter.
+- To catch all exceptions potentially thrown in a `try` block, use `catch(...)`. One weakness of this approach is tha the type of the caught exception is unknown at compile time. Also, there is no way to refer to the exception object inside the exception handler.
+- The standard `exception` hierarchy is a good starting point for creating exceptions. You can build programs that can `throw` standard exceptions, `throw` exceptions derived from the satandard exceptions or `throw` your own exceptions not derived from the standard ones.
+- Use `catch(...)` to perform recovery that does not depend on the exception type. The exception can be rethrown to alert more specific enclosing `catch` handlers.
