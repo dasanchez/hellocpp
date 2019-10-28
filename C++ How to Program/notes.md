@@ -1302,3 +1302,37 @@ double *ptr = new( nothrow ) double[50000000];
 - To catch all exceptions potentially thrown in a `try` block, use `catch(...)`. One weakness of this approach is tha the type of the caught exception is unknown at compile time. Also, there is no way to refer to the exception object inside the exception handler.
 - The standard `exception` hierarchy is a good starting point for creating exceptions. You can build programs that can `throw` standard exceptions, `throw` exceptions derived from the satandard exceptions or `throw` your own exceptions not derived from the standard ones.
 - Use `catch(...)` to perform recovery that does not depend on the exception type. The exception can be rethrown to alert more specific enclosing `catch` handlers.
+
+## Chapter 17: File Processing
+
+### 17.1 Introduction
+
+- Storage of data in memory is temporary. Files are used for data persistance - permanent retention of data. Computers store files on **secondary storage devices**.
+
+### 17.2 Files and Streams.
+
+- C++ views each file as a _sequence of bytes_. Each file ends either with an **end-of-file marker** or at a specific byte number recorded in an operating-system-maintained, administrative data structure.
+- When a file is opened, an object is created, and a stream is associated with the object.
+- To perform file processing in C++, headers <iostream> and <fstream> must be included. 
+- Files are _opened_ by creating objects of `basic_ifstream` and `basic_ofstream` stream template specializations.
+
+### 17.3 Creating a Sequential File
+
+- C++ imposes no structure on a file. You must structure files to meet the application's requirements.
+- An `ofstream` object is created to open a file for output, and two arguments are passed to the object's constructor: the **filename** and the **file-open mode**. For an `ofstream` object, the mode can be `ios::out` to output data to a file or `ios::app` to append data to the end of a file.
+- Existing files opened with mode `ios::out` are **truncated**- all data in the  file is discarded. If the specified file does not yet exist, then the `ofstream` object creates the file using that filename.
+- Use  caution when opernin an existing file for output (ios::out), especially when you want to preserve the file's contents, which will be discarded without warning.
+- An `ofstream` object can be created without opening a specific file- a file can be attached to the object later. For example, the statement
+```
+ofstream outClientFile;
+```
+- creates an `ofstream` object named `outClientFile`. The `ofstream` member function `open` opens a file and attaches it to an existing `ofstream` object as follows:
+```
+outClientFile.open("clients.dat", ios::out)
+```
+- Function `exit` is invoked to terminate a program. Argument 0 indicates that the program terminated normally; any other value indicates that the program terminated due to an error.
+- Overloaded `ios` member function `operator void *` converts the stream to a pointer, so it can be tested as 0 (the null pointer) or nonzero (any other pointer value). When a pointer is used as a condition, C++ interprets a null pointer in a condition as the `bool` value `false` and interprets a non-null pointer as the `bool` value `true`.
+- You can close the `ofstream` object explicitly, using member function `close` in the statement
+```
+outClientFile.close();
+```
