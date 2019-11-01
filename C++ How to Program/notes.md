@@ -1322,7 +1322,7 @@ double *ptr = new( nothrow ) double[50000000];
 - An `ofstream` object is created to open a file for output, and two arguments are passed to the object's constructor: the **filename** and the **file-open mode**. For an `ofstream` object, the mode can be `ios::out` to output data to a file or `ios::app` to append data to the end of a file.
 - Existing files opened with mode `ios::out` are **truncated**- all data in the  file is discarded. If the specified file does not yet exist, then the `ofstream` object creates the file using that filename.
 - Use  caution when opernin an existing file for output (ios::out), especially when you want to preserve the file's contents, which will be discarded without warning.
-- An `ofstream` object can be created without opening a specific file- a file can be attached to the object later. For example, the statement
+- An `ofstream` object can be created without opening a sbpecific file- a file can be attached to the object later. For example, the statement
 ```
 ofstream outClientFile;
 ```
@@ -1336,3 +1336,15 @@ outClientFile.open("clients.dat", ios::out)
 ```
 outClientFile.close();
 ```
+
+### 17.4 Reading Data from a Sequential File
+
+- Creating an `ifstream` object opens a file for input. The `ifstream` constructor can receive the filename and the file open mode as arguments.
+- Open a file for input only (using ios::in) if the file's contents should not be modified. This prevents unintentional modification of the file's contents and is another example of the principle of least privilege.
+- Objects of class `ifstream` are opened for input by default, so the statement `ifstream inClientFile("clients.txt");` opens the file for input.
+- To retrieve data sequentially from a file, programs normally start reading from the  beginning of the file and read all the data consecutively until the desired data is found.
+- Both `istream` and `ostream` provide member functions for repositioning the **file-position pointer** (the byte number of the  next byte in the file to be read or written). These member functions are `seekg` and `seekp` (seek get and seek put).
+- Each `istream` object has a _get pointer_, and each `ostream` object has a _put pointer_.
+- The statement `inClientFile.seekg(0);` repositions the file-position pointer to the beginning of the file attached to `inClientFile`.
+- The argument to `seekg` is a `long` integer. A second argument can be specified to indicate the **seek direction**, which can be `ios::beg` for positioning relative to the beginning of a stream, `ios::cur` for positioning to the current position in a stream, or `ios::end` for positioning relative to the end of a stream.
+- Member function `tellg` and `tellp` are provided to return the current locations of the _get_ and _put_ pointers.
