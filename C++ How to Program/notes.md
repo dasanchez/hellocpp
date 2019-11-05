@@ -1348,3 +1348,40 @@ outClientFile.close();
 - The statement `inClientFile.seekg(0);` repositions the file-position pointer to the beginning of the file attached to `inClientFile`.
 - The argument to `seekg` is a `long` integer. A second argument can be specified to indicate the **seek direction**, which can be `ios::beg` for positioning relative to the beginning of a stream, `ios::cur` for positioning to the current position in a stream, or `ios::end` for positioning relative to the end of a stream.
 - Member function `tellg` and `tellp` are provided to return the current locations of the _get_ and _put_ pointers.
+
+### 17.5 Updating Sequential Files
+
+- Data that is formatted and written to a sequential file cannot be modified without the risk of destroying other data in the file.
+- The formatted input/output model usually is not used to update records in place.
+
+### 17.6 Random-Access Files
+
+- Sequential files are inappropriate for **instant-access applications**, in which a particular record must be located immediately. Common instant-access applications are airline reservation systems, banking systems, and other  **transaction-processing systems** that require rapid access to specific data.
+- This kind of required instant access is made possible with **random-access files**. Individual records of a random-access file can be accessed directly (and quickly)  without having to search other records.
+- C++ does not impose structure on a file, so the application that wants to use random-access files must create them. The easiest methed is to require that all records in a file be of the _same fixed length_.
+- A random-access file  is like a railroad train with many same-size cars - some empty and some with contents.
+
+### 17.7 Creating a Random-Access File
+
+- When a stream is associated with a file, function `write` writes the data _at the location specified by the put file-position pointer_, and function `read` inputs bytes at the location in the file specified by the  "get" file-position pointer.
+
+**Writing Bytes with `ostream` Member Function `write`**
+
+- When writing the integer `number` to a file, instead of using the statement `outFile << number;` which for a four-byte integer could print as few digits as one or as many as 11 (10 digits plus a sign, each requiring a single byte of storage), we can use the statement:
+
+```
+outFile.write(reinterpret_cast <const char *> (&number), sizeof(number));
+```
+
+which always writes the binary version of the integer `number`'s four bytes. Function `write` treats its first argument as a group of bytes by viewing the object in memory as a `const char *`, which is a pointer to a byte. Starting from that location, function `write` outputs the number of bytes specified by its second argument - an integer of type `size_t`. `istream` function` read` can subsequently be used to read the four bytes back into integer variable `number`.
+
+**Converting Between Pointer Types with the `reinterpret_cast` Operator**
+
+- Most pointers that we pass to function `write` as the first argument are not of type `const char *`. We must convert the pointers to objects of other types to type `const char *`.
+- C++ provides the `reinterpret_cast` operator for cases like this in which a pointer of one type must be cast to an _unrelated_ pointer type.
+- A `reinterpret_cast` is performed at compile time and soes not change the value of the object to which its operand points. Instead, it requests that the compiler reinterpret the operand as the target type (specifieed in the angle brackets).
+
+- Random-access file-processing programs rarely write a single field to a file. Typically, they write one object of a class at a time.
+- It's easy to use `reinterpret_cast` to perform dangerous manipulations that could lead to serious execution-time errors.
+- Using `reinterpret_cast` is compiler dependent and can cause programs to behave differently on different platforms. It should not be used unless absolutely necessary.
+- A program that reads unformatted data (written by `write`) must be compiled and executed on a system compatible with the program that wrote the data, because different systems may represent internal data differently.
