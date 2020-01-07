@@ -1385,3 +1385,12 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 - It's easy to use `reinterpret_cast` to perform dangerous manipulations that could lead to serious execution-time errors.
 - Using `reinterpret_cast` is compiler dependent and can cause programs to behave differently on different platforms. It should not be used unless absolutely necessary.
 - A program that reads unformatted data (written by `write`) must be compiled and executed on a system compatible with the program that wrote the data, because different systems may represent internal data differently.
+
+### 17.8 Writing Data Randomly to a Random-Access File
+
+- The combination of `fstream` functions `seekp` and `write` allows us to store data at _exact_ locations in the file. Function `seekp` sets the `put` file-position pointer to a specific position in the file, and function `write` outputs the data.
+
+### 17.9 Reading from a Random-Access File Sequentially
+
+- The `istream` function `read` inputs a specified number of bytes from the current position in the specified stream into an object. Function `read` requires a firsst argument of type `char *`.
+
