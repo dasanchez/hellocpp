@@ -1393,4 +1393,13 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 ### 17.9 Reading from a Random-Access File Sequentially
 
 - The `istream` function `read` inputs a specified number of bytes from the current position in the specified stream into an object. Function `read` requires a first argument of type `char *`.
-- Sorting using direct-access techniques is relatively fast, compared to the insertion sort we used in Chapter 7. The speed is achieved by making the file large enough to hold every possible record that migh tbe created. This means that the file could be occupied sparsely most of the time, resulting in a waste of storage. This is an example of the _space-time trade-off_: By using large amounts of space, we can develop a much faster sorting algorithm. 
+- Sorting using direct-access techniques is relatively fast, compared to the insertion sort we used in Chapter 7. The speed is achieved by making the file large enough to hold every possible record that migh tbe created. This means that the file could be occupied sparsely most of the time, resulting in a waste of storage. This is an example of the _space-time trade-off_: By using large amounts of space, we can develop a much faster sorting algorithm.
+
+### 17.11 Object Serialization
+
+- An object's member functions are _not_ input or output with the object's data; rather, _one copy of the class's member functions remains available internally and is shared by all objects of the class_.
+- When object data members are output to a disk file, we lose the object's type information. We store only the vaues of the object's attributes, not type information, on the disk. If the program that reads this data knows the object type to which the data corresponds, the program can read the data into an object of that type as we did in the random-access file examples.
+- An interesting problem occurs when we store obejcts of different types in the same file. How can we distinguish them as we read them into a program? The problem is that objects typically do _not_ have type fields.
+- One approach is called **object serialization**. A so-called **serialized object** is an objecct represented as a sequence of bytes that includes the object's data as well as information about the object's type and the types of data stored in the object. After a serialized object has been written to a file, it can be read from the file and **deserialized** (the type information and bytes that represent the object ad  its object can be used to recreate te object in memory).
+- C++ does not provide a built-in serialization mechanism. There are third party and open source libraries that support object serialization. The Boost C++ libraries provide support for serializing objects in text, binary, and extensible markup language.
+
