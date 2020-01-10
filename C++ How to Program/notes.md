@@ -1392,5 +1392,5 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 
 ### 17.9 Reading from a Random-Access File Sequentially
 
-- The `istream` function `read` inputs a specified number of bytes from the current position in the specified stream into an object. Function `read` requires a firsst argument of type `char *`.
-
+- The `istream` function `read` inputs a specified number of bytes from the current position in the specified stream into an object. Function `read` requires a first argument of type `char *`.
+- Sorting using direct-access techniques is relatively fast, compared to the insertion sort we used in Chapter 7. The speed is achieved by making the file large enough to hold every possible record that migh tbe created. This means that the file could be occupied sparsely most of the time, resulting in a waste of storage. This is an example of the _space-time trade-off_: By using large amounts of space, we can develop a much faster sorting algorithm. 
