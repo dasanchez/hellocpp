@@ -1403,3 +1403,64 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 - One approach is called **object serialization**. A so-called **serialized object** is an objecct represented as a sequence of bytes that includes the object's data as well as information about the object's type and the types of data stored in the object. After a serialized object has been written to a file, it can be read from the file and **deserialized** (the type information and bytes that represent the object ad  its object can be used to recreate te object in memory).
 - C++ does not provide a built-in serialization mechanism. There are third party and open source libraries that support object serialization. The Boost C++ libraries provide support for serializing objects in text, binary, and extensible markup language.
 
+## Chapter 18: Class `string` and String Stream Processing
+
+### 18.1 Introduction
+
+- The class template `basic_string` provides typical string-manipulation operations such as copying, searching, etc. The template definitionn and all support facilities are defined in `namespace std`; these include the `typedef` statement
+  ```
+  typedef basic_string<char> string;
+  ```
+  that creates the alias type `string` for `basic_string<char>`. A typedef is also provided for the `wchar_t` type (`wstring`). Type `wchar_t` stores characters for supporting other character sets (it's commonly used to represent Unicode).
+
+- To use `string`s, include header `<string>`.
+- A `string` object can be initialized with a constructor argument as in
+  ```
+  string text("Hello"); // creates a string from a const char *
+  ```
+  or with two constructor arguments as in
+  ```
+  string name(8, 'x'); // string of 8 'x' characters
+  ```
+- Class `string` also provides a _default constructor_ (creates an empty string) and a _copy constructor_.
+- A `string` also can be initialized in its definition as in
+  ```
+  string month = "March"; // same as: string month("March");
+  ```
+  The `=` is not an assignment, it's an _implicit call_ to the `string` _class constructor_, which does the conversion.
+- Class `string` provides no conversions from `int` or `char` to `string` in a `string` definition. For example, the definitions
+  ```
+  string error1 = 'c';
+  string error2 = ('u');
+  string error3 = 22;
+  string error4(8);
+  ```
+  result in syntax errors. Assigning a single character to a `string` object is permitted in an assignment statement as in
+  ```
+  string1 = 'n':
+  ```
+- `string`s are not necessarily null terminated.
+- The length of a `string` can be retrieved with member function `length` and with member function `size`.
+- The subscript operator `[]` can be used with `string`s to access and modify individual characters. `string`s have a first subscript of 0 and a last subscript of `length()` - 1.
+- Most `string` member functions take as arguments a starting subscript location and the number of characters on which to operate.
+- The stream extraction operator (`>>`) is overloaded to support strings. The statements
+  ```
+  string stringObject;
+  cin >> stringObject;
+  ```
+  declare a `string` object and read a `string` obejct from `cin`. Input is delimmited by white-space characters. When a delimiter is encountered, the input operation is terminated. Function `getline` also is overloaded for `string`s. Assuming `string` is a `string`, the statement
+  ```
+  getline(cin, string);
+  ```
+  reads a `string` from the keyboard into `string1`. Input is delimited by a newline (`'\n'`), so `getLine` can read a line of text into a `string` object. You can specify an alternate delimiter as the optional third argument to `getline`.
+
+### 18.2 `string` Assignment and Concatenation
+
+- Member function `assign` is used to make a separate copy of a `string` object (both objects become independent).
+- Class `string` also provides an overloaded member function `assign` that copies a specified number of characters, as in
+  ```
+  targetString.assign(sourceString, start, numberOfCharacters);
+  ```
+  where `sourceString` is the `string` to be copied, `start` is the starting subscript and `numberOfCharacters` is the number of characters to copy.
+- Member function `at` provides **checked access** (or **range checking**): going past the end of the `string` throws an `out_of_range` exception. The subscript operator `[]` does not provide check access. This is consistent with its use on arrays.
+- Accesing an element beyond the size of the `string` using the subscript operator is an unreported logic error.
