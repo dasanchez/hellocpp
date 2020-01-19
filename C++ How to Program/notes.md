@@ -1471,3 +1471,7 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
   The result is 0 if the `string`s are equivalent.
   The result is a positive number if `string1` is **lexicographically** greater than `string2`.
   The result is a negative number if `string1` is lexicographically less than `string2`.
+
+#### 18.4 Substrings
+
+- Class `string` provides member function `substr` for retrieving a substring from a `string`. The result is a new `string` object that's copied from the source `string`. The first argument specifies the beginning subscript of the desired substring; the second argument specifies the substring's length.
