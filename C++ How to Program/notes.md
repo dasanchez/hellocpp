@@ -1464,3 +1464,10 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
   where `sourceString` is the `string` to be copied, `start` is the starting subscript and `numberOfCharacters` is the number of characters to copy.
 - Member function `at` provides **checked access** (or **range checking**): going past the end of the `string` throws an `out_of_range` exception. The subscript operator `[]` does not provide check access. This is consistent with its use on arrays.
 - Accesing an element beyond the size of the `string` using the subscript operator is an unreported logic error.
+
+### 18.3 Comparing `string`s
+
+- When function `compare` is used to compare `string1` to `string2`:
+  The result is 0 if the `string`s are equivalent.
+  The result is a positive number if `string1` is **lexicographically** greater than `string2`.
+  The result is a negative number if `string1` is lexicographically less than `string2`.
