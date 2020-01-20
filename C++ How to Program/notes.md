@@ -1472,6 +1472,18 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
   The result is a positive number if `string1` is **lexicographically** greater than `string2`.
   The result is a negative number if `string1` is lexicographically less than `string2`.
 
-#### 18.4 Substrings
+### 18.4 Substrings
 
 - Class `string` provides member function `substr` for retrieving a substring from a `string`. The result is a new `string` object that's copied from the source `string`. The first argument specifies the beginning subscript of the desired substring; the second argument specifies the substring's length.
+
+### 18.5 Swapping strings
+
+- Class `string` provides member function `swap` for swapping `string`s.
+
+### 18.6 string Characteristics
+
+- Class `string` provides member functions for gathering information about a `string`'s size, length, capacity, maximum length, and other characteristics.
+- A `string`'s size or length is the number of characters currently stored in the `string`.
+- A `string`'s capacity is the number of characters that can be stored in the `string` withoug allocating more memory. The exact capacity of a `string` depends on the immplementation.
+- The `maximum size` is the largest possible size a `string` can have. If this value is exceeded, a `length_error` exception is thrown.
+
