@@ -1486,4 +1486,18 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 - A `string`'s size or length is the number of characters currently stored in the `string`.
 - A `string`'s capacity is the number of characters that can be stored in the `string` withoug allocating more memory. The exact capacity of a `string` depends on the immplementation.
 - The `maximum size` is the largest possible size a `string` can have. If this value is exceeded, a `length_error` exception is thrown.
+- Member function `resize` increases the length of the `string`.
 
+### 18.7 Finding Substrings and Characters in a `string`
+
+- Class `string` provides `const` member functions for finding substrings and characters in a `string`: `find`, `rfind`, `find_first_of`, `find_last_of`, and `first_not_of`.
+- If the `string` is not found, the value `string::npos` is returned.
+
+### 18.8 Replacing Charactes in a `string`
+
+- `string` member function `erase` erases everything from and including the starting character to the end of the string.
+- `string` member function `replace` replaces all occurrences of a given character with the specified one.
+
+### 18.9 Inserting Characters into a `string`
+
+- Member function `insert` inserts content from one `string` into another one.
