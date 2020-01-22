@@ -1501,3 +1501,11 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 ### 18.9 Inserting Characters into a `string`
 
 - Member function `insert` inserts content from one `string` into another one.
+
+### 18.10 Conversion to C-Style Pointer-Based char * Strings
+
+- `string` member function `copy` can be used to copy a `string` object into a `char` array. A null character must be manually added to the array.
+- Function `c_str` provides a `const char *` that points to a null terminated C-style string.
+- Function `data` returns a non-null terminated C-style character array.
+- Not terminating the character array returned by `data` with a null character can lead to execution-time errors.
+- Whenever possible, use the more robust `string` class object rather than C-style pointer-based strings.
