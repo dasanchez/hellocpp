@@ -1509,3 +1509,21 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 - Function `data` returns a non-null terminated C-style character array.
 - Not terminating the character array returned by `data` with a null character can lead to execution-time errors.
 - Whenever possible, use the more robust `string` class object rather than C-style pointer-based strings.
+
+### 18.11 Iterators
+
+- Class `string` provides iterators for forward and backward traversal of `string`s.
+- Iterators provide access to individual characters with syntax that's similar to pointer operations. _Iterators are not range checked_.
+- A `const_iterator` is an iterator that cannot modify the `string`, and it is initialized to the beginning of the `string` with the `string` class member function `begin`. Two versions of `begin` exist: one that returns an `iterator` for iterating through a non-`const string` and a `const` version that returns a `const_iterator` for iterating through a `const string`.
+- Class `string` member function `end` returns an `iterator` for the position past the last element of a `string`.
+- Class `string` provides member functions `rend` and `rbegin` for accessing individual `string` characters in reverse from the end of a `string` toward the beginning. Member functions `rend` and `rbegin` return `reverse_iterators` or `const_reverse_iterators`.
+- When the operations involving the iterator should not modify the data being processed, use a `const_iterator`. This is another example of employing the principle of least privilege.
+
+### 18.12 String Stream Processing
+
+- C++ stream I/O includes capabilities for inputting from, and outputting to, `string`s in memory. These capabilities often are referred to as **in-memory I/O** or **string stream processing**.
+- Input from a `string` is supported by class `istringstream`. Output to a `string` is supported by class `ostringstream`.
+- Programs that use in-memory formatting must include the `<sstream>` and `<iostream>` headers.
+- One application of these technique is data validation. A program can read an entire line at a time from the input stream into a `string`. Next, a validation routine can scrutinize the contents of the `string` and correct the data if necessary.
+- Outputting to a `string` is a nice way to take advantage of the powerful output formatting capabilities of C++ streams. Data can be prepared in a `string` to mimic the edited screen format. That `string` could be written to a disk file to preserve the screen image.
+- An `istringstream` object inputs data from a `string` in memoryy to program variables. Data is stored in an `istringstream` object as characters. Input from the `istringstream` object works identically to input from any file. The end of the `string` is interpreted by the `istringstream` object as end-of-file.
