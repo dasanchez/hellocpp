@@ -1527,3 +1527,29 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 - One application of these technique is data validation. A program can read an entire line at a time from the input stream into a `string`. Next, a validation routine can scrutinize the contents of the `string` and correct the data if necessary.
 - Outputting to a `string` is a nice way to take advantage of the powerful output formatting capabilities of C++ streams. Data can be prepared in a `string` to mimic the edited screen format. That `string` could be written to a disk file to preserve the screen image.
 - An `istringstream` object inputs data from a `string` in memoryy to program variables. Data is stored in an `istringstream` object as characters. Input from the `istringstream` object works identically to input from any file. The end of the `string` is interpreted by the `istringstream` object as end-of-file.
+
+## Chapter 19: Searching and Sorting
+
+### 19.1 Introduction
+
+- **Big O** notation is used to characterize an algorithm's worst-case runtime- that is, how hard an algorithm may have to work to solve a problem.
+
+### 19.2 Searching Algorithms
+
+- A searching algorithm finds an element that matches a given search key, if such an element does, in fact, exist. The major difference between different algorithms is the amount of effort they require to complete the search. One way to describe this effort is with Big O notation. For searching and sorting algorithms, this is particularly dependent on the number of data elements.
+
+### 19.2.1 Efficiency of Linear Search
+
+- If an algorithm is independent of the number of vector elements, it is said to have a **constant runtime**, represented in Big O notation as **O(1)**. The number of comparisons is constant- it does not grow as the size of the vector increases. O(1) is often pronounced "on the order of 1" or more simply "order 1".
+- An algorithm that requires a total of n-1 comparisons is said to be **O(n)**, also referred to as having a **linear runtime**. O(n) is often pronounced "on the order of n" or more simply "order n".
+- If an algorithm grows as the square of n, it is considered to be **O(n^2)**, which is referred to as **quadratic runtime** and pronounced "on the order of n-squared" or more simply "order n-squared". O(n^2) algorithms tend to be easy to write.
+- Sometimes the simplest algorithms perform poorly. Their virtue is that they're easy to program, test, and debug. Sometimes more complex algorithms are required to realize maximum performance.
+
+### 19.2.2 Binary Search
+
+- The **binary search algorithm** is more efficient than the linear search algoithm, but it requires that the vector first be sorted. Each iteration tests the _middle value_ of the remaning portion of the vector. If the element does not match the search key, the algorithm eliminates half of the remaining elements. The algorithm ends either by finding an element that matches the search key or by reducing the subvector to zero size.
+
+**Efficiency of Binary Search**
+
+- In the worst-case scenario, a sorted vector of 1023 elements will take only 10 comparisons when using a binary search. The maximum number of comparisons needed for the binary search of any sorted vector is the exponent of the first power of 2 greater than the number of elements in the vector, which is represented as log2 n.
+- All logarithms grow at roughly the same rate, so in Big O notation the base can be omitted. This results in a Big O of **O(log n)** for a binary search, which is also known as **logarithmic runtime** and pronounced "on the order of log n" or more simply "order log n".
