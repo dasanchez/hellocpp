@@ -21,9 +21,35 @@ BubbleSort::BubbleSort(int vectorSize)
 // bubble sort algorithm
 void BubbleSort::sort()
 {
+    int passCount = 0;
+    vector<int> tempVector(data);
     // outer loop: run through all elements
     for (int i = 0; i < size; ++i)
     {
+        // inner loop: run through all elements comparing n to n+1
+        for (int j = 0; j < size - 1; ++j)
+        {
+                if (tempVector[j] > tempVector[j+1])
+                {
+                    // swap
+                    int temp = tempVector[j];
+                    tempVector[j] = tempVector[j+1];
+                    tempVector[j+1] = temp;
+                } // end if
+                passCount++;
+        } // end inner loop
+    } // end outer loop
+    cout << "\nTotal passes for original algorithm: " << passCount << endl;
+} // end function sort
+
+// bubble sort algorithm
+void BubbleSort::enhancedSort()
+{
+    int passCount = 0;
+    // outer loop: run through all elements
+    for (int i = 0; i < size; ++i)
+    {
+        bool swaps = false;
         // inner loop: run through all elements comparing n to n+1
         for (int j = 0; j < size - 1 - i; ++j)
         {
@@ -33,11 +59,14 @@ void BubbleSort::sort()
                     int temp = data[j];
                     data[j] = data[j+1];
                     data[j+1] = temp;
+                    swaps = true;
                 } // end if
-                displayElements();
-                cout << endl;
+                passCount++;
         } // end inner loop
+        if (!swaps)
+            break;
     } // end outer loop
+    cout << "\nTotal passes for improved algorithm: " << passCount << endl;
 } // end function sort
 
 // display elements in vector
