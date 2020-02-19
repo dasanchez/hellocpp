@@ -1,4 +1,4 @@
-// 19.5: Bubble Sort
+// 19.6: Enhanced Bubble Sort
 // Make the following modifications to iprove the performance of the bubble sort developed
 // in Exercise 19.5:
 // a. After the first pass, the largest value is guaranteed to be in the highest-numbered
