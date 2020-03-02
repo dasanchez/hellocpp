@@ -1595,3 +1595,56 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 | 2^20 | 20       | 2^20 | 2^10 x 20  | 2^40   |
 | 2^30 | 30       | 2^30 | 2^10 x 30  | 2^60   |
 
+## Chapter 20: Custom Templatized Data Structures
+
+### 20.1 Introduction
+
+- This chapter introduces **dynamic data structures** that grow and shrink during execution.
+- **Linked lists** are collections of data items logically "lined up in a row"- insertions and removals are made anywhere in a linked list.
+- **Stacks** are  importand in compilers and operating systems: Insertions and removals are made only at one end of a stack, its top.
+- **Queues** represent wwaiting lines; insertions are made at the back (also referred to as the tail) of a queue and removals are made from the fron (also referred to as the head) of a queue.
+- **Binary trees** facilitate high-speed searching and sorting of data and efficient elimination of duplicate data items among other applications.
+
+### 20.2 Self-Referential Classes
+
+- A **self-referential class** contains a member that points to a class object of the same class type. A "`next`" pointer member in a self-referential class is referred to as a **link**.
+- Self-referential class objects can be linked together to form useful data structures such as lists, queues, stacks, and trees.
+- A null (0) pointer normally indicates the end of a data structure just as the null character ('\0') indicates the end of a string.
+- Not setting the link in the last node of a linked data structure to null (0) is a (possibly fatal) logic error.
+
+### 20.3 Dynamic Memory Allocation and Data Structures
+
+- Creating and maintaining dynamic data structures requires dynamic memory allocation, which enables a program to obtain more memory at execution time to hold new nodes. When that memory is no longer needed by the program, the memory can be _released_ so that it can be reused to allocate other objects in the future. The limit for dynamic memory allocation can in theory be as large as the aount of available physical memory in the computer or the amount of available virtual memory in a virtual memory system.
+- The `new` operator takes as an argument the type of the object being dynamically allocated and returns a pointer to an object of that type:
+```
+Node *newPtr = new Node( 10 ); // create Node with data 10
+```
+- The `delete` operator runs the `Node` destructor and deallocates memory allocated with `new`. To free memory dynamically allocated by the preceding `new`, use the statement
+```
+delete newPtr;
+```
+- `newPtr` itself is not deleted; rather the destructor of the `Node` object that `newPtr` points to iis called and  the object's memory is freed. If pointer `newPtr` has the null pointer value 0, the preceding statement has no effect. It is _not_ an error to delete a null pointer.
+
+### 20.4 Linked Lists
+
+- A linked list is a linear collection of self-referential class objects, called **nodes**, connected by **pointer links**. A linked list is accessed  via a pointer to the list's first node. Each subsequent node is accessed via the link-pointer member stored in the precious node. By convenction, the link pointer in the last node of a list is set to null (0) to mark the end of the list.
+- Data is stored in a linked list dynamically - each node is created as necessary.
+- A node can contain data of any type, including objects of other classes. If nodes contain base-class pointers to base-class and derived-class objects related by inheritance, we can have a linked list of such nodes and process them _polymorphically_  using `virtual` function calls.
+- Stack and queues are also **linear data structures**, and  can be viewed as constrained versions of linked lists.
+- Trees are **nonlinear data structures**.
+- Lists of data can be stored in arrays, but linked lists provide several advantages. A linked list is appropriate when the number of data elements to be represented at one time is _unpredictable_. Lined lists are dynamic, so the length of a list can increase or decrease as necessary. The size of a "conventional" C++ array, however, cannot be altered, because th array size is fixed at compile time. "Conventional" arrays can become full. Linked lists become full only when the system has insufficient memory to satisfy additional dynamic sotrage allocation requests.
+- An array can be declared to contain more elements that the number of items expected, but this can waste memory. Linked lists can provide better memory utilization in these situations. Linked lists allow the program to adapt at runtime.
+- Class template `vector` implements a dynamically resizable array-based data structure.
+- Linked lists can be maintained in sorted order by inserting each new wlement at the proper point in the list. Existing list elements do not need to be moved. Pointers merely need to be updated to point to the correct node.
+- Insertion and deletion in a sorted array can be time consuming. A linked list allows efficient insertion operations anywhere in the list.
+- THe elements of an array are stored contiguously in memory. This allows immediate access to any element. Linked lists do not afford such immediat direct access to their elements. So accessing individual elements in a linked list can be considerably more expensive than accessing individual elements in an array.
+- The selection of a data structure is typically based on the performance of specific operations used by a program and the order in which the data items are maintained in the data structure.
+- Using dynamic memroy allocation (instead of fixed-size arrays) for data structures that grow and shrink at execution time can save memory. Keep in mind, however, that pointers occupy space and that dynamic memory allocation incurs the overhead of function calls.
+- Assign null(0) to the link member  of a new node. Pointers must be initialized before they're used.
+
+**Circular Linked Lists and Double Linked Lists**
+
+- A **singly linked list** begins with a pointer to the first node, and each node contains a pointer to the next node "in sequence". This list terminates with a node whose pointer member has the value 0. A singly liinked list may be traversed in only _one_ direction.
+- A **circular, singly linked list** begins with a pointer to the first node, and each node contains a pointer to the next node. The "last node" does not contain a 0 pointer; rather, the pointer in the last node points back to the first node, thus closing the "circle".
+- A **double linked list** allows traversals _both forward and backward_. Such a list is often implemented with two "start pointers": one that pointer to the first element of the list to allow front-to-back traversal, and one that points to the last element to allow back-to-front traversal. Each node has both a forward pointer and a backward pointer.
+- In a **circular, doubly linked list**, the forward pointer of the last node points to the first node, and the backward pointer of the first node points to the last node, thus closing the "circle".
