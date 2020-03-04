@@ -1659,3 +1659,18 @@ delete newPtr;
 ### 20.6 Queues
 
 - A **queue** similar to a supermarket checkout line- the _first_ person in line is serviced  _first_, and other customers enter the line at the _end_ and _wait_ to be serviced. Queue nodes are removed only from the head of the queue and are inserted only at the tail of the queue. For this reason, a queue is referred to as a first-in, first-out (FIFO) data structure. The insert and remove operations are known as **enqueue** and **dequeue**.
+
+### 20.7 Trees
+
+- Linked lists, stacks, and queues are linear data structures. A tree is a nonlinear, two-dimensional data structure. Tree nodes contain two or more links.
+- Binary trees are trees whose nodes all contain two links (none, one, or both of which may be null).
+- The **rot node** is the first node in a tree. Each link in the root node refers to a **child**. The **left child** is the root node of the **left subtree**. The **right child** is the root node of the **right subtree**.
+- The children of a given node are called **sublings**.
+- A node with no children is a **leaf node**.
+- A **binary search tree** (with no duplicate node values) has the characteristic that the values in any left subtree are _less than the value_ in its **parent node**, and the values in any right subtree _are greater than_ the value in its parent node.
+- A binary search tree can be walked through with an **inorder**, **preorder**, and **postorder** **traversals**.
+- A node can only be inserted as a leaf node in a binary search tree.
+- The inorder traversal of a binary search tree prints the node values in ascending order. The  process of creating a binary search tree actually _sorts_ the data - thus, this process is called the **binary tree sort**.
+- The binary search tree facilitates **duplicate elimination**.
+- Searching a binary tree for a value that matches a key value is also fast. If the tree is balanced, then each branch contains about half the number of nodes in the tree. Each comparison of a node to the search key eliminates half the nodes. This is called an O(log n) algorithm. So a binary search tree with n elements would require a maximum of log 2 n comparisons either to find a match or to determine that no match exists.
+- The level-order traversal of a binary tree visits the nodes of the tree row by row, starting at the root node level. On each levvel of the tree, the nodes are visited from left to right.
