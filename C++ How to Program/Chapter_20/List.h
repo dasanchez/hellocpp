@@ -19,7 +19,9 @@ public:
     bool removeFromBack(NODETYPE &);
     bool isEmpty() const;
     void print() const;
+    void clear();
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
+    static void merge(List<NODETYPE> &, List<NODETYPE> &, List<NODETYPE> &);
 
 private:
     ListNode<NODETYPE> *firstPtr; // pointer to first node
@@ -175,6 +177,17 @@ void List<NODETYPE>::print() const
     cout << "\n\n";
 } // end function print
 
+// removes all nodes from list
+template <typename NODETYPE>
+void List<NODETYPE>::clear()
+{
+    while (!isEmpty())
+    {
+        NODETYPE value;
+        this->removeFromFront(value);
+    }
+}
+
 // concatenates contents of second argument into first
 template <typename NODETYPE>
 void List<NODETYPE>::concatenate(List<NODETYPE> &list1, List<NODETYPE> &list2)
@@ -189,6 +202,48 @@ void List<NODETYPE>::concatenate(List<NODETYPE> &list1, List<NODETYPE> &list2)
             currentPtr = currentPtr->nextPtr;
         }
     }
+}
+
+// merge first two arguments into third one
+template <typename NODETYPE>
+void List<NODETYPE>::merge(List<NODETYPE> &l1, List<NODETYPE> &l2, List<NODETYPE> &l3)
+{
+    // clear list 3
+    l3.clear();
+
+    ListNode<NODETYPE> *curPtr1 = l1.firstPtr;
+    ListNode<NODETYPE> *curPtr2 = l2.firstPtr;
+
+    while (curPtr1 != 0 || curPtr2 != 0)
+    {
+        if (curPtr1 != 0 && curPtr2 != 0)
+        {
+            NODETYPE data1 = curPtr1->data;
+            NODETYPE data2 = curPtr2->data;
+            if (data2 > data1)
+            {
+                l3.insertAtBack(data1);
+                l3.insertAtBack(data2);
+            }
+            else
+            {
+                l3.insertAtBack(data2);
+                l3.insertAtBack(data1);
+            }
+            curPtr1 = curPtr1->nextPtr;
+            curPtr2 = curPtr2->nextPtr;
+        } // end if both lists have items left
+        else if (curPtr1 != 0)
+        {
+            l3.insertAtBack(curPtr1->data);
+            curPtr1 = curPtr1->nextPtr;
+        } // end if only first list is not empty
+        else
+        {
+            l3.insertAtBack(curPtr2->data);
+            curPtr2 = curPtr2->nextPtr;
+        } // end if only second list is not empty
+    }     // end while loop
 }
 
 #endif
