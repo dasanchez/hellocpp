@@ -19,6 +19,7 @@ public:
     bool removeFromBack(NODETYPE &);
     bool isEmpty() const;
     void print() const;
+    static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
 
 private:
     ListNode<NODETYPE> *firstPtr; // pointer to first node
@@ -82,7 +83,7 @@ void List<NODETYPE>::insertAtBack(const NODETYPE &value)
     else                             // List is not empty
     {
         lastPtr->nextPtr = newPtr; // update previous last node
-        lastPtr = newPtr;         // new last node
+        lastPtr = newPtr;          // new last node
     }                              // end else
 } // end function insertAtBack
 
@@ -152,10 +153,10 @@ ListNode<NODETYPE> *List<NODETYPE>::getNewNode(
 } // end function getNewNode
 
 // display contents of List
-template<typename NODETYPE>
+template <typename NODETYPE>
 void List<NODETYPE>::print() const
 {
-    if (isEmpty() ) // list is empty
+    if (isEmpty()) // list is empty
     {
         cout << "The list is empty\n\n";
         return;
@@ -165,7 +166,7 @@ void List<NODETYPE>::print() const
 
     cout << "The list is: ";
 
-    while (currentPtr != 0 ) // get element data
+    while (currentPtr != 0) // get element data
     {
         cout << currentPtr->data << ' ';
         currentPtr = currentPtr->nextPtr;
@@ -174,5 +175,20 @@ void List<NODETYPE>::print() const
     cout << "\n\n";
 } // end function print
 
+// concatenates contents of second argument into first
+template <typename NODETYPE>
+void List<NODETYPE>::concatenate(List<NODETYPE> &list1, List<NODETYPE> &list2)
+{
+    if (!list2.isEmpty())
+    {
+        ListNode<NODETYPE> *currentPtr = list2.firstPtr;
+
+        while (currentPtr != 0)
+        {
+            list1.insertAtBack(currentPtr->data);
+            currentPtr = currentPtr->nextPtr;
+        }
+    }
+}
 
 #endif

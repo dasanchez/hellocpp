@@ -7,9 +7,6 @@
 #include <iostream>
 #include "List.h"
 
-template<typename NODETYPE>
-void concatenate(List<NODETYPE> &, List<NODETYPE> &);
-
 int main()
 {
     List<char> list1;
@@ -23,19 +20,6 @@ int main()
     list2.insertAtBack('o');
     list2.insertAtBack('\n');
 
-    concatenate(list1, list2);
+    List<char>::concatenate(list1, list2);
     list1.print();
-}
-
-// function depletes the list on the second argument
-template<typename NODETYPE>
-void concatenate(List<NODETYPE> &l1, List<NODETYPE> &l2)
-{
-
-    while (!l2.isEmpty())
-    {
-        NODETYPE value;
-        l2.removeFromFront(value);
-        l1.insertAtBack(value);
-    }
 }
