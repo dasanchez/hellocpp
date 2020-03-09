@@ -20,12 +20,14 @@ public:
     bool isEmpty() const;
     void print() const;
     void clear();
+    unsigned int getSize() const;
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
     static void merge(List<NODETYPE> &, List<NODETYPE> &, List<NODETYPE> &);
 
 private:
     ListNode<NODETYPE> *firstPtr; // pointer to first node
     ListNode<NODETYPE> *lastPtr;  // pointer to last node
+    unsigned int size;
 
     // utility function to allocate new node
     ListNode<NODETYPE> *getNewNode(const NODETYPE &);
@@ -36,7 +38,7 @@ template <typename NODETYPE>
 List<NODETYPE>::List()
     : firstPtr(0), lastPtr(0)
 {
-    // empty body
+    size = 0;
 } // end List constructor
 
 // destructor
@@ -72,6 +74,7 @@ void List<NODETYPE>::insertAtFront(const NODETYPE &value)
         newPtr->nextPtr = firstPtr; // point new node to previous 1st node
         firstPtr = newPtr;          // aim firstPtr at new node
     }                               // end else
+    size++;
 } // end function insertAtFront
 
 // insert node at back of list
@@ -87,6 +90,7 @@ void List<NODETYPE>::insertAtBack(const NODETYPE &value)
         lastPtr->nextPtr = newPtr; // update previous last node
         lastPtr = newPtr;          // new last node
     }                              // end else
+    size++;
 } // end function insertAtBack
 
 // delete node from front of list
@@ -105,8 +109,9 @@ bool List<NODETYPE>::removeFromFront(NODETYPE &value)
 
         value = tempPtr->data; // return data being removed
         delete tempPtr;        // reclaim previous front node
-        return true;           // delete successful
-    }                          // end else
+        size--;
+        return true; // delete successful
+    }                // end else
 } // end function removeFrontFront
 
 // delete node from back of list
@@ -135,8 +140,9 @@ bool List<NODETYPE>::removeFromBack(NODETYPE &value)
 
         value = tempPtr->data; // return value from old last node
         delete tempPtr;        // reclaim former last node
-        return true;           // delete successful
-    }                          // end else
+        size--;
+        return true; // delete successful
+    }                // end else
 } // end function removeFromBack
 
 // is List empty?
@@ -188,6 +194,13 @@ void List<NODETYPE>::clear()
     }
 }
 
+// returns list size
+template <typename NODETYPE>
+unsigned int List<NODETYPE>::getSize() const
+{
+    return size;
+}
+
 // concatenates contents of second argument into first
 template <typename NODETYPE>
 void List<NODETYPE>::concatenate(List<NODETYPE> &list1, List<NODETYPE> &list2)
@@ -223,15 +236,13 @@ void List<NODETYPE>::merge(List<NODETYPE> &l1, List<NODETYPE> &l2, List<NODETYPE
             if (data2 > data1)
             {
                 l3.insertAtBack(data1);
-                l3.insertAtBack(data2);
+                curPtr1 = curPtr1->nextPtr;
             }
             else
             {
                 l3.insertAtBack(data2);
-                l3.insertAtBack(data1);
+                curPtr2 = curPtr2->nextPtr;
             }
-            curPtr1 = curPtr1->nextPtr;
-            curPtr2 = curPtr2->nextPtr;
         } // end if both lists have items left
         else if (curPtr1 != 0)
         {

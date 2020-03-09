@@ -17,9 +17,10 @@ int main()
     list1.insertAtBack(3);
     list1.insertAtBack(5);
 
-    list2.insertAtFront(2);
+    list2.insertAtFront(0);
     list2.insertAtBack(4);
-    list2.insertAtBack(6);
+    list2.insertAtBack(8);
+    list2.insertAtBack(10);
 
     List<int>::merge(list1, list2, list3);
     list3.print();
