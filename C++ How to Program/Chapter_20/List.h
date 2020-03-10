@@ -23,6 +23,7 @@ public:
     unsigned int getSize() const;
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
     static void merge(List<NODETYPE> &, List<NODETYPE> &, List<NODETYPE> &);
+    NODETYPE at(int) const;
 
 private:
     ListNode<NODETYPE> *firstPtr; // pointer to first node
@@ -199,6 +200,27 @@ template <typename NODETYPE>
 unsigned int List<NODETYPE>::getSize() const
 {
     return size;
+}
+
+// returns element at given position
+template <typename NODETYPE>
+NODETYPE List<NODETYPE>::at(int position) const
+{
+    if (position > static_cast<int>(size) || position < 0)
+    {
+        cout << "Position not valid. Returning first value at first node." << endl;
+        return firstPtr->data;
+    }
+    else
+    {
+        ListNode<NODETYPE> *currentPtr = firstPtr;
+        while (position-- >0)
+        {
+            currentPtr = currentPtr->nextPtr;
+        }
+        return currentPtr->data;
+    }
+    
 }
 
 // concatenates contents of second argument into first
