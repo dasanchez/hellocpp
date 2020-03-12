@@ -173,7 +173,7 @@ void List<NODETYPE>::print() const
 
     ListNode<NODETYPE> *currentPtr = firstPtr;
 
-    cout << "The list is: ";
+    // cout << "The list is: ";
 
     while (currentPtr != 0) // get element data
     {
@@ -181,7 +181,7 @@ void List<NODETYPE>::print() const
         currentPtr = currentPtr->nextPtr;
     } // end while
 
-    cout << "\n\n";
+    cout << "\n";
 } // end function print
 
 // removes all nodes from list
