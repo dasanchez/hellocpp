@@ -20,7 +20,7 @@ public:
     bool isEmpty() const;
     void print() const;
     void clear();
-    unsigned int getSize() const;
+    size_t getSize() const;
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
     static void merge(List<NODETYPE> &, List<NODETYPE> &, List<NODETYPE> &);
     NODETYPE at(int) const;
@@ -197,7 +197,7 @@ void List<NODETYPE>::clear()
 
 // returns list size
 template <typename NODETYPE>
-unsigned int List<NODETYPE>::getSize() const
+size_t List<NODETYPE>::getSize() const
 {
     return size;
 }

@@ -31,7 +31,13 @@ public:
     void printStack() const
     {
         this->print();
-    } // end function print
+    } // end function printStack
+
+    size_t getStackSize() const
+    {
+        return this->getSize();
+    } // end function getStackSize 
+
 };    // end class Stack
 
 #endif
