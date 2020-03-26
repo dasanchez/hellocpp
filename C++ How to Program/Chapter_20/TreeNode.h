@@ -16,9 +16,10 @@ class TreeNode
 public:
     // constructor
     TreeNode(const NODETYPE &d)
-        : leftPtr(0), // pointer to left  subtree
-          data(d),    // tree node data
-          rightPtr(0) // pointer to right subtree
+        : leftPtr(0),  // pointer to left  subtree
+          data(d),     // tree node data
+          rightPtr(0), // pointer to right subtree
+          counter(0)
     {
         // empty body
     } // end TreeNode constructor
@@ -32,6 +33,7 @@ private:
     TreeNode<NODETYPE> *leftPtr; // pointer to left subtree
     NODETYPE data;
     TreeNode<NODETYPE> *rightPtr; // pointer to right subtree
-};                                // end class TreeNode
+    unsigned int counter;
+}; // end class TreeNode
 
 #endif

@@ -50,7 +50,10 @@ void Tree<NODETYPE>::insertNodeHelper(
 {
     // subtree is  empty; create new TreeNode containing value
     if (*ptr == 0)
+    {
         *ptr = new TreeNode<NODETYPE>(value);
+        (*ptr)->counter++;
+    }
     else // subtree is not empty
     {
         // data to insert is less than data in current node
@@ -62,7 +65,10 @@ void Tree<NODETYPE>::insertNodeHelper(
             if (value > (*ptr)->data)
                 insertNodeHelper(&((*ptr)->rightPtr), value);
             else // duplicate data value ignored
+            {
                 cout << value << " dup" << endl;
+                (*ptr)->counter++;
+            }
         } // end else
     }     // end else
 } // end function insertNodeHelper
@@ -80,7 +86,8 @@ void Tree<NODETYPE>::preOrderHelper(TreeNode<NODETYPE> *ptr) const
 {
     if (ptr != 0)
     {
-        cout << ptr->data << ' ';      // process node
+        cout << ptr->data << ' '; // process node
+
         preOrderHelper(ptr->leftPtr);  // traverse left subtree
         preOrderHelper(ptr->rightPtr); // traverse right subtree
     }                                  // end if
@@ -100,7 +107,7 @@ void Tree<NODETYPE>::inOrderHelper(TreeNode<NODETYPE> *ptr) const
     if (ptr != 0)
     {
         inOrderHelper(ptr->leftPtr);  // traverse left subtree
-        cout << ptr->data << ' ';     // process node
+        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
         inOrderHelper(ptr->rightPtr); // traverse right subtree
     }                                 // end if
 } // end function inOrderHelper
