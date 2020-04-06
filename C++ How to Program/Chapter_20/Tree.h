@@ -86,8 +86,7 @@ void Tree<NODETYPE>::preOrderHelper(TreeNode<NODETYPE> *ptr) const
 {
     if (ptr != 0)
     {
-        cout << ptr->data << ' '; // process node
-
+        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
         preOrderHelper(ptr->leftPtr);  // traverse left subtree
         preOrderHelper(ptr->rightPtr); // traverse right subtree
     }                                  // end if
@@ -128,7 +127,7 @@ void Tree<NODETYPE>::postOrderHelper(
     {
         postOrderHelper(ptr->leftPtr);  // traverse left subtree
         postOrderHelper(ptr->rightPtr); // traverse right subtree
-        cout << ptr->data << ' ';       // process node
+        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
     }                                   // end if
 } // end functipn postOrderHelper
 
