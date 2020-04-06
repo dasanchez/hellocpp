@@ -64,7 +64,7 @@ void Tree<NODETYPE>::insertNodeHelper(
             // data to insert is greater than data in current node
             if (value > (*ptr)->data)
                 insertNodeHelper(&((*ptr)->rightPtr), value);
-            else // duplicate data value ignored
+            else // duplicate data value increases counter
             {
                 cout << value << " dup" << endl;
                 (*ptr)->counter++;
