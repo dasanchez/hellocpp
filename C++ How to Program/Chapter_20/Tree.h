@@ -17,6 +17,7 @@ public:
     void preOrderTraversal() const;
     void inOrderTraversal() const;
     void postOrderTraversal() const;
+    static int treeDepth(Tree<NODETYPE>);
 
 private:
     TreeNode<NODETYPE> *rootPtr;
@@ -26,6 +27,7 @@ private:
     void preOrderHelper(TreeNode<NODETYPE> *) const;
     void inOrderHelper(TreeNode<NODETYPE> *) const;
     void postOrderHelper(TreeNode<NODETYPE> *) const;
+    int depthHelper(TreeNode<NODETYPE> *) const;
 }; // end class Tree
 
 // constructor
@@ -34,6 +36,22 @@ Tree<NODETYPE>::Tree()
 {
     rootPtr = 0; // indicate tree is initially empty
 } // end Tree constructor
+
+template <typename NODETYPE>
+int Tree<NODETYPE>::treeDepth(Tree<NODETYPE> tree)
+{
+    if (tree.rootPtr != 0)
+        return tree.depthHelper(tree.rootPtr);
+    return 0;
+}
+
+template <typename NODETYPE>
+int Tree<NODETYPE>::depthHelper(TreeNode<NODETYPE> *ptr) const
+{
+    if (ptr != 0)
+        return 1 + max(depthHelper(ptr->leftPtr), depthHelper(ptr->rightPtr));
+    return 0;
+}
 
 // insert node in Tree
 template <typename NODETYPE>
@@ -86,10 +104,10 @@ void Tree<NODETYPE>::preOrderHelper(TreeNode<NODETYPE> *ptr) const
 {
     if (ptr != 0)
     {
-        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
-        preOrderHelper(ptr->leftPtr);  // traverse left subtree
-        preOrderHelper(ptr->rightPtr); // traverse right subtree
-    }                                  // end if
+        cout << ptr->data << '(' << ptr->counter << ')' << ' '; // process node
+        preOrderHelper(ptr->leftPtr);                           // traverse left subtree
+        preOrderHelper(ptr->rightPtr);                          // traverse right subtree
+    }                                                           // end if
 } // end function preOrderHelper
 
 // begin inorder traversal of Tree
@@ -105,10 +123,10 @@ void Tree<NODETYPE>::inOrderHelper(TreeNode<NODETYPE> *ptr) const
 {
     if (ptr != 0)
     {
-        inOrderHelper(ptr->leftPtr);  // traverse left subtree
-        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
-        inOrderHelper(ptr->rightPtr); // traverse right subtree
-    }                                 // end if
+        inOrderHelper(ptr->leftPtr);                            // traverse left subtree
+        cout << ptr->data << '(' << ptr->counter << ')' << ' '; // process node
+        inOrderHelper(ptr->rightPtr);                           // traverse right subtree
+    }                                                           // end if
 } // end function inOrderHelper
 
 // begin postorder traversal of Tree
@@ -125,10 +143,10 @@ void Tree<NODETYPE>::postOrderHelper(
 {
     if (ptr != 0)
     {
-        postOrderHelper(ptr->leftPtr);  // traverse left subtree
-        postOrderHelper(ptr->rightPtr); // traverse right subtree
-        cout << ptr->data << '('  << ptr->counter << ')' << ' ';     // process node
-    }                                   // end if
+        postOrderHelper(ptr->leftPtr);                          // traverse left subtree
+        postOrderHelper(ptr->rightPtr);                         // traverse right subtree
+        cout << ptr->data << '(' << ptr->counter << ')' << ' '; // process node
+    }                                                           // end if
 } // end functipn postOrderHelper
 
 #endif
