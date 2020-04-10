@@ -19,6 +19,8 @@ public:
     bool removeFromBack(NODETYPE &);
     bool isEmpty() const;
     void print() const;
+    void printBackward() const;
+    void printBackwardHelper(const ListNode<NODETYPE> *) const;
     void clear();
     size_t getSize() const;
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
@@ -184,6 +186,38 @@ void List<NODETYPE>::print() const
     cout << "\n";
 } // end function print
 
+template <typename NODETYPE>
+void List<NODETYPE>::printBackward() const
+{
+    if (isEmpty()) // list is empty
+    {
+        cout << "The list is empty\n\n";
+        return;
+    } // end if
+
+    ListNode<NODETYPE> *currentPtr = firstPtr;
+    this->printBackwardHelper(currentPtr);
+
+    cout << "\n";
+} // end function printBackward
+
+template <typename NODETYPE>
+void List<NODETYPE>::printBackwardHelper(const ListNode<NODETYPE> *ptr) const
+{
+    // is currentPtr the last ptr?
+    // yes: print
+    // no: call printBackwardHelper for nextPtr, then print
+    if (ptr == lastPtr)
+    {
+        cout << ptr->data << " ";
+    }
+    else
+    {
+        printBackwardHelper(ptr->nextPtr);
+        cout << ptr->data << " ";
+    }
+} // end function printBackwardHelper
+
 // removes all nodes from list
 template <typename NODETYPE>
 void List<NODETYPE>::clear()
@@ -214,13 +248,12 @@ NODETYPE List<NODETYPE>::at(int position) const
     else
     {
         ListNode<NODETYPE> *currentPtr = firstPtr;
-        while (position-- >0)
+        while (position-- > 0)
         {
             currentPtr = currentPtr->nextPtr;
         }
         return currentPtr->data;
     }
-    
 }
 
 // concatenates contents of second argument into first
