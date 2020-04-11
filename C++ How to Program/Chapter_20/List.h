@@ -21,6 +21,8 @@ public:
     void print() const;
     void printBackward() const;
     void printBackwardHelper(const ListNode<NODETYPE> *) const;
+    const ListNode<NODETYPE> * searchList(const NODETYPE &) const;
+    const ListNode<NODETYPE> * searchListHelper(const NODETYPE &, const ListNode<NODETYPE> *) const;
     void clear();
     size_t getSize() const;
     static void concatenate(List<NODETYPE> &, List<NODETYPE> &);
@@ -217,6 +219,27 @@ void List<NODETYPE>::printBackwardHelper(const ListNode<NODETYPE> *ptr) const
         cout << ptr->data << " ";
     }
 } // end function printBackwardHelper
+
+template<typename NODETYPE>
+const ListNode<NODETYPE> * List<NODETYPE>::searchList(const NODETYPE &target) const
+{
+    if (isEmpty()) // list is empty
+        return NULL;
+    
+    return searchListHelper(target, firstPtr);
+} // end function searchList
+
+template<typename NODETYPE>
+const ListNode<NODETYPE> * List<NODETYPE>::searchListHelper(const NODETYPE &target, const ListNode<NODETYPE> *ptr) const
+{
+    if (ptr->data == target)
+        return ptr;
+    else if (ptr == lastPtr)
+        return NULL;
+    else
+        return searchListHelper(target, ptr->nextPtr);    
+} // end function searchListHelper
+
 
 // removes all nodes from list
 template <typename NODETYPE>
