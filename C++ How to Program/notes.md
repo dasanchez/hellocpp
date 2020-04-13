@@ -1803,7 +1803,7 @@ char *strtok(char *s1, const char *s2);
 ```
 size_t strlen(const char  *s);
 ```
-- Determines the length of string s. The number of characters preceding the terminating null character is returned.                                                                       |
+- Determines the length of string s. The number of characters preceding the terminating null character is returned.
 
 - Forgetting to include the `<string>` header when using functions from the string-handling library causes compilation errors.
 - When using `strncpy`, the terminating null character of the second argument (a `char *` string) will not be copied if the number of characters specified by strncpy's third argument is not greater than the second argument's length. In that case, a fatal error may occur if you do not  manually terminate the resulting `char *` string  with a null character.
@@ -1898,3 +1898,151 @@ void *memset(void *s, int c, size_t n);
 - The pointer parameters to these functions are declared `void *`. A pointer to any data type can be assigned directly to a pointer of type void *. For this reason, these functions can receive pointers to any data type.
 - A pointer of type void * cannot be assigned directly to a pointer of any other data type. Because a void * pointer cannot be derefenced, each function receives a size argument that specified the number of characters (bytes) the function will process.
 - String-manipulation functions other than memmove that copy characters have undefined results when coying takes place between parts of the same string.
+
+## Chapter 22: Standard Template Library (STL)
+
+### 22.1 Introduction to the Standard Template Library (STL)
+
+- The Standard Template Library (STL) defines powerful, template-based, reusable components that implement many common data structures and algorithms used to process those data structures.
+- The STL has three key components: **containers** (popular templatized data structures), **iterators**, and **algorithms**. The STL containers are data structures capable of storing objects of almost any data type.
+- There are three styles of container classes: **first-class containers**, **adapters**, and **near containers**.
+- Each STL container has associated member functions. A subset of these member functions is defined in all STL containers.
+- STL iterators, which have properties similar to those of pointers, are used by programs to manipulate the STL-container elements.
+- STL algorithms are functions that perform such common data manipulations as searching, sorting, and comparing elements or entire containers. Most of them use iterators to access container elements.
+- The STL approach allows programs to be written so that the code does not depend on the underlying container. Such a programming style is called generic programming.
+- Avoid reinventing the wheel; program with the reusable components of the C++ Standard Library.
+- The prepackaged, templatized containers of the STL are sufficient for most applications. Using the STL helps you reduce testing and debugging time.
+
+### 22.2 Introduction to Containers
+
+- The containers are divided into three major categories: **sequence containers**, **associative containers**, and **container adapters**.
+
+**Sequence containers**
+
+- `vector`: Rapid insertions and deletions at back. Direct access to any element.
+- `deque`: Rapid insertions and deletions at front or back. Direct acces to any element.
+- `list`: Doubly linked list, rapid insertion and deletion anywhere.
+
+**Associative containers**
+
+- `set`: Rapid lookup, no duplicates allowed.
+- `multiset`: Rapid lookup, duplicates allowed.
+- `map`: One-to-one mapping, no duplicates allowed, rapid-key based lookup.
+- `multimap`: One-to-many mapping, duplicates allowed, rapid key-based lookup.
+
+**Container adapters**
+- `stack`: Last-in, first-out (LIFO).
+- `queue`: First-in, first-out (FIFO).
+- `priority_queue`: Highest-priority element is always the first element out.
+
+- The sequence containers represent linear data structures, such as vectors and linked lists. Associative containers are nonlinear containers that typically can locate elements stored in the containers quickly. Such containers can store sets of values or **key/value pairs**. The sequence containers and associative containers are collectively referred to as first-class containers.
+- STL implements stacks and queues as container adapters that enable a program to view a sequential container in a constrained manner.
+
+**STL Container Common Functions**
+
+- default constructor: A constructor that initializes an empty container. Normally, each container has several constructors that provide different initialization methods for the container.
+- copy constructor: A constructor that initializes the container to be a copy of an existing container of the same type.
+- destructor: Destructor function for cleanup after a container is no longer needed.
+- `empty`: Returns `true` if there are no elements in the container; otherwise, returns `false`.
+- `insert`: Inserts an item in the  container.
+- `size`: Returns the nnumber of elements currently in the container.
+- `operator=`: Assigns one container to another.
+- `operator<`: Returns `true` if the contents of the first container is less than the second; otherwise, returns `false`.
+- `operator<=`: Returns `true` if the contents of the first container is less than or equal to the second; otherwise, returns `false`.
+- `operator>`: Returns `true` if the contents of the first container is greater than the second; otherwise, returns `false`.
+- `operator>=`: Returns `true` if the contents of the first container is greater than or equal to the second; otherwise, returns `false`.
+- `operator==`: Returns `true` if the contents of the first container is equal to the second; otherwise, returns `false`.
+- `operator!=`: Returns `true` if the contents of the first container is not equal to the second; otherwise, returns `false`.
+- `swap`: Swap the elements of two containers.
+
+_Functions found only in first-class containers_
+
+- `max_size`: Returns the maximum number of elements for a container.
+- `begin`: The two versions of this function return either an `iterator` or a `const_iterator` that refers to the first element of the container.
+- `end`: The two versions of this function return either an `iterator` or a `const_iterator` that refers to the next position after the end of the container.
+- `rbegin`: The two versions of this function retun either a `reverse_iterator` or a `const_reverse_iterator` that refers to the last element of the container.
+- `rend`: The two versions of this function return either a `reverse_iterator` or a `const_reverse_iterator` that refers to the next position after the last element of the container.
+- `erase`: Erases one or more elment from the container.
+- `clear`: Erases all elements from the container.
+
+**STL Container Headers**
+
+- `<vector>`
+- `<list>`
+- `<deque>`
+- `<queue>`: Contains both `queue` and `priority_queue`.
+- `<stack>`
+- `<map>`: Contains both `map` and `multimap`.
+- `<set>`: Contains both `set` and `multiset`.
+- `<valarray>`
+- `<bitset>`
+
+**First-Class Container Common `typedef`s**
+
+- `allocator_type`: The type of the object used to allocate the container's memory.
+- `value_type`: The type of element stored in the container.
+- `reference`: A reference for the container's element type.
+- `const_reference`: A constant reference for the container's element type. Such a reference can be used only for reading elements in the container and for performing `const` operations.
+- `pointer`: A pointer for the container's element type.
+- `const_pointer`: A pointer for a constant of the container's element type.
+- `iterator`: An iterator that points to an element of the container's element type.
+- `const_iterator`: A constant iterator that points to an element of the container's element type and can be used only to read elements.
+- `reverse_iterator`: A reverse iterator that points to an element of the container's element type. This type of iterator is for iterating through a container in reverse.
+- `const_reverse_iterator`
+- `difference_type`: The type of result of subtracting two iterators that refer to the same container (operator `-` is not defined for iterators of `lists` and associative containers).
+- `size_type`: The type used to count items in a container and index through a sequence container (cannot index through a `list`).
+
+- When preparing to use an STL container, it's important to ensure that the type of element being stored in the containeer supports a minimum set of functionality. When an element is inserted into a container, a copy of that element is made. The element type should provide its own copy constructor and assignment operator. 
+- The associative containers and many algorithms require elements to be compared. The element type should provide an equality operator and a less-than operator.
+
+### 22.3 Introduction to Iterators
+
+- Iterators are used to point to first-class container elements.
+- Iterators hold state information sensitive to the particular containers on which they operate; ths, they are implemented appropriately ffor each type of container.
+- Certain iterator operations are uniform across containers.
+- The deferencing operator (`*`) dereferences an iterator so that you can use the element to which it points. The ++ operation on an iterator moves it to the container's next element.
+- STL first-class containers provide member functions `begin` and `end`. Function `begin` returns an iterator pointing to the first element of the container. Function `end` returns an iterator pointing to the first element past the end of the container.
+- An object of type `iterator` refers to a container element that can be modified. An object of type `const_iterator` refers to a container element that _cannot_ be modified.
+- The `*` (dereferencing) operator of any `const` iterator returns a `const` reference to the container element, disallowing the use of non-`const` member functions.
+- Attempting to create a non-`const` iterator for a `const` container results in a compilation error.
+
+**Iterator Categories**
+
+- input: Used to read an element from a container. An input iterator can move only in the forward direction (from the beginning of the container to the end) one element at a time. Input iterators support only one-pass algorithms- the same input iterator cannot be used to pass through a sequence twice.
+- output: Used to write an element to a container. An output iterator can move only in the forward direction one element at a time. Output iterators support only one-pass algorithms.
+- forward: Combines the capabilities of input and output iterators and retains their position in the container (as state information).
+- bidirectional: Conbines the capabilities of a forward iterator with the ability to move in the backward direction. Bidirectional iterators support multipass algorithms.
+- random access: Combines the capabilities of a bidirectional iterator with the ability to directly access any element of the container (i.e., no jump forward or backward by an arbitrary number of elements).
+
+- The iterator category that each container supports determines whether that container can be used with specific algorithms in the STL.
+- Containers that support random-access iterators can be used with all algorithms in the STl.
+- Pointers into arrays can be used in place of iterators in most STl algorithms, including those that require random-access iterators.
+- The first-clas containers (`vector`s, `deque`s, `list`s, `set`s, `multiset`s, and `multimap`s), `string`s, and arrays are all traversable with iterators.
+- Using the "weakest iterator" that yields acceptable performance helps produce maximally reusable components. For example, if an algorithm requires only forward iterators, it can be used with any container that supports forward iterators, bidirectional iterators, or random-access iterators. However, an algorithm that requires random-access iterators can be used only with containers that have random-access iterators.
+
+| Container                            | iterator supported     |
+|:-------------------------------------|------------------------|
+| Sequence containers (first class)    |                        |
+| `vector`                             | random access          |
+| `deque`                              | random access          |
+| `list`                               | bidirectional          |
+| Associative containers (first class) |                        |
+| `set`                                | bidirectional          |
+| `multiset`                           | bidirectional          |
+| `map`                                | bidirectional          |
+| `multimap`                           | bidirectional          |
+| Container adapters                   |                        |
+| `stack`                              | no iterators supported |
+| `queue`                              | no iterators supported |
+| `priority_queue`                     | no iterators supported |
+
+**Predefined Iterator `typedef`s**
+
+- Not every `typedef` is defined for every container.
+- We use `const` versions of the iterators for traversing read-only containers.
+- `iterator`: ++ moves in forward direction, read/write capability.
+- `const_iterator`: ++ moves in forward direction, read capability.
+- `reverse_iterator`: ++ moves in backward direction, read/write capability.
+- `const_reverse_iterator`: ++ moves in backward direction, read capability.
+- Operations performed on a `const_iterator` return `const` references to prevent modification to elements of the container being manipulated. Using `const_iterators` where appropriate is another example of hte principle of least privilege.
+
