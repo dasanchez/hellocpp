@@ -1577,12 +1577,12 @@ which always writes the binary version of the integer `number`'s four bytes. Fun
 
 | Algorithm               |                 Big O                 |
 |:------------------------|:-------------------------------------:|
-| Searching               |
+| Searching               |                                       |
 | Linear search           |                 O(n)                  |
 | Binary search           |               O(log n)                |
 | Recursive linear search |                 O(n)                  |
 | Recursive binary search |               O(log n)                |
-| Sorting                 |
+| Sorting                 |                                       |
 | Insertion sort          |                O(n^2)                 |
 | Selection sort          |                O(n^2)                 |
 | Merge sort              |              O(n log n)               |
@@ -1753,21 +1753,25 @@ unsigned b : 4;
 - `EOF` has the value of -1 and that some hardware architectures do not allow negative values to be stored in `char` variables.
 - When using function from the character-handling library, include the `<cctype>` header.
 
-| Prototype           | Description                                                                 |
-|:--------------------|-----------------------------------------------------------------------------|
-| int isdigit(int c)  |                                                                             |
-| int isalpha(int c)  |                                                                             |
-| int isalnum(int c)  |                                                                             |
-| int isxdigit(int c) | Returns 1 if c is a hexadecimal digit character.                            |
-| int islower(int c)  |                                                                             |
-| int isupper(int c)  |                                                                             |
-| int tolower(int c)  |                                                                             |
-| int toupper(int c)  |                                                                             |
-| int isspace(int c)  | Returns 1 if c is a white-space character: \n, ' ', \f, \r, \t, \v          |
-| int iscntrl(int c)  | Returns 1 if c is a control charaacter: \n, \f, \r, \t, \v ,\a, \b          |
-| int ispunct(int c)  | Returns i if c is a printing character other than a space, digit or letter. |
-| int isprint(int c)  | Returns 1 if c is a printing character including space.                     |
-| int isgraph(int c)  | Returns ` if c is a printing character other than space.                    |
+- `int isdigit(int c)`
+- `int isalpha(int c)`
+- `int isalnum(int c)`
+- `int isxdigit(int c)`  
+Returns 1 if c is a hexadecimal digit character.                            |
+- `int islower(int c)`
+- `int isupper(int c)`  
+- `int tolower(int c)`  
+- `int toupper(int c)`  
+- `int isspace(int c)`  
+Returns 1 if c is a white-space character: \n, ' ', \f, \r, \t, \v          |
+- `int iscntrl(int c)`  
+Returns 1 if c is a control charaacter: \n, \f, \r, \t, \v ,\a, \b
+- `int ispunct(int c)`  
+Returns i if c is a printing character other than a space, digit or letter.
+- `int isprint(int c)`  
+Returns 1 if c is a printing character including space.
+- `int isgraph(int c)`  
+Returns ` if c is a printing character other than space.
 
 ### 21.8 Pointer-Based String Manipulation Functions
 
@@ -2044,5 +2048,82 @@ _Functions found only in first-class containers_
 - `const_iterator`: ++ moves in forward direction, read capability.
 - `reverse_iterator`: ++ moves in backward direction, read/write capability.
 - `const_reverse_iterator`: ++ moves in backward direction, read capability.
-- Operations performed on a `const_iterator` return `const` references to prevent modification to elements of the container being manipulated. Using `const_iterators` where appropriate is another example of hte principle of least privilege.
+- Operations performed on a `const_iterator` return `const` references to prevent modification to elements of the container being manipulated. Using `const_iterators` where appropriate is another example of the principle of least privilege.
 
+**Iterator Operations**
+
+| Iterator operation      | Description                                                                                         |
+|:------------------------|:----------------------------------------------------------------------------------------------------|
+| All iterators           |                                                                                                     |
+| `++p`                   | Preincrement an iterator                                                                            |
+| `p++`                   | Postincrement an iterator                                                                           |
+| Input iterators         |                                                                                                     |
+| `*p`                    | Dereference an iterator                                                                             |
+| `p = p1`                | Assign one iterator to another                                                                      |
+| `p == p1`               | Compare iterators for equality                                                                      |
+| `p != p1`               | Compare iterators for inequality                                                                    |
+| Output iterators        |                                                                                                     |
+| `*p`                    | Dereference an iterator                                                                             |
+| `p = p1`                | Assign one iterator to another                                                                      |
+| Forward iterators       | Forward iterators provide all the functionaliry of both input iterators and output iterators        |
+| Bidirectional iterators |                                                                                                     |
+| `--p`                   | Predecrement an iterator                                                                            |
+| `p--`                   | Postdecrement an iterator                                                                           |
+| Random-access iterators |                                                                                                     |
+| `p += i`                | Increment the iterator `p` by i positions                                                           |
+| `p -= i`                | Decrement the iterator `p` by i positions                                                           |
+| `p + i` or `i + p`      | Expression value is an iterator positioned at `p` incremented by `i` positions                      |
+| `p - i`                 | Expression value is an iterator positioned at `p` decremented by `i` positions                      |
+| `p - p1`                | Expression value is an integer representing the distance between two elements in the same container |
+| `p[i]`                  | Return a reference to the element offset from `p` by `i` positions                                  |
+| `p < p1`                | Return `true` if iterator `p` is less than or equal to iterator `p1`, otherwise return `false       |
+| `p <= p1`               |                                                                                                     |
+| `p > p1`                |                                                                                                     |
+| `p >= p1`               |                                                                                                     |
+
+### 22.4 Introduction to Algorithms
+
+- STL algorith,s can be used generically across a variety of containers.
+- Inserting, deleting, searching, sorting, and others are appropriate for some or all of the STL containers.
+- The algorithms operate on container elements only indirectly through iterators.
+- Algorithms often return iterators that indicate the results of the algorithms. Algorithm `find`, for example, locates an element and returns an iterator to that element.
+- The STL is extensible. It's straightforward to add new algorithms and to do so without changes to STL containers.
+- The STL is implemented concisely. The algorithms are separated from the containers and operate on elements of the containers only indirectly through iterators. This separation makes it easier to write generic algorithms applicable to many container classes.
+- STL algorithms can operate on STL containers and on pointer-based C-like arrays.
+- Tere are mutating-sequence algorithms (those that can modify the container), and nonmodifying sequence algorithms (those that do not result in modifications to the container).
+
+### 22.5 Sequence Containers
+
+- The C++ STL provides three sequence containers: `vector`, `list`, and `deque`.
+- `vector` and `deque` are based on arrays, and `list` implements a linked-list data structure.
+- Insertion at the back of a `vector` is efficient. The `vector` simply frows, if necessary, to accommodate the new item. It's expensive to insert (or delete) an element in the middle of a `vector`: the entire portion of the `vector` after the insertion (or deletion) point must be moved, because `vector` elements occupy contiguous cells in memory just as C or C++ "raw" arrays do.
+- Applications that require frequent insertions and deletions at both ends of a container normally use a `deque` rather than a vector. Class `deque` is more efficient than `vector` for doing insertions and deletions at the front.
+- Applications with frequent insertions and deletions in the middle and/or at the extremes of a container normally use a `list`, due to its efficient implementations of insertion and deletion anywhere in the data structure.
+- Sequence containers have several other common operations: `front` returns a reference to the first element in a non-empty container, `back` returns a reference to the last element in a non-empty container. `push_back` inserts a new element at the end of the container and `pop_back` removes the last element of the container.
+
+#### 22.5.1 `vector` Sequence Container
+
+- Class template `vector` provides a data structure with contiguous memory locations. It's most commonly used when the data in the container must be easily accessible via a subscript or will be sorted.
+- When a `vector`'s memory is exhausted, the `vector` allocates a larger contiguous area of memory, _copies_ the original elements into the new memory and _deallocates_ the old memory.
+- Choose the `vector` container for the best random-access performance.
+- Object of class template `vector` provide rapid indexed access with the overloaded subscript operator `[]` because they're stored in contiguous memory like a C or C++ raw array.
+- It's faster to insert many elmeents into a container at once than one at a time.
+- A `vector` supports random-access iterators. All STL algorithms can operate on a `vector`.
+- Function `push_back` is available in all sequence containers and is used to add an element to the  end of the `vector`.
+- If an element is added to a full `vector`, the `vector` increases its size- some STL implementations have the `vector` double its capacity.
+- It can be wasteful to double a `vector`'s size when more space is needed. For example, a full `vector` of 1,000,000 elements resizes to accommodate 2,000,000 elements when a new element is added. This leaves 999,999 unused elements. You can use  `resize` and `reserve` to control space usage better.
+- Use prefix increment when appied to STL iterators because the prefix increment operator does not have the overhead of returning a value that must be stored in a temporary object.
+- Only random-access iterators support `<`. It's better to use != and `end` to test for the end of a container.
+- Attempting to dereference an iterator positioned outside its container is a runtime logic error. In particular, the iterator returned by `end` cannot be dereferenced or incremented.
+- For performance reasons, capture the loop ending value before the loop and compare against that, rather than having aa (potentially expensive) function call for each iteration.
+
+**Vector Element-Manipulation Functions**
+
+- `ostream_iterator` can be used to output integers separated by single spaces via `cout`.
+- Algorithm `copy` from the Standard Librar can be used to output the entire contents of `vector`s to the standard output. 
+- Functions `front` and `back` are available for all sequence containers and are used to determing a `vector`s first and last elements, respectively. The `vector` must not be empty, otherwise the results of `front` and `back` functions are undefined.
+- `insert` function inserts the value at the location specified by the first argument.
+- `erase` function indicates that the element at the location specified by the iterator argument should be removed from the container.
+- Function `empty` is used to check whether the container has any elements.
+- Erasing an element that contains a pointer to a dynamically allocated object does not `delete` that object; this can lead to a memory leak.
+- Function `clear` is found in all first-class containers, and is used to remove all elements at once.
