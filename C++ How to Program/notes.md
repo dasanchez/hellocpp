@@ -2127,3 +2127,20 @@ _Functions found only in first-class containers_
 - Function `empty` is used to check whether the container has any elements.
 - Erasing an element that contains a pointer to a dynamically allocated object does not `delete` that object; this can lead to a memory leak.
 - Function `clear` is found in all first-class containers, and is used to remove all elements at once.
+
+#### 22.5.2 `list` Sequence Container
+
+- The `list` sequence container provides an efficient implementation for insertion and deletion operations at any locaation in the container. If most of the insertions and deletions occur at the ends of the container, the `deque` data structure provides a more efficient implementation.
+- Class template `list` is implemented as a _doubly linked list_: every node in the `list` contains a pointer to the previous node in the `list` and to the next node in the `list`.
+- Any iterator that requires input, output, forward or bidirectional iterators can operate on a `list`.
+- Many `list` member functions manipulate the elements of the container as an ordered set of elements.
+- Class template `list` provides additional member functions: `splice`, `push_front`, `pop_front`, `remove`, `remove_if`, `unique`, `merge`, `reverse`, and `sort`.
+- Function `push_front` is specific classes `list` and `deque` (not to `vector`). Function `push_back` is common to all sequence containers.
+- The `list` member function `sort` arranges the elements in ascending order. This is different from the `sort` in the STL algorithms.
+- Function `splice` removes the elements from a list and inserts them into another one.
+- Function `merge` removes all elements from a list and inserts them into another one in sorted order. Both lists must be sorted in the same order before this operation is performed. 
+- Function `pop_front` removes the first element in the `list`. `pop_back` is available to all sequence containers.
+- Function `unique` removes duplicate elements in the `list`. The `list` should be in sorted order before this operations is performed, to guarantee that all duplicates are eliminated.
+- `swap` exchanges the contents of two `lists`.
+- Function `assign` (available to all sequence containers) replaces the contents of a `list` with another's using specified ranges.
+- Function `remove` deletes all copies of the specified value from a `list`.
