@@ -2155,3 +2155,23 @@ _Functions found only in first-class containers_
 - In genertal, `deque` has  higher ovdrhead than `vector`.
 - Insertions and deletions in the  middle of a `deque` are optimized to minimize the number of elements copied, so it's more efficient than `vector` but less efficient than a `list` for this kind of modification.
 
+### 22.6 Associative Containers
+
+- The STL's associative containers provide _direct access_ to store and retrieve elements via **keys** (often called **search keys**).
+- The four associative containers are `multiset`, `set`, `multimap`, and `map`.
+- Each associative container maintains its keys in _sorted order_.
+- Iterating through an associative container traverses in the sort order for that container.
+- Classes `multiset` and `set` provide operations for manipulating sets of values where the values are the keys- there s not a separate value associated with each key.
+- The primary difference between a `multiset` and a `set` is that  a `multiset` allows duplicate keys and a `se` does not.
+- Classes `multimap` and `map` provide operations for manipulating values associated with keys (those values are sometimes referred to as **mapped values**).
+- The primary difference between a `multimap` and a `map` is that a `multimap` allows duplicate keys with associated values to be stored and a `map` allows only unique keys with associated values.
+
+#### 22.6.1 `multiset` Associatice Container
+
+- The `multiset` associative container provides fast storage and retrieval keys and allows duplicate keys. The ordering of the elements is determined by a **comparator function object**.
+- The data type of the keys in all associative containers must support comparison properly based on the comparator function object specified - keys sorted with `less<T>` must support comparison with `operator<`.
+- A `multiset` supports bidirectional iterators (but not random-access iterators).
+- Use `typedef`s to make code with long type names (such as `multiset`s) easier to read.
+- Function `find` (available to all associative containers) to locate a value.
+- `lower_bound` locates the earliest occurrence of a value, and `upper_bound` locates the element _after_ the last occurrence of a value.
+- Function `equal_range` returns a `pair` containing the results of both a `lower_bound` and an `upper_bound` operation. Type `pair` contains two `public` data members called `first` and `second`.
