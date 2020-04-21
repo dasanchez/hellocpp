@@ -2144,3 +2144,14 @@ _Functions found only in first-class containers_
 - `swap` exchanges the contents of two `lists`.
 - Function `assign` (available to all sequence containers) replaces the contents of a `list` with another's using specified ranges.
 - Function `remove` deletes all copies of the specified value from a `list`.
+
+#### 22.5.3 `deque` Sequence Container
+
+- Class `deque` provides many of the benefits of a `vector` and a `list` in one container.
+- The term `deque` is  short for "double-ended queue". Class `deque` is implemented to provide efficient indexed access (using subscripting) for reading and modifying its elements.
+- Class `deque` is also implemented for _efficient insertion and deletion operations at its front and back_.
+- Class `deque` provides support for random-access iterators, so `deque`s can be used with all STL algorithms.
+- One of the  most common uses of a `deque` is to maintain a first-in, first-out queue of elements. In fact a `deque` is the default underlying implementation for the `queue` adaptor.
+- In genertal, `deque` has  higher ovdrhead than `vector`.
+- Insertions and deletions in the  middle of a `deque` are optimized to minimize the number of elements copied, so it's more efficient than `vector` but less efficient than a `list` for this kind of modification.
+

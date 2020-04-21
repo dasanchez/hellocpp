@@ -1,4 +1,4 @@
-// Fig 22.1: Standard library list class template test program.
+// Fig 22.17: Standard library list class template test program.
 #include <iostream>
 #include <list>      // list class-template definition
 #include <algorithm> // copy algorithm
