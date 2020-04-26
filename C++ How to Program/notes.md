@@ -2166,7 +2166,7 @@ _Functions found only in first-class containers_
 - Classes `multimap` and `map` provide operations for manipulating values associated with keys (those values are sometimes referred to as **mapped values**).
 - The primary difference between a `multimap` and a `map` is that a `multimap` allows duplicate keys with associated values to be stored and a `map` allows only unique keys with associated values.
 
-#### 22.6.1 `multiset` Associatice Container
+#### 22.6.1 `multiset` Associative Container
 
 - The `multiset` associative container provides fast storage and retrieval keys and allows duplicate keys. The ordering of the elements is determined by a **comparator function object**.
 - The data type of the keys in all associative containers must support comparison properly based on the comparator function object specified - keys sorted with `less<T>` must support comparison with `operator<`.
@@ -2175,3 +2175,19 @@ _Functions found only in first-class containers_
 - Function `find` (available to all associative containers) to locate a value.
 - `lower_bound` locates the earliest occurrence of a value, and `upper_bound` locates the element _after_ the last occurrence of a value.
 - Function `equal_range` returns a `pair` containing the results of both a `lower_bound` and an `upper_bound` operation. Type `pair` contains two `public` data members called `first` and `second`.
+
+#### 22.6.2 `set` Associative Container
+
+- The `set` associative container is used for fast storage and retrieval of unique keys. The implementation of a `set` is identical to that of a `multiset`, except that a `set` must have unique keys.
+- If an attempt is made to insert a duplicate key into a `set`, the duplicate is ignored.
+- A `set` supports bidirectional iterators, but not random-access iterators.
+
+#### 22.6.3 `multimap` Associative Container
+
+- The `multimap` associative container is used for fast storage and  retrieval of keys and associated values (often called key/value pairs).
+- Many of the functions used with `multiset`s and `set`s are also used with `multimap`s and `map`s.
+- The elements of `multimap`s and `map`s are `pair`s of keys and values instead of individual values. When inserting into a `multimap` or `map`, a `pair` object that contains the key and value is used.
+- The ordering of the keys is determined by a comparator function object. For example, in a `multimap` that uses integers as the key type, keys can be sorted in ascending order by ordering them with comparator function object`less<int>`.
+- Duplicate keys are allowed in a `multimap`, so multiple values can be associated with a single key. This is called a **one-to-many relationship**.
+- A `multimap` supports bidirectional iterators, but not random-access iterators.
+- A `multimap` is implemented to efficiently locate all values paired with a given key.
