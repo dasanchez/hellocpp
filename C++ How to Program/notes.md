@@ -2191,3 +2191,26 @@ _Functions found only in first-class containers_
 - Duplicate keys are allowed in a `multimap`, so multiple values can be associated with a single key. This is called a **one-to-many relationship**.
 - A `multimap` supports bidirectional iterators, but not random-access iterators.
 - A `multimap` is implemented to efficiently locate all values paired with a given key.
+
+#### 22.6.4 `map` Associative Container
+
+- The `map` associative container performs fast storage and retrieval of unique keys and associated values. Duplicates are not allowed. This is called a **one-to-one mapping**.
+- A `map` is also known as an **associative array**. Providing the key in a `map`'s subscript operator `[]` locates the value associated with that key in the `map`.
+- Insertions and deletions can be made anywhere in a `map`.
+
+### 22.7 Container Adapters
+
+- The STL provides three **container adapters**- `stack`, `queue`, and `priority_queue`.
+- Adapters are not first-class containers, because they do not provide the actual data-structure implementation in which elements can be stored and because adapters do not support iterators.
+- The benefit of an adapter class is that you can choose an appropriate underlying data structure.
+- All three adapter classes provide member functions **push** and **pop** that properly insert an element into each adapter data structure and properly remove an element from each adapter data structure.
+
+#### 22.7.1 `stack` Adapter
+
+- Class `stack` enables insertions into and deletions from the underlying data structure at one end (commonly referred to as alast-in, first-out data structure).
+- A `stack` can be implemented with any of the sequence containers: `vector`, `list`, and `deque`.
+- By default, a `stack` is implemented with a `deque`.
+- Each of the common operations of a `stack` is implemented as an `inline` function that calls the appropriate function of the  underying container. This avoids the overhead of a second function call.
+- For the best performance, use class `vector` as the underlying container for a `stack`.
+- Function `top` does not remove the top element.
+
