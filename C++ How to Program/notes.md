@@ -2207,10 +2207,32 @@ _Functions found only in first-class containers_
 
 #### 22.7.1 `stack` Adapter
 
-- Class `stack` enables insertions into and deletions from the underlying data structure at one end (commonly referred to as alast-in, first-out data structure).
+- Class `stack` enables insertions into and deletions from the underlying data structure at one end (commonly referred to as a last-in, first-out data structure).
 - A `stack` can be implemented with any of the sequence containers: `vector`, `list`, and `deque`.
 - By default, a `stack` is implemented with a `deque`.
 - Each of the common operations of a `stack` is implemented as an `inline` function that calls the appropriate function of the  underying container. This avoids the overhead of a second function call.
 - For the best performance, use class `vector` as the underlying container for a `stack`.
 - Function `top` does not remove the top element.
 
+#### 22.7.2 `queue` Adapter
+
+- Class `queue` enables insertions at the back of the underlying data structure and deletions from the front (commonly referred to as a first-in, first-out data structure).
+- A `queue` can be implemented with STL data structure `list` or `deque`.
+- By default, a `queue` is implemented with a `deque`.
+- The common `queue` operations are `push` to insert an element at the back of the `queue`, `pop` to remove the element at the front of the `queue`, `front` to get a reference to the first element in the `queue`, `back` to get a reference to the last element in the `queue`, `empty` to determine whether the `queue` is empty, and `size` to get the number of elements in the `queue`.
+- For the best performance, use class `deque` as the underlying container for a `queue`.
+- Each of the common operations of a `queue` is implemented as an `inline` function that calls the appropriate function of the underlying container. This avoids the overhead of a second function call.
+
+#### 22.7.3 `priority_queue` Adapter
+
+- Class `priority_queue` provides functionality that enables insertions in sorted order into the underlying data sstructure and deletiosn from the front of the underlying data structure.
+- A `priority_queue` can be implemented with STL sequence containers `vector` or `deque` (the default).
+- When elements are added to a `priority_queue`, they're inserted in priority order, such that the highest-priority element (i.e., the largest value) will be the first element removed from the  `priority_queue`. This is usually accomplishedd by arranging the elements in a binary tree structure called a **heap** that always maintains the largest value at the front of the data structure.
+- For the best performance, use class `vector` as the underlying container for a `priority_queue`.
+
+### Algorithms
+
+- Until the STL, class libraries of containers and algorithms were essentially incompatible among vendors. Early container libraries generally used inheritance and polymorphism, with the associated overhead of `virtual` function calls. Early libraries built the algorithms into the container classes as class behaviours.
+- The STL separates the algorithms from the containers. This makes it much easier to add new algorithms.
+- With the STL, the elements of containers are accessed through iterators.
+- STL algorithms do not depend on the implementation details of the containers on which they operate. As long as the container's (or array's) iterators satisfy the requirements of the algorithm, STL algorithms can work on C-style pointer-based arrays, STL containers, and user-defined data structures.
