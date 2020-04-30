@@ -2236,3 +2236,11 @@ _Functions found only in first-class containers_
 - The STL separates the algorithms from the containers. This makes it much easier to add new algorithms.
 - With the STL, the elements of containers are accessed through iterators.
 - STL algorithms do not depend on the implementation details of the containers on which they operate. As long as the container's (or array's) iterators satisfy the requirements of the algorithm, STL algorithms can work on C-style pointer-based arrays, STL containers, and user-defined data structures.
+
+#### 22.8.1 `fill`, `fill_n`, `generate`, and `generate_n`
+
+- Functions `fill` and `fill_n` set every element in a range of container elements to a specific value.
+- Functions `generate` and `generate_n` use a **generator function** to create values for every element in a range of container elements. The generator function takes no arguments and returns a value that can be placed in an element of the container.
+
+#### 22.8.2 `equal`, `mismatch`, and `lexicographical_compare`
+
