@@ -1,4 +1,4 @@
-// Fig 22.25: Standard Library algorithms
+// Fig 22.26: Standard Library algorithms
 // fill, fill_n, generate, and generate_n
 #include <iostream>
 #include <algorithm> // algorithm definitions

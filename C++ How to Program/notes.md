@@ -2244,3 +2244,6 @@ _Functions found only in first-class containers_
 
 #### 22.8.2 `equal`, `mismatch`, and `lexicographical_compare`
 
+- Function `equal` compares two sequences of values for equality.
+- Function `mismatch` compares two sequences of values and returns a `pair` of iterators indicating the location in each sequence of the mismatched elements. If all the elements match, the two iterators in the `pair` are equal to the last iterator for each sequence.
+- Function `lexicographical_compare` compares the contents of two character arrays.
