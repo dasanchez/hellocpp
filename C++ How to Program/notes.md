@@ -2247,3 +2247,10 @@ _Functions found only in first-class containers_
 - Function `equal` compares two sequences of values for equality.
 - Function `mismatch` compares two sequences of values and returns a `pair` of iterators indicating the location in each sequence of the mismatched elements. If all the elements match, the two iterators in the `pair` are equal to the last iterator for each sequence.
 - Function `lexicographical_compare` compares the contents of two character arrays.
+
+#### 22.8.3 `remove`, `remove_if`, `remove_copy`, and `remove_copy_if`
+
+- Function `remove` eliminates all elements with the specified value in the given range. This function does not modify the number of elements in the `vector` or destroy the eliminated elements, but it does move all elements that are not eliminated toward the beginning of the `vector`.
+- Function `remove_copy` copies all elements that do not have a specified value in a gven range to another container.
+- Function `remove_if` deletes elements in a range when the given predicate function returns `true`.
+
