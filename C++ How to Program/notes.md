@@ -2259,3 +2259,14 @@ _Functions found only in first-class containers_
 - Function `replace` replaces all elements with a given value in a specified range with a second value.
 - Function `replace_copy` copies all elements in a specified range, replacing them with a second value.
 
+#### 22.8.5 Mathematical Algorithms
+
+- Function `random_shuffle` reorders randomly the elements in the range. This function takese two random-access iterator arguments.
+- Function `count` counts the elements with a specified value in the range. This function requires its two iterator arguments to be at least input iterators.
+- Function `min_element` locates the smallest element in the range. The function's two iterator arguments must be at least input iterators.
+- It is good practice to check that the range specified in a call to `min_element` is not empty and that the return alue is not the "past the end" iterator.
+- Function `max_element` locates the largest element in the range. The function returns an input iterator at the largest element.
+- Function `accumulate` to sum the values in the range. The two iterator arguments must be at least input iterators and the third arfument represents the initial value of the total.
+- Function `for_each` applies a general function to every element in the range. The general function takes the current element as an argument and may modify that element if it's received by reference. This function requires its two iterator arguments to be at least input iterators.
+- Function `transform` applies a general function to every element in the range and puts the result in a container specified by an iterator. The general function should take the current element as an argument, should not modify the element, and should return the tranformed value.
+
