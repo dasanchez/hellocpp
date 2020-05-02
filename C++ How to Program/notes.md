@@ -2254,3 +2254,8 @@ _Functions found only in first-class containers_
 - Function `remove_copy` copies all elements that do not have a specified value in a gven range to another container.
 - Function `remove_if` deletes elements in a range when the given predicate function returns `true`.
 
+#### 22.8.4 `replace`, `replace_if`, `replace_copy`, and `replace_copy_if`
+
+- Function `replace` replaces all elements with a given value in a specified range with a second value.
+- Function `replace_copy` copies all elements in a specified range, replacing them with a second value.
+
