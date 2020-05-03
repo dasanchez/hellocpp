@@ -2270,3 +2270,10 @@ _Functions found only in first-class containers_
 - Function `for_each` applies a general function to every element in the range. The general function takes the current element as an argument and may modify that element if it's received by reference. This function requires its two iterator arguments to be at least input iterators.
 - Function `transform` applies a general function to every element in the range and puts the result in a container specified by an iterator. The general function should take the current element as an argument, should not modify the element, and should return the tranformed value.
 
+#### 22.8.6 Basic Searching and Sorting Algorithms
+
+- Function `find` locates a given value in a range. It returns an input iterator that either is positioned at the first elemenet containing the value or indicates the end of the sequence.
+- Function `find_if` locates the first value in a range for which a unary predicate function returns `true`.
+- Function `sort` arranges the elements in a range in ascending order. A second version of this function takes a third argument that's a binary predicate function taking two arguments that are values in the sequence and returning a `bool` indicating the sorting order. If the return value is `true`, the two elements being compared are in sorted order.
+- Attempting to `sort` a container by using an iretator other htan a random-access iterator is a compilation error. Function `sort` requires a random-access iterator.
+- Function `binary_search` determins whether a value is in a given range. The sequence of values must be sorted in ascending order first.
