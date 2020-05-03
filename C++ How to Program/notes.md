@@ -2292,3 +2292,10 @@ _Functions found only in first-class containers_
 - `back_inserter` calls the container's default `push_back` functionn to insert an element at the end of the container. If an element is inserted into a container that has no more space available, the container grows in size.
 - Function `unique` removes duplicate entries in a sorted sequence.
 - Function `reverse` reverses all the elements in a given range.
+
+#### 22.8.9 `inplace_merge`, `unique_copy`, and `reverse_copy`
+
+- Function `inplace_merge` merges two sorted sequences in the same container.
+- Function `uinque_copy` copies all the unique elements in a sorted sequence.
+- Function `reverse_copy` makes a reversed copy of the elements in a given range.
+

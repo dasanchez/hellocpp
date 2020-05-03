@@ -1,5 +1,5 @@
 // Fig 22.33: Standard Library functions
-// copy_backward
+// copy_backward, merge, unique, and reverse
 #include <iostream>
 #include <algorithm> // algorithm definitions
 #include <vector>    // vector class-template definition
@@ -24,11 +24,11 @@ int main()
     cout << "\n\nAfter copy_backward, results contains: ";
     copy(begin(results), end(results), output);
 
-    vector<int> results2(v1.size() + v2.size());
+    vector<int> results2;
 
     // merge elements of v1 and v2 into results2 in sorted order
-    merge(begin(v1), end(v1), begin(v2), end(v2), results2.begin());
-    
+    merge(begin(v1), end(v1), begin(v2), end(v2), back_inserter(results2));
+
     cout << "\n\nAfter merge of v1 and v2 results2 contains:\n";
     copy(begin(results2), end(results2), output);
 
