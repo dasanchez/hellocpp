@@ -2277,3 +2277,10 @@ _Functions found only in first-class containers_
 - Function `sort` arranges the elements in a range in ascending order. A second version of this function takes a third argument that's a binary predicate function taking two arguments that are values in the sequence and returning a `bool` indicating the sorting order. If the return value is `true`, the two elements being compared are in sorted order.
 - Attempting to `sort` a container by using an iretator other htan a random-access iterator is a compilation error. Function `sort` requires a random-access iterator.
 - Function `binary_search` determins whether a value is in a given range. The sequence of values must be sorted in ascending order first.
+
+#### 22.8.7 `swap`, `iter_swap`, and `swap_ranges`
+
+- Function `swap` exchanges two values.
+- Function `iter_swap` exchanges two elements. The function takes two forward iterator arguments.
+- Function `swap_ranges` exchanges elements between specified ranges.
+
