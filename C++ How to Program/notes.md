@@ -2284,3 +2284,11 @@ _Functions found only in first-class containers_
 - Function `iter_swap` exchanges two elements. The function takes two forward iterator arguments.
 - Function `swap_ranges` exchanges elements between specified ranges.
 
+#### 22.8.8 `copy_backward`, `merge`, `unique`, and `reverse`
+
+- Function `copy_backward` copies elements in a range by starting from the last element up to the beginning of the range. This function requires three bidirectional iterator arguments. One difference between `copy_backward` and `copy` is that the iterator returned from `copy` is positioned after the last element copied and the one returned from `copy_backward` is positioned `at` the last element copied.
+- `copy_backward` can manipulate overlapping ranges of elements in a container as long as the first element to copy is not in the destination range of elements.
+- Function `merge` combines two soerted ascending sequences of values into a third sorted ascending sequence.
+- `back_inserter` calls the container's default `push_back` functionn to insert an element at the end of the container. If an element is inserted into a container that has no more space available, the container grows in size.
+- Function `unique` removes duplicate entries in a sorted sequence.
+- Function `reverse` reverses all the elements in a given range.

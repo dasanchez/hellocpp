@@ -1,4 +1,4 @@
-// Fig 22.31: Standard Library algorithms
+// Fig 22.32: Standard Library algorithms
 // iter_swap, swap, and swap_ranges
 #include <iostream>
 #include <algorithm> // algorithm definitions
