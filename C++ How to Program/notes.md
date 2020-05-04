@@ -2306,3 +2306,10 @@ _Functions found only in first-class containers_
 - Function `set_intersect` determines the elements from the first set of sorted values that are in the second set of sortev values (both sets of values must be in ascending order).
 - Functions `set_symmetric_difference` determines the elements in the first set that are not in the second set and the elements in the second set that are not in the first set.
 - Function `set_union` creates a set of all the elements that are in either or both of the two sorted sets (both sets of values must be in ascending order).
+
+#### 22.8.11 `lower_bound`, `upper_bound`, and `equal_range`
+
+- Function `lower_bound` finds the first location in a sorted sequence of values at which the third argument could be in the sequence such that the sequence would still be sorted in ascending order.
+- Function `upper_bound` finds the last location in a sorted sequence of values at which the third argument could be in the sequence such that the sequence would still be sorted in ascending order.
+- Function `equal_range` returns a `pair` of forward iterators containing the results of performing both a `lower_bound` and an `upper_bound` operation.
+
