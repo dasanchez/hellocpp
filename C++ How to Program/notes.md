@@ -2319,3 +2319,7 @@ _Functions found only in first-class containers_
 - Function `sort_heap` sorts a sequence of values in a given range that are already in a heap.
 - Function `push_heap` adds a new value into a heap.
 - Function `pop_heap` removes the top heap element.
+
+#### 22.8.13 `min` and `max`
+
+- Algorithms `min` and `max` determine the minimum and the maximum of two elements, repsectively.
