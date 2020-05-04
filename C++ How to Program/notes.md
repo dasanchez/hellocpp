@@ -2313,3 +2313,9 @@ _Functions found only in first-class containers_
 - Function `upper_bound` finds the last location in a sorted sequence of values at which the third argument could be in the sequence such that the sequence would still be sorted in ascending order.
 - Function `equal_range` returns a `pair` of forward iterators containing the results of performing both a `lower_bound` and an `upper_bound` operation.
 
+#### 22.8.12 Heapsort
+
+- Heapsort is a sorting algorithm in which an array of elements is arranged into a special binary tree called a _heap_. The key features of a heap are that the largest element is always at the top of the heap and the values of the children of any node in the binary tree are always less han or equal to that node's value. A heap arranged in this manner is often called a **maxheap**.
+- Function `sort_heap` sorts a sequence of values in a given range that are already in a heap.
+- Function `push_heap` adds a new value into a heap.
+- Function `pop_heap` removes the top heap element.
