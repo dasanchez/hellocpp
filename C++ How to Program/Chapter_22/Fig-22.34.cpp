@@ -1,4 +1,4 @@
-// Fig 22.33: Standard Library algorithms
+// Fig 22.34: Standard Library algorithms
 // inplace_merge, unique_copy, and reverse_copy
 #include <iostream>
 #include <algorithm> // algorithm definitions

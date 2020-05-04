@@ -2299,3 +2299,10 @@ _Functions found only in first-class containers_
 - Function `uinque_copy` copies all the unique elements in a sorted sequence.
 - Function `reverse_copy` makes a reversed copy of the elements in a given range.
 
+#### 22.8.10 Set Operations
+
+- Function `includes` compares two sets of sorted values to determine whether everly element of the  second set is in the first set.
+- Function `set_difference` finds the elements from the first set of sorted values that are not in the second set of soerted values (must sets of values must be in ascending order).
+- Function `set_intersect` determines the elements from the first set of sorted values that are in the second set of sortev values (both sets of values must be in ascending order).
+- Functions `set_symmetric_difference` determines the elements in the first set that are not in the second set and the elements in the second set that are not in the first set.
+- Function `set_union` creates a set of all the elements that are in either or both of the two sorted sets (both sets of values must be in ascending order).
