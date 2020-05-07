@@ -2343,3 +2343,13 @@ _Functions found only in first-class containers_
 - `partial_sort_copy`: Use two input iterators and two random-access iterators to sort part of the sequence indicated by the two input iterattor arguments.
 - `stable_sort`: The algorithm is similar to `sort` except that all equivalent elements are maintained in their original order.
 
+### 22.9 Class `bitset`
+
+- Class `bitset` makes it easy to create and manipulate **bit sets**. `bitset`s are fixed in size at compile time.
+- `bitset<size> b;` creates `bitset b`, in which every bit is initially 0.
+- `b.set(butNumber);` sets bit `bitNumber` of `bitset b` "on".
+- `b.set();` sets all bits in `b` "on".
+- `b.reset(bitNumber);` sets bit `bitNumber` "off".
+- `b.reset();` sets all bits in `bitNumber` "off".
+- `b.flip(bitNumber);` "flips" bit `bitNumber`.
+- `b.flip();` "flips" all bits in `bitNumber`.
