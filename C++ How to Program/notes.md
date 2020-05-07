@@ -2340,7 +2340,7 @@ _Functions found only in first-class containers_
 - `search`: Searches for a subsequence of elements within a sequence of elements.
 - `search_n`: Searches a sequence of elements looking for a subsequence in which the values of a specified number of elements have a particular value.
 - `partial_sort`: Use three random-access iterators to sort part of a sequence.
-- `partial_sort_copy`: Use two input iterators and two random-access iterators to sort part of the sequence indicated by the two input iterattor arguments.
+- `partial_sort_copy`: Use two input iterators and two random-access iterators to sort part of the sequence indicated by the two input iteraor arguments.
 - `stable_sort`: The algorithm is similar to `sort` except that all equivalent elements are maintained in their original order.
 
 ### 22.9 Class `bitset`
@@ -2353,3 +2353,30 @@ _Functions found only in first-class containers_
 - `b.reset();` sets all bits in `bitNumber` "off".
 - `b.flip(bitNumber);` "flips" bit `bitNumber`.
 - `b.flip();` "flips" all bits in `bitNumber`.
+
+### 22.10 Function Objects
+
+- Many STL algorithms allow you to pass a function pointer into the algorithm to help the algorithm perform its task.
+- The STL's designers made the algorithms more flexible by allowing any algorithm that can receive a function pointer to receive an object of a class that overloads the parentheses operator with a function named `operator()`, provided that the overloaded operator meets the requirements of the algorithm. An object of such a class is known as a **function object** and can be used syntactically and semantically like a function or function pointer.
+- Together, function objects and functions are known as **functors**. Most algorithms can use function objects and functions interchangeably.
+- Function objects  provide several advantages over function pointers. Since function objects are commonly implemented as class templates that are included into each source code file that uses them, the compiler can inline an overloaded `operator()` to improve performance.
+- Many predefined function objects can be found in the header `<functional>`:
+
+| STL function object |    Type    |
+|:--------------------|:----------:|
+| `divides<T>`        | arithmetic |
+| `equal_to<T>`       | relational |
+| `greater<T>`        | relational |
+| `greater_equal<T>`  | relational |
+| `less<T>`           | relational |
+| `less_equal<T>`     | relational |
+| `logical_and<T>`    |  logical   |
+| `logical_not<T>`    |  logical   |
+| `logical_or<T>`     |  logical   |
+| `minus<T>`          | arithmetic |
+| `modulus<T>`        | arithmetic |
+| ` negate<T>`        | arithmetic |
+| `not_equal_to<T>`   | relational |
+| `plus<T>`           | arithmetic |
+| `multiplies<T>`     | arithmetic |
+
