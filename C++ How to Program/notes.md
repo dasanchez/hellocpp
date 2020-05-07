@@ -2323,3 +2323,23 @@ _Functions found only in first-class containers_
 #### 22.8.13 `min` and `max`
 
 - Algorithms `min` and `max` determine the minimum and the maximum of two elements, repsectively.
+
+#### 22.8.14 Other STL Algorithms
+
+- `inner_product`: Calculate the sum of the products of two sequences.
+- `adjacent_difference`: Beginning with the second element in a sequence, calculate the differencce between the current and previous elements, and store the results.
+- `partial_sum`: Calculate a running total of the values in a sequence.
+- `nth_element`: Use three random-access to partition a range of elements. After this algorithm executes, all elements before the partitioning element are less than that element and all elements after the partitioning element are greater than or equal to that element.
+- `partition`: Similar to the `nth_element`, but requires less powerful bidirectional iterators, making it more flexible.
+- `stable_partition`: Similar to `partition` except that this algorithm guarantees that equivalent elements will be maintained in their original order.
+- `next_permutation`: Next lexicographical permutation of a sequence.
+- `prev_permutation`: Previous lexicographical permutation of a sequence.
+- `rotate`: Use three forward iterator arguments to rotate the sequence indicated by the first and last argument by the number of positions indicated by subtracting the first argument from the second argument.
+- `rotate_copy`: The results are stored in a separate sequence indicated by the fourth argument. The two sequences must have the same number of elements.
+- `adjacent_find`: Returns an input iterator indicating the first of two identical adjacent elements in a sequence.
+- `search`: Searches for a subsequence of elements within a sequence of elements.
+- `search_n`: Searches a sequence of elements looking for a subsequence in which the values of a specified number of elements have a particular value.
+- `partial_sort`: Use three random-access iterators to sort part of a sequence.
+- `partial_sort_copy`: Use two input iterators and two random-access iterators to sort part of the sequence indicated by the two input iterattor arguments.
+- `stable_sort`: The algorithm is similar to `sort` except that all equivalent elements are maintained in their original order.
+
