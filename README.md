@@ -16,3 +16,12 @@ A repo for tracking exercises in C++.
 - Chapter 15: Stream Input/Output
 - Chapter 16: Exception Handling: A Deeper Look
 - Chapter 17: File Processing
+- Chapter 18: Class `string` and String Stream Processing
+- Chapter 19: Searching and Sorting
+- Chapter 20: Custom Templatized Data Structures
+- Chapter 21: Bits, Characters, C Strings and `struct`s
+- Chapter 22: Standard Template Library (STL)
+
+## Web Servers and APIs using C++
+
+- Chapter 1: Tools Installation
