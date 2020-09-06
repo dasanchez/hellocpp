@@ -89,7 +89,7 @@ docker run -v <host_path>:<container_path> -p <host_port>:<container_port> -e <e
 - In our case:
 
 ```
-[...]Chapter_1$ docker run -v [...]Chapter_1/crow_volume:/usr/src/crow_volume -p 8081:8081 -e PORT=8081 --rm crowbox /usr/src/crowbox/build/hello_crow
+[...]Chapter_1$ docker run -v [...]Chapter_1/crow_volume:/usr/src/crow_volume -p 8081:8081 -e PORT=8081 --rm crowbox /usr/src/crow_volume/build/hello_crow
 ``` 
 
 8. Change the server to display "Hello, \<your-name>"
