@@ -4,7 +4,7 @@ using namespace crow;
 
 void sendFile(response &res, string filename, string contentType) {
     ifstream in("../public/" + filename, ifstream::in);
-    cout << "INSIDE CROW ROUTE" << endl;
+    // cout << "INSIDE CROW ROUTE" << endl;
     if(in) {
         ostringstream contents;
         contents << in.rdbuf();
@@ -19,7 +19,7 @@ void sendFile(response &res, string filename, string contentType) {
 }
 
 void sendHtml(response &res, string filename) {
-    sendFile(res, filename + ".html", "text/html");
+    sendFile(res, filename, "text/html");
 }
 
 void sendImage(response &res, string filename) {
@@ -53,7 +53,12 @@ int main(int argc, char* argv[]) {
     });
 
     CROW_ROUTE(app, "/") ([](const request &req, response &res){
-        sendHtml(res, "index");
+        sendHtml(res, "index.html");
+    });
+
+    CROW_ROUTE(app, "/<string>")
+    ([](const request &req, response &res, string filename){
+        sendHtml(res, filename);
     });
 
     char* port = getenv("PORT");

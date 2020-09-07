@@ -36,3 +36,10 @@ root@4bf6a269fa0d:/usr/src/crow_volume/build# make
 ## Serving Static Content
 
 - Add three folders to add structure to the public folder: images, scripts, and styles.
+- Add a jpeg image, a JavaScript file, and a CSS stylesheet to each folder.
+- Modify the `main.cpp` as shown.
+
+## Challenge
+
+- Add an About page and a stylesheet for it.
+- Add a route for the About page.
