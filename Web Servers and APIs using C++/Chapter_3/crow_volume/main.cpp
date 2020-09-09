@@ -19,7 +19,7 @@ void sendFile(response &res, string filename, string contentType) {
 }
 
 void sendHtml(response &res, string filename) {
-    sendFile(res, filename, "text/html");
+    sendFile(res, filename + ".html", "text/html");
 }
 
 void sendImage(response &res, string filename) {
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
     });
 
     CROW_ROUTE(app, "/") ([](const request &req, response &res){
-        sendHtml(res, "index.html");
+        sendHtml(res, "index");
     });
 
     CROW_ROUTE(app, "/<string>")
