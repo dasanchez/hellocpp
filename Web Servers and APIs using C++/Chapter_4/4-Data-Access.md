@@ -48,4 +48,21 @@ docker build --rm --no-cache -t hello_crow:latest .
 ```
 docker run -p 8081:8081 -e PORT=8081 -e MONGODB_URI="mongodb://[host-ip-address]:[host-port]/cpp" hello_crow:latest
 ```
+- Go to `localhost:8081/contacts` in a browser and you will see a list of the first 10 collection records.
 
+
+## Add dynamic data to a page
+
+- Crow supports a logic list template system called Mustache.
+- Update `main.cpp` as shown.
+- Create `contacts.html` as shown.
+- Rebuild the image:
+```
+[...]/crow_volume$ docker build --rm --no-cache -t hello_crow:latest .
+```
+- Run the server image again:
+```
+docker run -p 8081:8081 -e PORT=8081 -e MONGODB_URI="mongodb://[host-ip-address]:[host-port]/cpp" hello_crow:latest
+```
+- Go to `localhost:8081/contacts` in a browser, the contacts table will be displayed using the bulma style.
+- Go to `localhost:8081/contacts/[email from contact list]`, the contact info will be displayed in raw text form.
