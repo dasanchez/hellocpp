@@ -66,3 +66,10 @@ docker run -p 8081:8081 -e PORT=8081 -e MONGODB_URI="mongodb://[host-ip-address]
 ```
 - Go to `localhost:8081/contacts` in a browser, the contacts table will be displayed using the bulma style.
 - Go to `localhost:8081/contacts/[email from contact list]`, the contact info will be displayed in raw text form.
+
+## Challenge
+
+- Create an HTML page named `contact.html` in the `public` folder.
+- Modify the contact route in `main.cpp` to use `contact.html` 
+- Use Mustache to render the contact data.
+- Use Bulma to style the page.
