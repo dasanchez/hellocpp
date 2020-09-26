@@ -141,6 +141,33 @@ int main(int argc, char* argv[]) {
         getView(res, "contacts", dto);
     });
 
+    CROW_ROUTE(app, "/add/<int>/<int>")
+        ([](const request &req, response &res, int a, int b){
+            res.set_header("Content-Type", "text/plain");
+            ostringstream os;
+            os << "Integer: " << a << " + " << b << " = " << a + b << "\n";
+            res.write(os.str());
+            res.end();
+        });
+
+    CROW_ROUTE(app, "/add/<double>/<double>")
+        ([](const request &req, response &res, double a, double b){
+            res.set_header("Content-Type", "text/plain");
+            ostringstream os;
+            os << "Double: " << a << " + " << b << " = " << a + b << "\n";
+            res.write(os.str());
+            res.end();
+        });
+
+    CROW_ROUTE(app, "/add/<string>/<string>")
+        ([](const request &req, response &res, string a, string b){
+            res.set_header("Content-Type", "text/plain");
+            ostringstream os;
+            os << "String: " << a << " + " << b << " = " << a + b << "\n";
+            res.write(os.str());
+            res.end();
+        });
+
     CROW_ROUTE(app, "/rest_test").methods(HTTPMethod::Post, HTTPMethod::Get,
         HTTPMethod::Put)
         ([](const request &req, response &res){
