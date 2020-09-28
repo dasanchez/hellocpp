@@ -143,9 +143,13 @@ int main(int argc, char* argv[]) {
 
     CROW_ROUTE(app, "/api/contacts")
     ([&collection](const request &req){
+        auto skip = req.url_params.get("skip");
+        auto limit = req.url_params.get("limit");
+
         mongocxx::options::find opts;
-        opts.skip(9);
-        opts.limit(10);
+        opts.skip(skip ? stoi(skip) : 0);
+        opts.limit(limit ? stoi(limit) : 10);
+        
         auto docs = collection.find({}, opts);
         vector<crow::json::rvalue> contacts;
         contacts.reserve(10);

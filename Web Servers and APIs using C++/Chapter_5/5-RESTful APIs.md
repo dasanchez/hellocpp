@@ -38,3 +38,11 @@
 - Rebuild and re-launch the server.
 - Go to the browser and visit `http://localhost:8081/api/contacts`.
 - The reponse will be the JSON-formatted set of 10 contacts.
+
+## Challenge: Create an endpoint
+
+- Modify `api/contacts` to use two query parameters: `skip` and `limit`.
+- If `skip` is valid, set the MongoDB `skip` option to its value; if not, use 0.
+- If `limit` is valid, set the MongoDB `limit` option to its value; if not, use 10.
+- See the updated `main.cpp` file.
+- To convert from `string` to `int`, use `int myInt = stoi(myString);`.
