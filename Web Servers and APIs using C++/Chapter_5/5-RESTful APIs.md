@@ -23,3 +23,11 @@
 - Copy the first and last name for one of the entries, and enter it in the URL: `http://localhost:8081/contact/[firstname]/[lastname]`. The contact info should appear.
 - Go to `http://localhost:8081/add/[param-1]/[param-2]` and use integers, doubles, and strings to see the add operation on these different data types.
 - The order of the route handlers in the program is important: the server will use the first route handler that matches the data types in the path.
+
+## Reading the query string
+
+- The query string comes after the question mark in a URL.
+- Modify `main.cpp` as shown to add a handler to the `/query` route.
+- Rebuild and re-launch the server.
+- Go to the browser and visit `https://localhost:8081/query?firstname=John&lastname=Smith`
+- The page should reply with "Hello John Smith".
