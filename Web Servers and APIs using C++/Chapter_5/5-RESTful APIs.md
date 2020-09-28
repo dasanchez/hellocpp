@@ -31,3 +31,10 @@
 - Rebuild and re-launch the server.
 - Go to the browser and visit `https://localhost:8081/query?firstname=John&lastname=Smith`
 - The page should reply with "Hello John Smith".
+
+## Converting to JSON data
+
+- Update `main.cpp` as shown to add a route handler for `/api/contacts`.
+- Rebuild and re-launch the server.
+- Go to the browser and visit `http://localhost:8081/api/contacts`.
+- The reponse will be the JSON-formatted set of 10 contacts.
