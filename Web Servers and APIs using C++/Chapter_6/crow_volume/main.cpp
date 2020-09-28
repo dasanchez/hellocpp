@@ -81,10 +81,10 @@ int main(int argc, char* argv[]) {
     SimpleApp app;
     set_base("."); // sets location of Mustache templates
 
-    mongocxx::instance inst{};
-    string mongoConnect = std::string(getenv("MONGODB_URI"));
-    mongocxx::client conn{mongocxx::uri{mongoConnect}};
-    auto collection = conn["cpp"]["contacts"];
+    // mongocxx::instance inst{};
+    // string mongoConnect = std::string(getenv("MONGODB_URI"));
+    // mongocxx::client conn{mongocxx::uri{mongoConnect}};
+    // auto collection = conn["cpp"]["contacts"];
 
     CROW_ROUTE(app, "/ws")
         .websocket()
@@ -128,68 +128,68 @@ int main(int argc, char* argv[]) {
         sendImage(res, filename);
     });
 
-    CROW_ROUTE(app, "/contact/<string>")
-    ([&collection](const request &req, response &res, string email) {
-        auto doc = collection.find_one(make_document(kvp("email", email)));
-        // return crow::response(bsoncxx::to_json(doc.value().view()));
+    // CROW_ROUTE(app, "/contact/<string>")
+    // ([&collection](const request &req, response &res, string email) {
+    //     auto doc = collection.find_one(make_document(kvp("email", email)));
+    //     // return crow::response(bsoncxx::to_json(doc.value().view()));
 
-        crow::json::wvalue dto;
-        dto["contact"] = json::load(bsoncxx::to_json(doc.value().view()));
-        getView(res, "contact", dto);
-    });
+    //     crow::json::wvalue dto;
+    //     dto["contact"] = json::load(bsoncxx::to_json(doc.value().view()));
+    //     getView(res, "contact", dto);
+    // });
 
-    CROW_ROUTE(app, "/contact/<string>/<string>")
-    ([&collection](const request &req, response &res, string firstname,
-        string lastname) {
-        auto doc = collection.find_one(
-            make_document(kvp("firstName", firstname), kvp("lastName", lastname)));
-        if (!doc) {
-            return notFound(res, "Contact");
-        }
-        crow::json::wvalue dto;
-        dto["contact"] = json::load(bsoncxx::to_json(doc.value().view()));
-        getView(res, "contact", dto);
-    });
+    // CROW_ROUTE(app, "/contact/<string>/<string>")
+    // ([&collection](const request &req, response &res, string firstname,
+    //     string lastname) {
+    //     auto doc = collection.find_one(
+    //         make_document(kvp("firstName", firstname), kvp("lastName", lastname)));
+    //     if (!doc) {
+    //         return notFound(res, "Contact");
+    //     }
+    //     crow::json::wvalue dto;
+    //     dto["contact"] = json::load(bsoncxx::to_json(doc.value().view()));
+    //     getView(res, "contact", dto);
+    // });
 
-    CROW_ROUTE(app, "/contacts")
-    ([&collection](const request &req, response &res){
-        mongocxx::options::find opts;
-        opts.skip(9);
-        opts.limit(10);
-        auto docs = collection.find({}, opts);
-        crow::json::wvalue dto;
-        vector<crow::json::rvalue> contacts;
-        contacts.reserve(10);
+    // CROW_ROUTE(app, "/contacts")
+    // ([&collection](const request &req, response &res){
+    //     mongocxx::options::find opts;
+    //     opts.skip(9);
+    //     opts.limit(10);
+    //     auto docs = collection.find({}, opts);
+    //     crow::json::wvalue dto;
+    //     vector<crow::json::rvalue> contacts;
+    //     contacts.reserve(10);
         
-        for (auto doc : docs) {
-            contacts.push_back(json::load(bsoncxx::to_json(doc)));
-        }
+    //     for (auto doc : docs) {
+    //         contacts.push_back(json::load(bsoncxx::to_json(doc)));
+    //     }
 
-        dto["contacts"] = contacts;
-        getView(res, "contacts", dto);
-    });
+    //     dto["contacts"] = contacts;
+    //     getView(res, "contacts", dto);
+    // });
 
-    CROW_ROUTE(app, "/api/contacts")
-    ([&collection](const request &req){
-        auto skip = req.url_params.get("skip");
-        auto limit = req.url_params.get("limit");
+    // CROW_ROUTE(app, "/api/contacts")
+    // ([&collection](const request &req){
+    //     auto skip = req.url_params.get("skip");
+    //     auto limit = req.url_params.get("limit");
 
-        mongocxx::options::find opts;
-        opts.skip(skip ? stoi(skip) : 0);
-        opts.limit(limit ? stoi(limit) : 10);
+    //     mongocxx::options::find opts;
+    //     opts.skip(skip ? stoi(skip) : 0);
+    //     opts.limit(limit ? stoi(limit) : 10);
         
-        auto docs = collection.find({}, opts);
-        vector<crow::json::rvalue> contacts;
-        contacts.reserve(10);
+    //     auto docs = collection.find({}, opts);
+    //     vector<crow::json::rvalue> contacts;
+    //     contacts.reserve(10);
         
-        for (auto doc : docs) {
-            contacts.push_back(json::load(bsoncxx::to_json(doc)));
-        }
+    //     for (auto doc : docs) {
+    //         contacts.push_back(json::load(bsoncxx::to_json(doc)));
+    //     }
 
-        crow::json::wvalue dto;
-        dto["contacts"] = contacts;
-        return crow::response{dto};
-    });
+    //     crow::json::wvalue dto;
+    //     dto["contacts"] = contacts;
+    //     return crow::response{dto};
+    // });
 
     CROW_ROUTE(app, "/add/<int>/<int>")
         ([](const request &req, response &res, int a, int b){
